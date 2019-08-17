@@ -1,0 +1,44 @@
+/*
+Write your variables here. All available variables can be
+found in element-ui/packages/theme-chalk/src/common/var.scss.
+For example, to overwrite the theme color:
+*/
+$--color-primary: teal;
+
+/* icon font path, required */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
+
+// 公共样式
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
+    &:before,&:after{
+        -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
+    }
+}
+body,html{
+    width: 100%;
+    max-width: 100%;
+    font-size: 12rem;
+    word-break:break-all;
+}
+body{
+    background: #f8f8f8;
+    font-family: '微软雅黑', 'Avenir', Helvetica, Arial, sans-serif;
+}
+a,input,textarea,select{
+    font-family: "Microsoft YaHei";
+    outline: none;
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+.container{
+    width: 1200px;
+    margin: 0 auto;
+    max-width: 100%;
+}

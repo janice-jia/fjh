@@ -26,7 +26,7 @@
                 <div class="pinPR-img">
                   <img src="../assets/img/header/pinpai-1.jpg" alt="">
                 </div>
-                <div class="pinPR-name">9天8晚 福冈+境港+海参崴</div>
+                <div class="pinPR-name">{{ppType}}==9天8晚 福冈+境港+海参崴</div>
               </div>
             </li>
             <li>
@@ -56,6 +56,32 @@
 <script>
 export default {
   name: 'HeadModulePP',
+  props: {
+    ppType: String
+  },
+  data() {
+    return {
+      list: [],
+    }
+  },
+  mounted(){
+    this.getList()
+  },
+  methods: {
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
+    // 游轮品牌
+    getList(){
+      this.$http.get('/API/index.ashx?command=GetShipListByCompanyId',{
+        params:{
+          companyid:'1'
+        }
+      }).then(function (res) {
+        this.list = res.body
+      })
+    }
+  }
 }
 </script>
 <style lang="scss">

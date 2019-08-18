@@ -7,10 +7,10 @@
       </el-header>
       <!-- banner -->
       <!-- 主体 -->
-      <el-main>
+      <!-- <el-main> -->
         <!-- <router-link to="/home">Home</router-link> |
         <router-link to="/about">About</router-link> -->
-      </el-main>
+      <!-- </el-main> -->
       
     </el-container>
     <router-view/>
@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  // @import './assets/style/all';
+  .el-header{
+    height: 45px!important;
+  }
 </style>
 

@@ -2,33 +2,16 @@
   <div class="HeadModuleBK">
     <div class="yl_baike container">
       <el-row :gutter="30">
-      <el-col :span="8">
-        <div class="yl_baike_img">
-          <img src="../assets/img/header/pinpai-3.jpg" alt="">
-        </div>
-        <div class="yl_baike_name">
-          <a href="">邮轮新手10大误区，你中招了...</a>
-        </div>
-      </el-col>
-      <el-col :span="8">
-        <div class="yl_baike_img">
-          <img src="../assets/img/header/pinpai-3.jpg" alt="">
-        </div>
-        <div class="yl_baike_name">
-          <a href="">邮轮新手10大误区，你中招了...</a>
-        </div>
-      </el-col>
-      <el-col :span="8">
-        <div class="yl_baike_img">
-          <img src="../assets/img/header/pinpai-3.jpg" alt="">
-        </div>
-        <div class="yl_baike_name">
-          <a href="">邮轮新手10大误区，你中招了...</a>
-        </div>
-      </el-col>
-    </el-row>
-
-
+        <el-col :span="8" v-for="(item, index) in contInfo" 
+          :key="index+1">
+          <div class="yl_baike_img">
+            <img :src="item.coverimg" alt="">
+          </div>
+          <div class="yl_baike_name">
+            <a href="">{{item.articletitle}}</a>
+          </div>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -36,6 +19,9 @@
 <script>
 export default {
   name: 'HeadModuleBK',
+  props: {
+    contInfo: Array
+  },
 }
 </script>
 <style lang="scss">

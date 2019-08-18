@@ -3,13 +3,14 @@
     <Banner></Banner>
     <!-- 游轮品牌 -->
     <HeadModuleTit class="container" tit="游轮品牌" enTit="Cruise brand"/>
-    <HeadModuleNav class="container" :navData="navDataYL" moreName="更多游轮公司" moreLink="1.html"></HeadModuleNav>
-    <HeadModulePP></HeadModulePP>
+    <!-- <HeadModuleNav class="container" :navData="navDataPP" moreName="更多游轮公司" moreLink="1.html"></HeadModuleNav> -->
+    <HeadModulePPTab :navData="navDataPP"></HeadModulePPTab>
     
     <!-- 游轮百科 -->
     <HeadModuleTit class="container" tit="游轮百科" enTit="Cruise encyclopedia"/>
-    <HeadModuleNav class="container" :navData="navDataBK" moreName="更多百科内容" moreLink="1.html"></HeadModuleNav>
-    <HeadModuleBK></HeadModuleBK>
+    <!-- <HeadModuleNav class="container" :navData="navDataBK" moreName="更多百科内容" moreLink="1.html"></HeadModuleNav> -->
+    <!-- <HeadModuleBK></HeadModuleBK> -->
+    <HeadModuleBKTab :navData="navDataBK"></HeadModuleBKTab>
 
     <!-- 港口城市 -->
     <HeadModuleTit class="container" tit="港口城市" enTit="The port city of"/>
@@ -30,9 +31,9 @@ import HeadModuleTit from '../components/HeadModuleTit.vue'
 // 导航
 import HeadModuleNav from '../components/HeadModuleNav.vue'
 // 品牌
-import HeadModulePP from '../components/HeadModulePP.vue'
+import HeadModulePPTab from '../components/HeadModulePPTab.vue'
 // 百科
-import HeadModuleBK from '../components/HeadModuleBK.vue'
+import HeadModuleBKTab from '../components/HeadModuleBKTab.vue'
 // 港口城市
 import HeadModuleCH from '../components/HeadModuleCH.vue'
 // 游记
@@ -42,20 +43,62 @@ export default {
   name: 'home',
   data() {
     return {
-      navDataYL:['皇家加勒比','歌诗达邮轮','公主邮轮','星梦邮轮','地中海邮轮'],
-      navDataBK:['新手入门','游轮介绍','预定锦囊','出行准备','游轮专栏'],
-      navDataGK:['日本','东南亚','地中海','中东','加勒比海','夏威夷','阿拉斯加'],
-      navDataYJ:['皇家加勒比国际游轮','公主邮轮','歌诗达邮轮','星梦邮轮','维京游轮'],
+      navDataPP: [],
+      navDataBK:[],
+      navDataGK: [],
+      navDataYJ:[],
     }
+  },
+  mounted(){
+    this.getPPnav()
+    this.getBKYJnav(1)
+    this.getBKYJnav(2)
+    this.getGKnav()
   },
   components: {
     Banner,
     HeadModuleTit,
     HeadModuleNav,
-    HeadModulePP,
-    HeadModuleBK,
+    HeadModulePPTab,
+    HeadModuleBKTab,
     HeadModuleCH,
     HeadModuleYJ
+  },
+  methods: {
+    // 游轮品牌
+    getPPnav(){
+      this.$http.get('/API/index.ashx?command=GetShipCompany').then(function (res) {
+        res.body = this.formatterNavVal(res.body, 'shipcompany')
+        this.navDataPP = res.body
+      })
+    },
+    //港口城市
+    getGKnav(){
+      this.$http.get('/API/index.ashx?command=GetPortByArea&areaid=1').then(function (res) {
+        res.body = this.formatterNavVal(res.body, 'portname')
+        this.navDataGK = res.body
+      })
+    },
+    // 百科。。。。游记（1-百科，，2游记）1
+    getBKYJnav(type){
+      this.$http.get('/API/index.ashx?command=GetCategoryByCategoryId&categoryid='+type).then(function (res) {
+        res.body = this.formatterNavVal(res.body, 'category')
+        if(type == 1){
+          this.navDataBK = res.body
+        }else if(type == 2){
+          this.navDataYJ = res.body
+        }
+        
+      })
+    },
+    // 格式化数据
+    formatterNavVal(data, showName){
+      for(var i=0; i<data.length; i++){
+        if(data[i].id) data[i].id = data[i].id.toString();
+        data[i].name = data[i][showName]
+      }
+      return data;
+    }
   }
 }
 </script>

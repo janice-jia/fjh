@@ -42,11 +42,24 @@ module.exports = {
     open: true, //配置自动启动浏览器
     // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
     proxy: {
-        '/api': {
-            target: '<url>',
+        //接口地址转发 
+        '/API': {
+            target: 'http://www.opvcruise.com/',
             ws: true,
-            changeOrigin: true
-        }
+            changeOrigin: true,
+            pathRewrite: {
+              '^/API': '/API'
+            }
+        },
+        // 图片地址转发
+        // '/upload/': {
+        //   target: 'http://www.opvcruise.com/',
+        //   ws: true,
+        //   changeOrigin: true,
+        //   pathRewrite: {
+        //     '^/upload/': '/upload/'
+        //   }
+        // }
     }
   }
 }

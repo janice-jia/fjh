@@ -4,7 +4,9 @@
       <div class="yl_chengshi_01">
         <el-row>
           <el-col :span="15">
-            <img src="../assets/img/header/pinpai-4.jpg" alt="">
+            <div class="chImg">
+              <img src="../assets/img/header/pinpai-4.jpg" alt="">
+            </div>
           </el-col>
           <el-col :span="9" class="">
             <div class="yl_chengshi_po">
@@ -62,6 +64,9 @@
 <script>
 export default {
   name: 'HeadModuleCH',
+  props: {
+    contInfoCH: Array
+  }
 }
 </script>
 <style lang="scss">
@@ -72,6 +77,12 @@ export default {
     box-shadow:5px 5px 5px rgba(0,0,0,.35);
     border-radius: 8px;
     margin-bottom: 30px;
+    .chImg{
+      overflow: hidden;
+      img{
+        max-height: 100%;
+      }
+    }
     // 第一部分
     .yl_chengshi_tit{
       font-size: 32px;

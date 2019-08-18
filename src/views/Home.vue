@@ -1,26 +1,28 @@
 <template>
   <div class="home">
-    <Banner></Banner>
-    <!-- 游轮品牌 -->
-    <HeadModuleTit class="container" tit="游轮品牌" enTit="Cruise brand"/>
-    <!-- <HeadModuleNav class="container" :navData="navDataPP" moreName="更多游轮公司" moreLink="1.html"></HeadModuleNav> -->
-    <HeadModulePPTab :navData="navDataPP"></HeadModulePPTab>
+    <Banner :lineList="navDataPP"></Banner>
+    <!-- 邮轮品牌 -->
+    <HeadModuleTit class="container" tit="邮轮品牌" enTit="Cruise brand"/>
+    <!-- <HeadModuleNav class="container" :navData="navDataPP" moreName="更多邮轮公司" moreLink="1.html"></HeadModuleNav> -->
+    <HeadModulePPTab :navData="navDataPP"  moreName="更多邮轮公司" moreLink="1.html"></HeadModulePPTab>
     
-    <!-- 游轮百科 -->
-    <HeadModuleTit class="container" tit="游轮百科" enTit="Cruise encyclopedia"/>
+    <!-- 邮轮百科 -->
+    <HeadModuleTit class="container" tit="邮轮百科" enTit="Cruise encyclopedia"/>
     <!-- <HeadModuleNav class="container" :navData="navDataBK" moreName="更多百科内容" moreLink="1.html"></HeadModuleNav> -->
     <!-- <HeadModuleBK></HeadModuleBK> -->
-    <HeadModuleBKTab :navData="navDataBK"></HeadModuleBKTab>
+    <HeadModuleBKTab :navData="navDataBK" moreName="更多百科内容" moreLink="1.html"></HeadModuleBKTab>
 
     <!-- 港口城市 -->
     <HeadModuleTit class="container" tit="港口城市" enTit="The port city of"/>
-    <HeadModuleNav class="container" :navData="navDataGK" moreName="更多港口城市" moreLink="1.html"></HeadModuleNav>
-    <HeadModuleCH></HeadModuleCH>
+    <!-- <HeadModuleNav class="container" :navData="navDataGK" moreName="更多港口城市" moreLink="1.html"></HeadModuleNav>
+    <HeadModuleCH></HeadModuleCH> -->
+    <HeadModuleCHTab :navData="navDataGK" moreName="更多港口城市" moreLink="1.html"></HeadModuleCHTab>
 
     <!-- 邮轮游记 -->
     <HeadModuleTit class="container" tit="邮轮游记" enTit="Cruise travel"/>
-    <HeadModuleNav class="container" :navData="navDataYJ" moreName="更多游记内容" moreLink="1.html"></HeadModuleNav>
-    <HeadModuleYJ></HeadModuleYJ>
+    <!-- <HeadModuleNav class="container" :navData="navDataYJ" moreName="更多游记内容" moreLink="1.html"></HeadModuleNav> -->
+    <!-- <HeadModuleYJ></HeadModuleYJ> -->
+    <HeadModuleYJTab :navData="navDataYJ" moreName="更多游记内容" moreLink="1.html"></HeadModuleYJTab>
   </div>
 </template>
 
@@ -28,16 +30,14 @@
 import Banner from '../components/Banner.vue'
 // 模块名称
 import HeadModuleTit from '../components/HeadModuleTit.vue'
-// 导航
-import HeadModuleNav from '../components/HeadModuleNav.vue'
 // 品牌
 import HeadModulePPTab from '../components/HeadModulePPTab.vue'
 // 百科
 import HeadModuleBKTab from '../components/HeadModuleBKTab.vue'
 // 港口城市
-import HeadModuleCH from '../components/HeadModuleCH.vue'
+import HeadModuleCHTab from '../components/HeadModuleCHTab.vue'
 // 游记
-import HeadModuleYJ from '../components/HeadModuleYJ.vue'
+import HeadModuleYJTab from '../components/HeadModuleYJTab.vue'
 
 export default {
   name: 'home',
@@ -58,14 +58,13 @@ export default {
   components: {
     Banner,
     HeadModuleTit,
-    HeadModuleNav,
     HeadModulePPTab,
     HeadModuleBKTab,
-    HeadModuleCH,
-    HeadModuleYJ
+    HeadModuleCHTab,
+    HeadModuleYJTab
   },
   methods: {
-    // 游轮品牌
+    // 邮轮品牌
     getPPnav(){
       this.$http.get('/API/index.ashx?command=GetShipCompany').then(function (res) {
         res.body = this.formatterNavVal(res.body, 'shipcompany')

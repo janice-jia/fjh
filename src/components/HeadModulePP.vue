@@ -1,54 +1,42 @@
 <template>
   <div class="HeadModulePP">
-    <div class="yl_pinpai container">
-      <el-row>
-        <el-col :span="15">
-          <div class="pinPL">
-            <div class="pinPL-img">
-              <img src="../assets/img/header/pinpai-2.jpg" alt="">
-            </div>
-            <div class="pinPL-con">
-              <p class="tit">
-                海洋量子号
-                <a href="">查看更多></a>
-              </p>
-              <p class="con">海洋量子号不是一艘简单意义上的新船，她已经超越了人类的想象力，这是一座让你入海和上天的海
-上国际大都市，在这里，童年的怀旧与明日的科技相逢。前一刻还在感叹眼前的一幕，顷刻已经进入
-下一个完全不同的未来。海洋量子号，皇家加勒比国际邮轮量子船系的第一艘邮轮，将永远改变你邮
-轮巡游的视野，带给你全新的海上体验！</p>
-            </div>
-          </div>
-        </el-col>
-        <el-col :span="9">
-          <ul>
-            <li>
-              <div class="pinPR">
-                <div class="pinPR-img">
-                  <img src="../assets/img/header/pinpai-1.jpg" alt="">
+
+    <el-carousel indicator-position="outside" :autoplay="false" trigger="click" arrow="nerver" height="600px">
+      <el-carousel-item v-for="item in contInfoPP" :key="item.id">
+        <div class="yl_pinpai container">
+          <el-row>
+            <el-col :span="15">
+              <div class="pinPL">
+                <div class="pinPL-img">
+                  <img :src="item.imgurl" alt="">
                 </div>
-                <div class="pinPR-name">{{ppType}}==9天8晚 福冈+境港+海参崴</div>
-              </div>
-            </li>
-            <li>
-              <div class="pinPR">
-                <div class="pinPR-img">
-                  <img src="../assets/img/header/pinpai-1.jpg" alt="">
+                <div class="pinPL-con">
+                  <p class="tit">
+                    {{item.shipname}}
+                    <a href="">查看更多></a>
+                  </p>
+                  <p class="con">{{item.description}}</p>
                 </div>
-                <div class="pinPR-name">9天8晚 福冈+境港+海参崴</div>
               </div>
-            </li>
-            <li>
-              <div class="pinPR">
-                <div class="pinPR-img">
-                  <img src="../assets/img/header/pinpai-1.jpg" alt="">
-                </div>
-                <div class="pinPR-name">9天8晚 福冈+境港+海参崴</div>
-              </div>
-            </li>
-          </ul>
-        </el-col>
-      </el-row>
-    </div> 
+            </el-col>
+            <el-col :span="9">
+              <ul>
+                <li v-for="(vv, ii) in item.itinerarylist" :key="ii+1">
+                  <div class="pinPR">
+                    <div class="pinPR-img">
+                      <img :src="vv.coverimg" alt="">
+                    </div>
+                    <div class="pinPR-name">{{vv.title}}</div>
+                  </div>
+                </li>
+              </ul>
+            </el-col>
+          </el-row>
+        </div> 
+      </el-carousel-item>
+    </el-carousel>
+
+    
     
   </div>
 </template>
@@ -57,29 +45,11 @@
 export default {
   name: 'HeadModulePP',
   props: {
-    ppType: String
+    contInfoPP: Array
   },
   data() {
     return {
-      list: [],
-    }
-  },
-  mounted(){
-    this.getList()
-  },
-  methods: {
-    handleClick(tab, event) {
-      console.log(tab, event);
-    },
-    // 游轮品牌
-    getList(){
-      this.$http.get('/API/index.ashx?command=GetShipListByCompanyId',{
-        params:{
-          companyid:'1'
-        }
-      }).then(function (res) {
-        this.list = res.body
-      })
+
     }
   }
 }
@@ -91,13 +61,16 @@ export default {
     max-height: 540px;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+    background: #e2d9d9
   }
 }
 .pinPL{
   padding-right: 40px;
   .pinPL-img{
     height: 440px;
-    max-height: 540px;
+    max-height: 440px;
+    max-width: 100%;
+    overflow: hidden;
     text-align: center;
   }
   .pinPL-con{
@@ -147,6 +120,11 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+  }
+}
+.HeadModulePP{
+  .el-carousel__indicators--outside{
+    border: -10px;
   }
 }
 </style>

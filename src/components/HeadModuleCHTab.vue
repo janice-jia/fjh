@@ -1,5 +1,5 @@
 <template>
-  <div class="HeadModuleBKTab">
+  <div class="HeadModuleCHTab">
     <div class="container linkbox">
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane 
@@ -8,10 +8,9 @@
           :label="item.name" 
           :name="item.id"
         >
-          <HeadModuleBK :contInfoBK="contInfoBK"></HeadModuleBK>
+          <HeadModuleCH :contInfoCH="contInfoCH"></HeadModuleCH>
         </el-tab-pane>
       </el-tabs>
-
       <div class="link">
         <a href="moreLInk">{{moreName}}</a>
       </div>
@@ -20,10 +19,10 @@
 </template>
 
 <script>
-// 百科
-import HeadModuleBK from './HeadModuleBK.vue'
+// 港口城市
+import HeadModuleCH from './HeadModuleCH.vue'
 export default {
-  name: 'HeadModuleBKTab',
+  name: 'HeadModuleCHTab',
   props: {
     navData: Array,
     moreName: String,
@@ -31,10 +30,10 @@ export default {
   },
   data() {
     return {
-      activeName: '3',
+      activeName: '1',
       activeIndex: '1',
       activeIndex2: '1',
-      contInfoBK: []
+      contInfoCH: []
     };
   },
   mounted(){
@@ -45,20 +44,20 @@ export default {
       this.getConInfo(this.activeName)
     },
     // 根据分类id获取内容
-    getConInfo(categoryid){
-      if(!categoryid) return;
-      this.$http.get('/API/index.ashx?command=GetArticleByCategoryId&categoryid='+categoryid).then(function (res) {
-        this.contInfoBK = res.body
+    getConInfo(areaid){
+      if(!areaid) return
+      this.$http.get('/API/index.ashx?command=GetPortByArea&areaid='+areaid).then(function (res) {
+        this.contInfoCH = res.body
       })
     }
   },
   components: {
-    HeadModuleBK
+    HeadModuleCH
   }
 }
 </script>
 <style lang="scss">
-.HeadModuleBKTab{
+.HeadModuleCHTab{
   .el-tabs__item.is-active{
     color: #ee6b03;
   }
@@ -102,5 +101,6 @@ export default {
       }
     }
   }
+  
 }
 </style>

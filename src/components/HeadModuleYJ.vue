@@ -2,38 +2,17 @@
   <div class="HeadModuleYJ">
     <div class="yl_chengshi container">
       <div class="yl_yj">
-        <img src="../assets/img/header/pinpai-4.jpg" alt="">
+        <img :src="contInfoYJ[0].coverimg" alt="">
       </div>
 
       <el-row :gutter="30">
-      <el-col :span="8">
+      <el-col :span="8" v-for="item in contInfoPP" :key="item.id">
         <div class="yl_chengshi_img">
-          <img src="../assets/img/header/pinpai-3.jpg" alt="">
+          <img :src="item.articletitle" alt="">
         </div>
         <div class="yl_chengshi_name">
-          <p class="tit"><a href="">福冈</a></p>
-          <p class="con">福冈县位于九州北端，东北部濒临周防滩，西北部面对
-玄海滩，西南部面对有明海。这里与朝鲜半岛和中...</p>
-        </div>
-      </el-col>
-      <el-col :span="8">
-        <div class="yl_chengshi_img">
-          <img src="../assets/img/header/pinpai-3.jpg" alt="">
-        </div>
-        <div class="yl_chengshi_name">
-          <p class="tit"><a href="">长崎</a></p>
-          <p class="con">福冈县位于九州北端，东北部濒临周防滩，西北部面对
-玄海滩，西南部面对有明海。这里与朝鲜半岛和中...</p>
-        </div>
-      </el-col>
-      <el-col :span="8">
-        <div class="yl_chengshi_img">
-          <img src="../assets/img/header/pinpai-3.jpg" alt="">
-        </div>
-        <div class="yl_chengshi_name">
-          <p class="tit"><a href="">大阪</a></p>
-          <p class="con">福冈县位于九州北端，东北部濒临周防滩，西北部面对
-玄海滩，西南部面对有明海。这里与朝鲜半岛和中...</p>
+          <p class="tit"><a href="">{{item.articletitle}}</a></p>
+          <p class="con">{{item.articlecontent}}</p>
         </div>
       </el-col>
     </el-row>
@@ -46,6 +25,9 @@
 <script>
 export default {
   name: 'HeadModuleYJ',
+  props: {
+    contInfoYJ: Array
+  },
 }
 </script>
 <style lang="scss">

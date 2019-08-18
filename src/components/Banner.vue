@@ -24,32 +24,53 @@
       <div class="container">
         <el-row>
           <el-col :span="5">
+            <!-- 出发城市 -->
             <el-select v-model="search.city" placeholder="出发城市">
-              <el-option label="出发城市" value=""></el-option>
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+              <el-option-group
+                v-for="group in cityList"
+                :key="group.areaname"
+                :label="group.areaname">
+                <el-option
+                  v-for="item in group.child"
+                  :key="item.id"
+                  :label="item.portname"
+                  :value="item.id">
+                </el-option>
+              </el-option-group>
             </el-select>
           </el-col>
           <el-col :span="5">
-            <el-select v-model="search.time" placeholder="出发时间">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="5">
+            <!-- 出发航线 -->
             <el-select v-model="search.line" placeholder="出发航线">
               <el-option label="区域一" value="shanghai"></el-option>
               <el-option label="区域二" value="beijing"></el-option>
             </el-select>
           </el-col>
           <el-col :span="5">
-            <el-select v-model="search.yl" placeholder="热门游轮">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+            <!-- 热门邮轮 -->
+            <el-select v-model="search.yl" placeholder="热门邮轮">
+              <el-option v-for="(item, index) in lineList" :key="index+1"  :label="item.shipcompany" :value="item.id"></el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="5">
+            &nbsp;
+            <!-- 目的地 -->
+            <el-select v-model="search.bourn" placeholder="目的地">
+              <el-option-group
+                v-for="group in cityList"
+                :key="group.areaname"
+                :label="group.areaname">
+                <el-option
+                  v-for="item in group.child"
+                  :key="item.id"
+                  :label="item.portname"
+                  :value="item.id">
+                </el-option>
+              </el-option-group>
             </el-select>
           </el-col>
           <el-col :span="4">
-            <el-input v-model="search.user" placeholder="如：游轮"></el-input>
+            <el-input v-model="search.user" placeholder="请输入邮轮名称"></el-input>
           </el-col>
         </el-row>
       </div>
@@ -65,21 +86,56 @@
 <script>
 export default {
   name: 'Banner',
+  props: {
+    lineList: Array
+  },
   data() {
     return {
       bannerList:[],
       activeIndex: '1',
       activeIndex2: '1',
       city:[1,2,3],
-      search:{}
+      search:{},
+      cityList: [{
+          label: '热门城市',
+          options: [{
+            value: 'Shanghai',
+            label: '上海'
+          }, {
+            value: 'Beijing',
+            label: '北京'
+          }]
+        }, {
+          label: '城市名',
+          options: [{
+            value: 'Chengdu',
+            label: '成都'
+          }, {
+            value: 'Shenzhen',
+            label: '深圳'
+          }, {
+            value: 'Guangzhou',
+            label: '广州'
+          }, {
+            value: 'Dalian',
+            label: '大连'
+          }]
+        }]
     };
   },
   mounted(){
-    this.getBannerList()
+    this.getBannerList(),
+    this.getCityList()
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    getCityList(){
+      this.$http.get('/API/index.ashx?command=GetAreaCity').then(function (res) {
+        console.info('res.body===', res.body)
+        this.cityList = res.body.list
+      })
     },
     getBannerList(){
       this.$http.get('/API/index.ashx?command=GetBannerImg').then(function (res) {

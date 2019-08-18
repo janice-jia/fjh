@@ -2,7 +2,7 @@
   <div class="HeadModuleBK">
     <div class="yl_baike container">
       <el-row :gutter="30">
-        <el-col :span="8" v-for="(item, index) in contInfo" 
+        <el-col :span="8" v-for="(item, index) in contInfoBK" 
           :key="index+1">
           <div class="yl_baike_img">
             <img :src="item.coverimg" alt="">
@@ -20,7 +20,7 @@
 export default {
   name: 'HeadModuleBK',
   props: {
-    contInfo: Array
+    contInfoBK: Array
   },
 }
 </script>

@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      activeName: '1',
+      activeName: '8',
       activeIndex: '1',
       activeIndex2: '1',
       contInfoYJ: []
@@ -46,8 +46,8 @@ export default {
     // 根据分类id获取内容
     getConInfo(categoryid){
       if(!categoryid) return
-      this.$http.get('/API/index.ashx?command=GetArticleByCategoryId&categoryid='+categoryid).then(function (res) {
-        this.contInfoYJ = res.body
+      this.$http.get('/API/index.ashx?command=GetArticleTopByCategoryId&categoryid='+categoryid).then(function (res) {
+        this.contInfoYJ = res.body.list[0] || {}
       })
     }
   },
@@ -98,6 +98,14 @@ export default {
           background: url("../assets/img/header/right.png") no-repeat;
           background-size: 12px;
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .linkbox{
+      .el-tabs__header{
+        max-width: 360px;
       }
     }
   }

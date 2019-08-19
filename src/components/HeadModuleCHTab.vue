@@ -46,8 +46,8 @@ export default {
     // 根据分类id获取内容
     getConInfo(areaid){
       if(!areaid) return
-      this.$http.get('/API/index.ashx?command=GetPortByArea&areaid='+areaid).then(function (res) {
-        this.contInfoCH = res.body
+      this.$http.get('/API/index.ashx?command=GetAreaTopCity&areaid='+areaid).then(function (res) {
+        this.contInfoCH = res.body.list[0] ? res.body.list[0] : {}
       })
     }
   },
@@ -102,5 +102,12 @@ export default {
     }
   }
   
+  @media screen and (max-width: 650px) {
+    .linkbox{
+      .el-tabs__header{
+        max-width: 360px;
+      }
+    }
+  }
 }
 </style>

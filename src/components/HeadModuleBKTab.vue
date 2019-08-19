@@ -102,5 +102,14 @@ export default {
       }
     }
   }
+
+  
+  @media screen and (max-width: 650px) {
+    .linkbox{
+      .el-tabs__header{
+        max-width: 360px;
+      }
+    }
+  }
 }
 </style>

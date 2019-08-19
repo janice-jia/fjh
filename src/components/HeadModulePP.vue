@@ -1,7 +1,7 @@
 <template>
   <div class="HeadModulePP">
 
-    <el-carousel indicator-position="outside" :autoplay="false" trigger="click" arrow="nerver" height="600px">
+    <el-carousel indicator-position="outside" :autoplay="false" trigger="click" arrow="nerver">
       <el-carousel-item v-for="item in contInfoPP" :key="item.id">
         <div class="yl_pinpai container">
           <el-row>
@@ -55,13 +55,17 @@ export default {
 }
 </script>
 <style lang="scss">
+.HeadModulePP{
+  .el-carousel__container{
+    height: 600px;
+  }
+}
 .pinPL,.pinPR{
   img{
     max-width: 100%;
-    max-height: 540px;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
-    background: #e2d9d9
+    background: #e2d9d9;
   }
 }
 .pinPL{
@@ -72,6 +76,7 @@ export default {
     max-width: 100%;
     overflow: hidden;
     text-align: center;
+    background: #ededed;
   }
   .pinPL-con{
     height: 160px;
@@ -106,10 +111,12 @@ export default {
   margin-bottom: 30px;
   .pinPR-img{
     height: 130px;
+    background: #ededed;
   }
   .pinPR-name{
     height: 50px;
     line-height: 50px;
+    overflow: hidden;
     background: #ffffff;
     font-size: 26px;
     color: #333333;
@@ -125,6 +132,36 @@ export default {
 .HeadModulePP{
   .el-carousel__indicators--outside{
     border: -10px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .HeadModulePP{
+    .el-carousel__container{
+      height: 300px;
+    }
+  }
+
+  .pinPL{
+    .pinPL-img{
+      height: 210px;
+    }
+    .pinPL-con{
+      height: 80px;
+    }
+  }
+
+  .pinPR{
+    height: 90px;
+    margin-bottom: 30px;
+    .pinPR-img{
+      height: 65px;
+    }
+    .pinPR-name{
+      height: 25px;
+      line-height: 25px;
+      overflow: hidden;
+      font-size: 16px;
+    }
   }
 }
 </style>

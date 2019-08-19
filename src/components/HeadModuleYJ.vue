@@ -2,17 +2,17 @@
   <div class="HeadModuleYJ">
     <div class="yl_chengshi container">
       <div class="yl_yj">
-        <img :src="contInfoYJ[0].coverimg" alt="">
+        <img :src="contInfoYJ.coverimg" alt="">
       </div>
 
       <el-row :gutter="30">
-      <el-col :span="8" v-for="item in contInfoPP" :key="item.id">
+      <el-col :span="8" v-for="item in contInfoYJ.child" :key="item.id">
         <div class="yl_chengshi_img">
-          <img :src="item.articletitle" alt="">
+          <img :src="item.imgurl" alt="">
         </div>
         <div class="yl_chengshi_name">
-          <p class="tit"><a href="">{{item.articletitle}}</a></p>
-          <p class="con">{{item.articlecontent}}</p>
+          <p class="tit"><a href="">{{item.portname}}</a></p>
+          <p class="con">{{item.description}}</p>
         </div>
       </el-col>
     </el-row>

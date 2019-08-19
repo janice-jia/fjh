@@ -16,9 +16,10 @@ export default {
 </script>
 <style lang="scss">
 .HeadModuleTit{
-  margin-top: 50px;
+  // margin-top: 50px;
   text-align: center;
   max-width: 100%;
+  margin: 80px auto 60px auto!important;
   h1{
     font-size: 32px;
     color: #333333;

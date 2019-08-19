@@ -7,14 +7,33 @@
             <img class="logo" src="../assets/img/header/logo.png" alt="">
           </el-col>
           <el-col :span="18">
-            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-              <el-menu-item index="1">首页</el-menu-item>
-              <el-menu-item index="2">邮轮公司</el-menu-item>
-              <el-menu-item index="3">邮轮航线</el-menu-item>
-              <el-menu-item index="4">港口城市</el-menu-item>
-              <el-menu-item index="5">邮轮百科</el-menu-item>
-              <el-menu-item index="6">邮轮游记</el-menu-item>
-            </el-menu>
+            <!-- pc菜单 -->
+            <div class="pcMenu">
+              <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                <el-menu-item index="1">首页</el-menu-item>
+                <el-menu-item index="2">邮轮公司</el-menu-item>
+                <el-menu-item index="3">邮轮航线</el-menu-item>
+                <el-menu-item index="4">港口城市</el-menu-item>
+                <el-menu-item index="5">邮轮百科</el-menu-item>
+                <el-menu-item index="6">邮轮游记</el-menu-item>
+              </el-menu>
+            </div> 
+            <!-- app菜单 -->
+            <div class="appMenu el-icon-more" icon="el-icon-more" @click="drawer = true">&nbsp;</div>
+
+            <!-- 侧栏菜单 -->
+            <div class="appMenuList">
+              <el-drawer
+                title="法嘉华"
+                :visible.sync="drawer"
+                :direction="direction">
+                <p class="appnav"><a href="">首页</a></p>
+                <p class="appnav"><a href="">邮轮公司</a></p>
+                <p class="appnav"><a href="">港口城市</a></p>
+                <p class="appnav"><a href="">邮轮百科</a></p>
+                <p class="appnav"><a href="">邮轮游记</a></p>
+              </el-drawer>
+            </div>
           </el-col>
         </el-row>
       </div>
@@ -42,8 +61,17 @@
           <el-col :span="5">
             <!-- 出发航线 -->
             <el-select v-model="search.line" placeholder="出发航线">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+              <el-option-group
+                v-for="group in cityList"
+                :key="group.areaname"
+                :label="group.areaname">
+                <el-option
+                  v-for="item in group.child"
+                  :key="item.id"
+                  :label="item.portname"
+                  :value="item.id">
+                </el-option>
+              </el-option-group>
             </el-select>
           </el-col>
           <el-col :span="5">
@@ -70,12 +98,14 @@
             </el-select>
           </el-col>
           <el-col :span="4">
-            <el-input v-model="search.user" placeholder="请输入邮轮名称"></el-input>
+            <div class="ylInput">
+              <el-input clear="" v-model="search.user" placeholder="请输入邮轮名称"></el-input>
+            </div>
           </el-col>
         </el-row>
       </div>
     </div>
-    <el-carousel :interval="8000" arrow="always" height="850px">
+    <el-carousel :interval="8000" arrow="always">
         <el-carousel-item v-for="item in bannerList" :key="item.id">
           <img :src="item.imgurl" alt="">
         </el-carousel-item>
@@ -91,6 +121,10 @@ export default {
   },
   data() {
     return {
+      // 侧栏菜单显示状态
+      drawer: false,
+      // 侧栏菜单方向，，，从右往左开
+      direction:'rtl',
       bannerList:[],
       activeIndex: '1',
       activeIndex2: '1',
@@ -159,9 +193,31 @@ export default {
     max-height: 850px;
   }
   img{
-    max-width: 100%;
+    // max-width: 100%;
+    max-height: 100%;
+  }
+  .el-carousel__container{
+    height: 850px;
+  }
+  .appMenu{
+    display: none;
+    height: 100px;
+    line-height: 100px;
+    font-size: 34px;
+    font-weight: bold;
+    width: 100px;
+    color: #ffffff;
+    float: right;
+    text-align: center;
+    cursor: pointer;
   }
 }
+.appnav{
+  padding: 10px;
+  a{
+    color: #333333;
+  }
+} 
 // 导航
 .banner-nav{
   position: absolute;
@@ -207,5 +263,49 @@ export default {
   width: 100%;
   bottom: -30px;
   height: 60px;
+  // 搜索图标
+  .el-icon-arrow-up::after{
+    content: ' '!important;
+    background: url(../assets/img/header/up.png) no-repeat;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    width: 20px;
+    height: 10px;
+    margin-top: -5px;
+  }
+  .el-input{
+    border-right: #e5e5e5;
+  }
+  .el-input__inner{
+    border:none;
+  }
+  .ylInput{
+    input{
+      background: #ededed;
+    }
+  }
+}
+
+
+@media screen and (max-width: 650px) {
+  .pcMenu{
+    display: none!important;
+  }
+  .appMenu{
+    display: block!important;
+  }
+  .logo{
+    margin-left: 20px;
+  }
+  .Banner{
+    height: 425px;
+    .banner-img{
+      max-height: 425px;
+    }
+    .el-carousel__container{
+      height: 425px;
+    }
+  }
 }
 </style>

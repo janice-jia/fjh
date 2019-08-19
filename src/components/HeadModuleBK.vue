@@ -25,6 +25,9 @@ export default {
 }
 </script>
 <style lang="scss">
+.HeadModuleBK{
+  padding-bottom: 10px;
+}
 .yl_baike{
   .yl_baike_img{
     height: 270px;
@@ -50,6 +53,14 @@ export default {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .yl_baike{
+    .yl_baike_img{
+      height: 135px;
+    }
   }
 }
 </style>

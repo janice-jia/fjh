@@ -2,7 +2,15 @@
   <div class="HeadModuleYJ">
     <div class="yl_chengshi container">
       <div class="yl_yj">
-        <img :src="contInfoYJ.coverimg" alt="">
+        <!-- <img :src="contInfoYJ.coverimg" alt=""> -->
+        <!-- <embed src="https://media.w3.org/2010/05/sintel/trailer.mp4" allowFullScreen="true" 
+            quality="high" 
+            width="480" 
+            height="350" 
+            align="middle" 
+            allowScriptAccess="always" 
+            type="application/x-shockwave-flash">
+          </embed> -->
       </div>
 
       <el-row :gutter="30">
@@ -11,8 +19,8 @@
           <img :src="item.imgurl" alt="">
         </div>
         <div class="yl_chengshi_name">
-          <p class="tit"><a href="">{{item.portname}}</a></p>
-          <p class="con">{{item.description}}</p>
+          <p class="tit"><a href="">{{item.articletitle}}</a></p>
+          <p class="con">{{item.articlecontent}}</p>
         </div>
       </el-col>
     </el-row>

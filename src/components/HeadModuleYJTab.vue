@@ -47,7 +47,7 @@ export default {
     getConInfo(categoryid){
       if(!categoryid) return
       this.$http.get('/API/index.ashx?command=GetArticleTopByCategoryId&categoryid='+categoryid).then(function (res) {
-        this.contInfoYJ = res.body.list[0] || {}
+        this.contInfoYJ = res.body.list[0]
       })
     }
   },

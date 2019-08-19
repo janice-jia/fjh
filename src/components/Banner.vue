@@ -100,6 +100,7 @@
           <el-col :span="4">
             <div class="ylInput">
               <el-input clear="" v-model="search.user" placeholder="请输入邮轮名称"></el-input>
+              <img class="searchBtn" src="../assets/img/header/search.png" alt="">
             </div>
           </el-col>
         </el-row>
@@ -275,14 +276,27 @@ export default {
     margin-top: -5px;
   }
   .el-input{
-    border-right: #e5e5e5;
+    border-right: 1px solid #e5e5e5;
   }
   .el-input__inner{
     border:none;
   }
   .ylInput{
+    position: relative;
+    .el-input{
+      border: none;
+    }
+    .searchBtn{
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      margin-top:-12px;
+      width: 24px;
+      height: 24px;
+    }
     input{
       background: #ededed;
+      padding-right: 30px;
     }
   }
 }

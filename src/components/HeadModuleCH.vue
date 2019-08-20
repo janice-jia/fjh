@@ -15,7 +15,7 @@
               {{contInfoCH.description}}
             </div>
             <div class="yl_chengshi_more">
-              <a href="">查看更多 ></a> 
+              <a href="comingSoon">查看更多 ></a> 
             </div>
             </div>
           </el-col>
@@ -28,7 +28,7 @@
           <img :src="item.imgurl" alt="">
         </div>
         <div class="yl_chengshi_name">
-          <p class="tit"><a href="">{{item.portname}}</a></p>
+          <p class="tit"><a href="comingSoon">{{item.portname}}</a></p>
           <p class="con">{{item.description}}</p>
         </div>
       </el-col>

@@ -12,7 +12,7 @@
         </el-tab-pane>
       </el-tabs>
       <div class="link">
-        <a href="moreLInk">{{moreName}}</a>
+        <a href="comingSoon">{{moreName}}</a>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@ export default {
     getConInfo(areaid){
       if(!areaid) return
       this.$http.get('/API/index.ashx?command=GetAreaTopCity&areaid='+areaid).then(function (res) {
-        this.contInfoCH = res.body.list[0] ? res.body.list[0] : {}
+        this.contInfoCH = res.body.list[0] ? res.body.list[0] : []
       })
     }
   },

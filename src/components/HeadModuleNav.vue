@@ -8,7 +8,7 @@
       </el-col>
       <el-col :span="8">
         <div class="link">
-          <a href="moreLInk">{{moreName}}</a>
+          <a href="comingSoon">{{moreName}}</a>
         </div>
       </el-col>
     </el-row>

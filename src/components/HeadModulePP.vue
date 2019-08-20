@@ -13,7 +13,7 @@
                 <div class="pinPL-con">
                   <p class="tit">
                     {{item.shipname}}
-                    <a href="">查看更多></a>
+                    <a href="comingSoon">查看更多></a>
                   </p>
                   <p class="con">{{item.description}}</p>
                 </div>

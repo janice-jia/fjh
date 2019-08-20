@@ -73,9 +73,9 @@ export default {
     },
     //港口城市
     getGKnav(){
-      this.$http.get('/API/index.ashx?command=GetPortByArea&areaid=1').then(function (res) {
-        res.body = this.formatterNavVal(res.body, 'portname')
-        this.navDataGK = res.body
+      this.$http.get('/API/index.ashx?command=GetAreaCity').then(function (res) {
+        res.body.list = this.formatterNavVal(res.body.list, 'areaname')
+        this.navDataGK = res.body.list
       })
     },
     // 百科。。。。游记（1-百科，，2游记）1

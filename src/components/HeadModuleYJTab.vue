@@ -12,7 +12,7 @@
         </el-tab-pane>
       </el-tabs>
       <div class="link">
-        <a href="moreLInk">{{moreName}}</a>
+        <a href="comingSoon">{{moreName}}</a>
       </div>
     </div>
   </div>
@@ -20,6 +20,7 @@
 
 <script>
 // 港口城市
+let Base64 = require('js-base64').Base64
 import HeadModuleYJ from './HeadModuleYJ.vue'
 export default {
   name: 'HeadModuleYJTab',
@@ -33,7 +34,7 @@ export default {
       activeName: '8',
       activeIndex: '1',
       activeIndex2: '1',
-      contInfoYJ: []
+      contInfoYJ: {}
     };
   },
   mounted(){
@@ -47,7 +48,13 @@ export default {
     getConInfo(categoryid){
       if(!categoryid) return
       this.$http.get('/API/index.ashx?command=GetArticleTopByCategoryId&categoryid='+categoryid).then(function (res) {
-        this.contInfoYJ = res.body.list[0]
+        this.contInfoYJ = res.body.list[0] || {}
+        if(this.contInfoYJ.child){
+          for(var i=0; i< this.contInfoYJ.child.length; i++){
+            if(this.contInfoYJ.child[i].articlecontent)
+              this.contInfoYJ.child[i].articlecontent = Base64.decode(this.contInfoYJ.child[i].articlecontent)
+          }
+        }
       })
     }
   },

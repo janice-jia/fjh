@@ -8,7 +8,7 @@
             <img :src="item.coverimg" alt="">
           </div>
           <div class="yl_baike_name">
-            <a href="">{{item.articletitle}}</a>
+            <a href="comingSoon">{{item.articletitle}}</a>
           </div>
         </el-col>
       </el-row>
@@ -36,6 +36,9 @@ export default {
     max-height: 100%;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+    img{
+      max-width: 100%;
+    }
   }
   .yl_baike_name{
     font-size: 22px;

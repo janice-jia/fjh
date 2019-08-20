@@ -10,12 +10,12 @@
             <!-- pc菜单 -->
             <div class="pcMenu">
               <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                <el-menu-item index="1">首页</el-menu-item>
-                <el-menu-item index="2">邮轮公司</el-menu-item>
-                <el-menu-item index="3">邮轮航线</el-menu-item>
-                <el-menu-item index="4">港口城市</el-menu-item>
-                <el-menu-item index="5">邮轮百科</el-menu-item>
-                <el-menu-item index="6">邮轮游记</el-menu-item>
+                <el-menu-item index="1"><a href="/comingSoon" target="_blank">首页</a></el-menu-item>
+                <el-menu-item index="2"><a href="/comingSoon" target="_blank">邮轮公司</a></el-menu-item>
+                <el-menu-item index="3"><a href="/comingSoon" target="_blank">邮轮航线</a></el-menu-item>
+                <el-menu-item index="4"><a href="/comingSoon" target="_blank">港口城市</a></el-menu-item>
+                <el-menu-item index="5"><a href="/comingSoon" target="_blank">邮轮百科</a></el-menu-item>
+                <el-menu-item index="6"><a href="/comingSoon" target="_blank">邮轮游记</a></el-menu-item>
               </el-menu>
             </div> 
             <!-- app菜单 -->
@@ -27,11 +27,12 @@
                 title="法嘉华"
                 :visible.sync="drawer"
                 :direction="direction">
-                <p class="appnav"><a href="">首页</a></p>
-                <p class="appnav"><a href="">邮轮公司</a></p>
-                <p class="appnav"><a href="">港口城市</a></p>
-                <p class="appnav"><a href="">邮轮百科</a></p>
-                <p class="appnav"><a href="">邮轮游记</a></p>
+                <p class="appnav"><a href="/comingSoon" target="_blank">首页</a></p>
+                <p class="appnav"><a href="/comingSoon" target="_blank">邮轮公司</a></p>
+                <p class="appnav"><a href="/comingSoon" target="_blank">邮轮航线</a></p>
+                <p class="appnav"><a href="/comingSoon" target="_blank">港口城市</a></p>
+                <p class="appnav"><a href="/comingSoon" target="_blank">邮轮百科</a></p>
+                <p class="appnav"><a href="/comingSoon" target="_blank">邮轮游记</a></p>
               </el-drawer>
             </div>
           </el-col>
@@ -44,46 +45,94 @@
         <el-row>
           <el-col :span="5">
             <!-- 出发城市 -->
-            <el-select v-model="search.city" placeholder="出发城市">
-              <el-option-group
-                v-for="group in cityList"
-                :key="group.areaname"
-                :label="group.areaname">
-                <el-option
-                  v-for="item in group.child"
-                  :key="item.id"
-                  :label="item.portname"
-                  :value="item.id">
-                </el-option>
-              </el-option-group>
-            </el-select>
+            <el-button class="searchBtn" v-bind:class="{ active: isActiveCh }"  v-popover:popover1>{{isActiveChName}}</el-button>
+            <div class="showdropList">
+              <el-popover
+                ref="popover1"
+                placement="bottom-start"
+                width="450"
+                trigger="click"
+                v-model="isActiveCh">
+                <el-table :data="cityList">
+                  <el-table-column width="80" property="areaname" label="出发城市"></el-table-column>
+                  <el-table-column width="350">
+                    <span @click="showSearchVal('isActiveCh', group.areaname)" v-for="group in cityList" :key="group.areaname">
+                      {{group.areaname}}
+                    </span>
+                  </el-table-column>
+                </el-table>
+              </el-popover>
+            </div>
           </el-col>
           <el-col :span="5">
             <!-- 出发航线 -->
-            <el-select v-model="search.line" placeholder="出发航线">
-              <el-option-group
-                v-for="group in cityList"
-                :key="group.areaname"
-                :label="group.areaname">
-                <el-option
-                  v-for="item in group.child"
-                  :key="item.id"
-                  :label="item.portname"
-                  :value="item.id">
-                </el-option>
-              </el-option-group>
-            </el-select>
+            <el-button class="searchBtn" v-bind:class="{ active: isActiveHX }" v-popover:popover2>{{isActiveHXName}}</el-button>
+            <div class="showdropList">
+              <el-popover
+                ref="popover2"
+                placement="bottom-start"
+                width="450"
+                trigger="click"
+                v-model="isActiveHX">
+                <el-table :data="cityList">
+                  <el-table-column width="80" property="areaname" label="出发航线"></el-table-column>
+                  <el-table-column width="350">
+                    <span @click="showSearchVal('isActiveHX', group.areaname)" v-for="group in cityList" :key="group.areaname">
+                      {{group.areaname}}
+                    </span>
+                  </el-table-column>
+                </el-table>
+              </el-popover>
+            </div>
           </el-col>
+
           <el-col :span="5">
             <!-- 热门邮轮 -->
-            <el-select v-model="search.yl" placeholder="热门邮轮">
+            <el-button class="searchBtn" v-bind:class="{ active: isActiveYL }" v-popover:popover3>{{isActiveYLName}}</el-button>
+            <div class="showdropList">
+              <el-popover
+                ref="popover3"
+                placement="bottom-start"
+                width="200"
+                trigger="click"
+                v-model="isActiveYL">
+                <el-table :data="lineList">
+                  <el-table-column width="200" v-for="group in lineList" :key="group.areaname" label="热门游轮">
+                    <span style="width:90%; text-align:center;" @click="showSearchVal('isActiveYL', group.shipcompany)" >
+                      {{group.shipcompany}}
+                    </span>
+                  </el-table-column>
+                </el-table>
+              </el-popover>
+            </div>
+            <!-- <el-select v-model="search.yl" placeholder="热门邮轮">
               <el-option v-for="(item, index) in lineList" :key="index+1"  :label="item.shipcompany" :value="item.id"></el-option>
-            </el-select>
+            </el-select> -->
           </el-col>
           <el-col :span="5">
             &nbsp;
             <!-- 目的地 -->
-            <el-select v-model="search.bourn" placeholder="目的地">
+
+            <el-button class="searchBtn" v-bind:class="{ active: isActiveMD }" v-popover:popover4>{{isActiveMDName}}</el-button>
+            <div class="showdropList">
+              <el-popover
+                ref="popover4"
+                placement="bottom-start"
+                width="450"
+                trigger="click"
+                v-model="isActiveMD">
+                <el-table :data="cityList">
+                  <el-table-column width="80" property="areaname" label="目的地"></el-table-column>
+                  <el-table-column width="350">
+                    <span @click="showSearchVal('isActiveMD', group.areaname)" v-for="group in cityList" :key="group.areaname">
+                      {{group.areaname}}
+                    </span>
+                  </el-table-column>
+                </el-table>
+              </el-popover>
+            </div>
+
+            <!-- <el-select v-model="search.bourn" placeholder="目的地">
               <el-option-group
                 v-for="group in cityList"
                 :key="group.areaname"
@@ -95,7 +144,7 @@
                   :value="item.id">
                 </el-option>
               </el-option-group>
-            </el-select>
+            </el-select> -->
           </el-col>
           <el-col :span="4">
             <div class="ylInput">
@@ -131,31 +180,15 @@ export default {
       activeIndex2: '1',
       city:[1,2,3],
       search:{},
-      cityList: [{
-          label: '热门城市',
-          options: [{
-            value: 'Shanghai',
-            label: '上海'
-          }, {
-            value: 'Beijing',
-            label: '北京'
-          }]
-        }, {
-          label: '城市名',
-          options: [{
-            value: 'Chengdu',
-            label: '成都'
-          }, {
-            value: 'Shenzhen',
-            label: '深圳'
-          }, {
-            value: 'Guangzhou',
-            label: '广州'
-          }, {
-            value: 'Dalian',
-            label: '大连'
-          }]
-        }]
+      cityList: [],
+      isActiveCh:false,
+      isActiveHX:false,
+      isActiveYL:false,
+      isActiveMD:false,
+      isActiveChName:'出发城市',
+      isActiveHXName:'出发航线',
+      isActiveYLName:'热门游轮',
+      isActiveMDName:'目的地',
     };
   },
   mounted(){
@@ -177,6 +210,11 @@ export default {
         // console.info('data', data)
         this.bannerList = res.body
       })
+    },
+    showSearchVal(type, value){
+      // console.info(type)
+      this[type] = !this[type];
+      this[type+'Name'] = value;
     }
   }
 }
@@ -264,6 +302,8 @@ export default {
   width: 100%;
   bottom: -30px;
   height: 60px;
+
+
   // 搜索图标
   .el-icon-arrow-up::after{
     content: ' '!important;
@@ -297,6 +337,7 @@ export default {
     input{
       background: #ededed;
       padding-right: 30px;
+      cursor: pointer;
     }
   }
 }
@@ -320,6 +361,61 @@ export default {
     .el-carousel__container{
       height: 425px;
     }
+  }
+}
+
+
+// 搜索区域
+.el-popper{
+  height: 185px;
+  overflow: auto;
+}
+.cell{
+  vertical-align:top!important;
+  font-size: 12px;
+  font-size: #999999;
+  span{
+    display: inline-block;
+    width: 60px;
+    font-size: 12px;
+    color: #333333;
+    cursor: pointer;
+  }
+}
+
+.searchBtn{
+  border: none;
+  position: relative;
+  width: 80%;
+  border:none!important;
+  border-radius: none!important;
+  &:hover{
+    background: none;
+  }
+  &::before{
+    content: ' '!important;
+    background: url(../assets/img/header/down.png) no-repeat;
+    position: absolute;
+    right: 15%;
+    top: 50%;
+    width: 20px;
+    height: 10px;
+    margin-top: -5px;
+  }
+  &::after{
+    position: absolute;
+    content: ' '!important;
+    right: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid #e5e5e5!important;
+  }
+}
+
+.active{
+  &::before{
+    background: url(../assets/img/header/up.png) no-repeat;
   }
 }
 </style>

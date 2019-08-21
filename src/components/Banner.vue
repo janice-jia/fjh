@@ -97,11 +97,20 @@
                 trigger="click"
                 v-model="isActiveYL">
                 <el-table :data="lineList">
-                  <el-table-column width="200" v-for="group in lineList" :key="group.areaname" label="热门游轮">
+                  <el-table-column
+                    label="shipcompany"
+                    width="180">
+                      <template slot-scope="scope">
+                        <span style="width:90%; text-align:center;" @click="showSearchVal('isActiveYL', scope.row.shipcompany)" >
+                          {{scope.row.shipcompany}}
+                        </span>
+                      </template>
+                  </el-table-column>
+                  <!-- <el-table-column width="120" v-for="group in lineList" :key="group.areaname" label="热门游轮">
                     <span style="width:90%; text-align:center;" @click="showSearchVal('isActiveYL', group.shipcompany)" >
                       {{group.shipcompany}}
                     </span>
-                  </el-table-column>
+                  </el-table-column> -->
                 </el-table>
               </el-popover>
             </div>
@@ -149,7 +158,9 @@
           <el-col :span="4">
             <div class="ylInput">
               <el-input clear="" v-model="search.user" placeholder="请输入邮轮名称"></el-input>
-              <img class="searchBtn" src="../assets/img/header/search.png" alt="">
+              <router-link to="comingSoon" target="_blank">
+                <img class="searchBtn" src="../assets/img/header/search.png" alt="">
+              </router-link>
             </div>
           </el-col>
         </el-row>

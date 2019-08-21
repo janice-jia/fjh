@@ -94,7 +94,7 @@ export default {
       height: 280px;
       &::before{
         z-index: 1;
-        content: "1";
+        content: " ";
         position:absolute;
         left: -23px;
         top: 50%;

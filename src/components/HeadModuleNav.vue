@@ -8,7 +8,7 @@
       </el-col>
       <el-col :span="8">
         <div class="link">
-          <a href="comingSoon">{{moreName}}</a>
+          <router-link to="comingSoon">{{moreName}}</router-link>
         </div>
       </el-col>
     </el-row>

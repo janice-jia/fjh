@@ -12,7 +12,7 @@
         </el-tab-pane>
       </el-tabs>
       <div class="link">
-        <a href="comingSoon">{{moreName}}</a>
+        <router-link to="comingSoon">{{moreName}}</router-link>
       </div>
     </div>
   </div>

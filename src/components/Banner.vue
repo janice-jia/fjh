@@ -10,12 +10,12 @@
             <!-- pc菜单 -->
             <div class="pcMenu">
               <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                <el-menu-item index="1"><a href="/comingSoon" target="_blank">首页</a></el-menu-item>
-                <el-menu-item index="2"><a href="/comingSoon" target="_blank">邮轮公司</a></el-menu-item>
-                <el-menu-item index="3"><a href="/comingSoon" target="_blank">邮轮航线</a></el-menu-item>
-                <el-menu-item index="4"><a href="/comingSoon" target="_blank">港口城市</a></el-menu-item>
-                <el-menu-item index="5"><a href="/comingSoon" target="_blank">邮轮百科</a></el-menu-item>
-                <el-menu-item index="6"><a href="/comingSoon" target="_blank">邮轮游记</a></el-menu-item>
+                <el-menu-item index="1"><router-link to="comingSoon" target="_blank">首页</router-link></el-menu-item>
+                <el-menu-item index="2"><router-link to="comingSoon" target="_blank">邮轮公司</router-link></el-menu-item>
+                <el-menu-item index="3"><router-link to="comingSoon" target="_blank">邮轮航线</router-link></el-menu-item>
+                <el-menu-item index="4"><router-link to="comingSoon" target="_blank">港口城市</router-link></el-menu-item>
+                <el-menu-item index="5"><router-link to="comingSoon" target="_blank">邮轮百科</router-link></el-menu-item>
+                <el-menu-item index="6"><router-link to="comingSoon" target="_blank">邮轮游记</router-link></el-menu-item>
               </el-menu>
             </div> 
             <!-- app菜单 -->
@@ -27,12 +27,12 @@
                 title="法嘉华"
                 :visible.sync="drawer"
                 :direction="direction">
-                <p class="appnav"><a href="/comingSoon" target="_blank">首页</a></p>
-                <p class="appnav"><a href="/comingSoon" target="_blank">邮轮公司</a></p>
-                <p class="appnav"><a href="/comingSoon" target="_blank">邮轮航线</a></p>
-                <p class="appnav"><a href="/comingSoon" target="_blank">港口城市</a></p>
-                <p class="appnav"><a href="/comingSoon" target="_blank">邮轮百科</a></p>
-                <p class="appnav"><a href="/comingSoon" target="_blank">邮轮游记</a></p>
+                <p class="appnav"><router-link to="comingSoon" target="_blank">首页</router-link></p>
+                <p class="appnav"><router-link to="comingSoon" target="_blank">邮轮公司</router-link></p>
+                <p class="appnav"><router-link to="comingSoon" target="_blank">邮轮航线</router-link></p>
+                <p class="appnav"><router-link to="comingSoon" target="_blank">港口城市</router-link></p>
+                <p class="appnav"><router-link to="comingSoon" target="_blank">邮轮百科</router-link></p>
+                <p class="appnav"><router-link to="comingSoon" target="_blank">邮轮游记</router-link></p>
               </el-drawer>
             </div>
           </el-col>

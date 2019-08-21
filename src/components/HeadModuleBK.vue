@@ -8,7 +8,7 @@
             <img :src="item.coverimg" alt="">
           </div>
           <div class="yl_baike_name">
-            <a href="comingSoon">{{item.articletitle}}</a>
+            <router-link to="comingSoon">{{item.articletitle}}</router-link>
           </div>
         </el-col>
       </el-row>

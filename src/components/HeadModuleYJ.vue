@@ -19,7 +19,7 @@
           <img :src="item.coverimg" alt="">
         </div>
         <div class="yl_chengshi_name">
-          <p class="tit"><a href="comingSoon">{{item.articletitle}}</a></p>
+          <p class="tit"><router-link to="comingSoon">{{item.articletitle}}</router-link></p>
           <p class="con" v-html="item.articlecontent"></p>
         </div>
       </el-col>

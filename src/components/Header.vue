@@ -10,9 +10,9 @@
                 <el-menu mode="horizontal">
                   <el-submenu index="1">
                     <template slot="title"><img src="../assets/img/header/earth.png" alt="">Language</template>
-                    <el-menu-item index="1-1"><a href="/comingSoon" target="_blank">中文</a></el-menu-item>
-                    <el-menu-item index="1-2"><a href="/comingSoon" target="_blank">EN</a></el-menu-item>
-                    <el-menu-item index="1-3"><a href="/comingSoon" target="_blank">FR</a></el-menu-item>
+                    <el-menu-item index="1-1"><router-link to="comingSoon" target="_blank">中文</router-link></el-menu-item>
+                    <el-menu-item index="1-2"><router-link to="comingSoon" target="_blank">EN</router-link></el-menu-item>
+                    <el-menu-item index="1-3"><router-link to="comingSoon" target="_blank">FR</router-link></el-menu-item>
                   </el-submenu>
                 </el-menu>
               </div>
@@ -21,8 +21,9 @@
         </el-col>
         <el-col :span="12">
           <el-row>
-            <el-col :span="16" class="rightTxt"><a href="/comingSoon" target="_blank">法嘉华官网</a></el-col>
-            <el-col :span="8"  class="rightTxt"><a href="/comingSoon" target="_blank">法嘉华分销系统</a></el-col>
+            <!-- <el-col :span="16" class="rightTxt"><router-link to="comingSoon" target="_blank">法嘉华官网</router-link></el-col> -->
+            <el-col :span="16" class="rightTxt"><router-link to="comingSoon" target="_blank">法嘉华官网</router-link></el-col>
+            <el-col :span="8"  class="rightTxt"><router-link to="comingSoon" target="_blank">法嘉华分销系统</router-link></el-col>
           </el-row>
         </el-col>
       </el-row>

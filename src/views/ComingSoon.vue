@@ -6,6 +6,11 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  name:'comingSoon'
+}
+</script>
 <style lang="scss">
 .comingSoon{
   text-align: center;

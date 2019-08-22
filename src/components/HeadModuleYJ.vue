@@ -8,7 +8,7 @@
           <embed src="//player.video.iqiyi.com/98440a020edb2a03619235d1bc9eb6c1/0/0/v_19rrrnnplw.swf-albumId=3821237000-tvId=3821237000-isPurchase=0-cnId=undefined" allowFullScreen="true" quality="high" width="480" height="350" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
          -->
         <div class="embedbox" v-if="contInfoYJ.vlogurl">
-          <embed src="https://media.w3.org/2010/05/sintel/trailer.mp4" 
+          <embed :src="contInfoYJ.vlogurl" 
             autostart="false" />
         </div>
       </div>

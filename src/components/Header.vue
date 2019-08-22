@@ -22,7 +22,7 @@
         <el-col :span="12">
           <el-row>
             <!-- <el-col :span="16" class="rightTxt"><router-link to="comingSoon" target="_blank">法嘉华官网</router-link></el-col> -->
-            <el-col :span="16" class="rightTxt"><router-link to="comingSoon" target="_blank">法嘉华官网</router-link></el-col>
+            <el-col :span="16" class="rightTxt"><a href="http://www.opvoyage.com" target="_blank">法嘉华官网</a></el-col>
             <el-col :span="8"  class="rightTxt"><router-link to="comingSoon" target="_blank">法嘉华分销系统</router-link></el-col>
           </el-row>
         </el-col>

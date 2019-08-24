@@ -1,0 +1,191 @@
+<template>
+  <div class="company gkCity">
+    <div class="company-banner">
+      <HeaderMenu></HeaderMenu>
+      <img src="../assets/img/banner.jpg" alt=""/>
+      <div class="com-search container">
+        <el-input
+          placeholder="如：北欧"
+          v-model="searchVal">
+        </el-input>
+        <img class="com-search-btn" @click="getList" src="../assets/img/header/search.png" alt="">
+      </div>
+    </div>
+    <div class="container">
+      <div class="gkCityItem" v-for="(item, index) in list" :key="item.id">
+        <div style="clear:both"></div>
+        <!-- item结构1 -->
+        <div class="gkCityItem01" v-if="(index+1)%2==1">
+          <!-- 左图 -->
+          <div class="left w800">
+            <img :src="item.coverimg" alt="">
+          </div>
+          <!-- 右文 -->
+          <div class="left w400">
+            <div class="tit">日本</div>
+            <div class="desc">日本有众多港口，如冲绳，福冈，熊本，神户，
+鹿儿岛，长崎，细岛，油津等。您可去有东方夏
+威夷之称的冲绳观览白色的南国海滨；去亚洲的
+大门福冈享受海洋体育活动；带上宝贝去熊本拜
+访可爱的熊本熊；在异国风情的神户体验西洋与
+东瀛文化的交汇…</div>
+            <div class="more">
+              <router-link to="comingSoon" target="_blank">了解更多</router-link>
+            </div>
+          </div>
+          <div style="clear:both"></div>
+        </div>
+        <div style="clear:both"></div>
+        <!-- item结构2 -->
+        <div class="gkCityItem02" v-if="(index+1)%2==0">
+          <!-- 左文字 -->
+          <div class="left w400">
+            <div class="tit">日本</div>
+            <div class="desc">日本有众多港口，如冲绳，福冈，熊本，神户，
+鹿儿岛，长崎，细岛，油津等。您可去有东方夏
+威夷之称的冲绳观览白色的南国海滨；去亚洲的
+大门福冈享受海洋体育活动；带上宝贝去熊本拜
+访可爱的熊本熊；在异国风情的神户体验西洋与
+东瀛文化的交汇…</div>
+            <div class="more">
+              <router-link to="comingSoon" target="_blank">了解更多</router-link>
+            </div>
+          </div>
+          <!-- 右图 -->
+          <div class="left w800">
+            <img :src="item.coverimg" alt="">
+          </div>
+        </div>
+        <div style="clear:both"></div>
+      </div>
+      <div style="clear:both"></div>
+
+      <div class="page">
+        <div class="block">
+          <el-pagination
+            background
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="pageInfo.page"
+            :page-size="pageInfo.limit"
+            layout="prev, pager, next, jumper"
+            :total="pageInfo.total">
+          </el-pagination>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</template>
+<script>
+import HeaderMenu from '../components/HeaderMenu.vue'
+export default {
+  name:'Company',
+  components: {
+    HeaderMenu
+  },
+  data() {
+    return {
+      list: [],
+      searchVal: '',
+      activeIndex: 1,
+      pageInfo: {
+        page: 1,
+        limit: 10,
+        total: 0
+      }
+    }
+  },
+  mounted(){
+    this.getList()
+  },
+  methods: {
+    getList(pageval){
+      if(pageval) this.pageInfo.page = pageval
+      var paramsData = {
+        page: this.pageInfo.page,
+        limit: this.pageInfo.limit
+      }
+      if(this.searchVal) paramsData.shipcompany = this.searchVal
+      this.$http.get('/API/shipcompany.ashx?command=GetShipCompanyPager', {params: paramsData}).then(function (res) {
+        this.list = res.body.list
+        this.pageInfo.total = parseInt(res.body.count)
+      })
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${limit} 条`);
+      this.getList(val)
+    },
+    handleCurrentChange(val) {
+      this.getList(val)
+    },
+    currentPage(){
+      console.info(11)
+    }
+  }
+}
+</script>
+<style lang="scss">
+.gkCity{
+  .gkCityItem{
+    margin-top: 30px;
+    height: 360px;
+    width: 100%;
+    .gkCityItem01,.gkCityItem02{
+      margin: 30px 0;
+      background: #ffffff;
+      height: 100%;
+      box-shadow:5px 5px 5px rgba(0,0,0,.35);
+    }
+    .w800{
+      width: 790px;
+      background: #ededed;
+      height: 100%;
+      img{
+        max-width: 100%;
+      }
+    }
+    .w400{
+      width: 390px;
+      padding: 10px 20px;
+      .tit{
+        font-size: 36px;
+        color: #333333;
+        height: 50px;
+        line-height: 50px;
+        overflow: hidden;
+      }
+      .desc{
+        font-size: 14px;
+        color:#666666;
+        line-height: 23px;
+        margin-bottom: 10px;
+        max-height: 240px;
+        padding-left: 3px;
+        overflow: hidden;
+      }
+      .more{
+        text-align: right;
+        a{
+          position: relative;
+          color:#333333;
+          padding-right:22px;
+          &::before{
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 2px;
+            width: 15px;
+            height:15px;
+            background: url("../assets/img/header/right.png") no-repeat;
+            background-size: 12px;
+          }
+        }
+      }
+    }
+    .left{
+      float: left;
+    }
+  }
+}
+</style>

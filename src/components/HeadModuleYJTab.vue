@@ -12,7 +12,7 @@
         </el-tab-pane>
       </el-tabs>
       <div class="link">
-        <router-link to="comingSoon">{{moreName}}</router-link>
+        <router-link :to="moreLink">{{moreName}}</router-link>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@ export default {
   props: {
     navData: Array,
     moreName: String,
-    moreLInk: String
+    moreLink: String
   },
   data() {
     return {

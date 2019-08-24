@@ -6,86 +6,53 @@
       <div class="com-search container">
         <el-input
           placeholder="如：丽星邮轮"
-          v-model="input21">
+          v-model="searchVal">
         </el-input>
-        <img class="com-search-btn" src="../assets/img/header/search.png" alt="">
+        <img class="com-search-btn" @click="getList" src="../assets/img/header/search.png" alt="">
       </div>
     </div>
     <div class="container">
-      
-      <div class="companyItem">
+      <div class="companyItem" v-for="item in list" :key="item.id">
         <!-- 背景图 -->
         <div class="companyItem-bg">
-          <img src="../assets/img/com_item.jpg" alt="">
-          <div class="company-logo">
+          <img :src="item.coverimg" alt="">
+          <!-- <div class="company-logo">
             <img src="../assets/img/com_logo.jpg" alt="">
-          </div>
+          </div> -->
         </div>
         <div style="margin: 30px;">
           <el-row type="flex" class="row-bg"  justify="end" align="bottom">
             <el-col :span="7">
-              <div class="company-tit">丽星邮轮</div>
+              <div class="company-tit">{{item.shipcompany}}</div>
             </el-col>
             <el-col :span="4">
               <div class="company-tit-2" >
-                <div> 旗下船队 <span>4</span> 条</div>
+                <div> 旗下船队 <span>{{item.shipcount}}</span> 条</div>
               </div>
             </el-col>
             <el-col :span="4">
               <div class="company-tit-2"  align="bottom">
-                航线数量 <span>5</span> 条
+                航线数量 <span>{{item.itinerarycount}}</span> 条
               </div>
             </el-col>
           </el-row>
         </div>
-        <div class="company-desc">
-          丽星邮轮凭借「自由闲逸式」航游概念、亚洲式殷勤周到的服务及高水平的国际安全标准，丽星邮轮受到旅游业界的高度认可，并屡获一系列的国际性奖项。其中，连续十
-次荣获TTG ASIA颁发的「亚太区最佳邮轮公司」大奖，并于2008年起晋身「TTG旅游大奖荣誉堂」。
-        </div>
-      </div>
-        
-
-        <div class="companyItem">
-        <!-- 背景图 -->
-        <div class="companyItem-bg">
-          <img src="../assets/img/com_item.jpg" alt="">
-          <div class="company-logo">
-            <img src="../assets/img/com_logo.jpg" alt="">
-          </div>
-        </div>
-        <div style="margin: 30px;">
-          <el-row type="flex" class="row-bg"  justify="end" align="bottom">
-            <el-col :span="7">
-              <div class="company-tit">丽星邮轮</div>
-            </el-col>
-            <el-col :span="4">
-              <div class="company-tit-2" >
-                <div> 旗下船队 <span>4</span> 条</div>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="company-tit-2"  align="bottom">
-                航线数量 <span>5</span> 条
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-        <div class="company-desc">
-          丽星邮轮凭借「自由闲逸式」航游概念、亚洲式殷勤周到的服务及高水平的国际安全标准，丽星邮轮受到旅游业界的高度认可，并屡获一系列的国际性奖项。其中，连续十
-次荣获TTG ASIA颁发的「亚太区最佳邮轮公司」大奖，并于2008年起晋身「TTG旅游大奖荣誉堂」。
-        </div>
+        <div class="company-desc">{{item.description}}</div>
       </div>
 
-        <div class="page">
+      <div class="page">
+        <div class="block">
           <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page.sync="currentPage"
-              :page-size="100"
-              layout="prev, pager, next, jumper"
-              :total="1000">
+            background
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="pageInfo.page"
+            :page-size="pageInfo.limit"
+            layout="prev, pager, next, jumper"
+            :total="pageInfo.total">
           </el-pagination>
         </div>
+      </div>
     </div>
     
   </div>
@@ -97,18 +64,44 @@ export default {
   components: {
     HeaderMenu
   },
-  methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    }
-  },
   data() {
     return {
-      currentPage: 5
-    };
+      list: [],
+      searchVal: '',
+      activeIndex: 1,
+      pageInfo: {
+        page: 1,
+        limit: 10,
+        total: 0
+      }
+    }
+  },
+  mounted(){
+    this.getList()
+  },
+  methods: {
+    getList(pageval){
+      if(pageval) this.pageInfo.page = pageval
+      var paramsData = {
+        page: this.pageInfo.page,
+        limit: this.pageInfo.limit
+      }
+      if(this.searchVal) paramsData.shipcompany = this.searchVal
+      this.$http.get('/API/shipcompany.ashx?command=GetShipCompanyPager', {params: paramsData}).then(function (res) {
+        this.list = res.body.list
+        this.pageInfo.total = parseInt(res.body.count)
+      })
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${limit} 条`);
+      this.getList(val)
+    },
+    handleCurrentChange(val) {
+      this.getList(val)
+    },
+    currentPage(){
+      console.info(11)
+    }
   }
 }
 </script>
@@ -142,6 +135,7 @@ export default {
       right: 30px;
       bottom: 50%;
       margin-bottom: -12px;
+      cursor: pointer;
     }
   }
 }
@@ -189,7 +183,15 @@ export default {
 
 
 // 分页
-// .page{
-
-// }
+.page{
+  width: 100%;
+  text-align: center;
+  .block{
+    padding: 30px 0;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+}
 </style>

@@ -147,10 +147,6 @@ export default {
   },
   data() {
     return {
-      // 侧栏菜单显示状态
-      drawer: false,
-      // 侧栏菜单方向，，，从右往左开
-      direction:'rtl',
       bannerList:[],
       activeIndex: '1',
       activeIndex2: '1',

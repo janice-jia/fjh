@@ -9,14 +9,14 @@
         <el-col :span="18">
         <!-- pc菜单 -->
         <div class="pcMenu">
-            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1"><router-link to="comingSoon" target="_blank">首页</router-link></el-menu-item>
-            <el-menu-item index="2"><router-link to="company" target="_blank">邮轮公司</router-link></el-menu-item>
-            <el-menu-item index="3"><router-link to="comingSoon" target="_blank">邮轮航线</router-link></el-menu-item>
-            <el-menu-item index="4"><router-link to="comingSoon" target="_blank">港口城市</router-link></el-menu-item>
-            <el-menu-item index="5"><router-link to="comingSoon" target="_blank">邮轮百科</router-link></el-menu-item>
-            <el-menu-item index="6"><router-link to="comingSoon" target="_blank">邮轮游记</router-link></el-menu-item>
-            </el-menu>
+          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+          <el-menu-item index="1"><router-link to="home" target="_blank">首页</router-link></el-menu-item>
+          <el-menu-item index="2"><router-link to="company" target="_blank">邮轮公司</router-link></el-menu-item>
+          <el-menu-item index="3"><router-link to="comingSoon" target="_blank">邮轮航线</router-link></el-menu-item>
+          <el-menu-item index="4"><router-link to="gkcity" target="_blank">港口城市</router-link></el-menu-item>
+          <el-menu-item index="5"><router-link to="comingSoon" target="_blank">邮轮百科</router-link></el-menu-item>
+          <el-menu-item index="6"><router-link to="comingSoon" target="_blank">邮轮游记</router-link></el-menu-item>
+          </el-menu>
         </div>
         <!-- app菜单 -->
         <div class="appMenu el-icon-more" icon="el-icon-more" @click="drawer = true">&nbsp;</div>
@@ -41,6 +41,25 @@
 </div>
      
 </template>
+<script>
+export default {
+  name: 'home',
+  data() {
+    return {
+      activeIndex: '0',
+      // 侧栏菜单显示状态
+      drawer: false,
+      // 侧栏菜单方向，，，从右往左开
+      direction:'rtl',
+    }
+  },
+  methods: {
+    handleSelect(v){
+      this.activeIndex = v
+    }
+  }
+}
+</script>
 <style lang="scss">
 // 导航
 .banner-nav{
@@ -70,6 +89,13 @@
       background: #ee6b03;
       border-bottom: none;
       color: #ffffff;
+    }
+  }
+  .pcMenu{
+    a{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
     }
   }
   .appMenu{

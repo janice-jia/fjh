@@ -3,26 +3,19 @@
     <Banner :lineList="navDataPP"></Banner>
     <!-- 邮轮品牌 -->
     <HeadModuleTit class="container" tit="邮轮品牌" enTit="Cruise brand"/>
-    <!-- <HeadModuleNav class="container" :navData="navDataPP" moreName="更多邮轮公司" moreLink="1.html"></HeadModuleNav> -->
-    <HeadModulePPTab :navData="navDataPP"  moreName="更多邮轮公司" moreLink="1.html"></HeadModulePPTab>
+    <HeadModulePPTab :navData="navDataPP"  moreName="更多邮轮公司" moreLink="company"></HeadModulePPTab>
     
     <!-- 邮轮百科 -->
     <HeadModuleTit class="container" tit="邮轮百科" enTit="Cruise encyclopedia"/>
-    <!-- <HeadModuleNav class="container" :navData="navDataBK" moreName="更多百科内容" moreLink="1.html"></HeadModuleNav> -->
-    <!-- <HeadModuleBK></HeadModuleBK> -->
-    <HeadModuleBKTab :navData="navDataBK" moreName="更多百科内容" moreLink="1.html"></HeadModuleBKTab>
+    <HeadModuleBKTab :navData="navDataBK" moreName="更多百科内容" moreLink="comingSoon"></HeadModuleBKTab>
 
     <!-- 港口城市 -->
     <HeadModuleTit class="container" tit="港口城市" enTit="The port city of"/>
-    <!-- <HeadModuleNav class="container" :navData="navDataGK" moreName="更多港口城市" moreLink="1.html"></HeadModuleNav>
-    <HeadModuleCH></HeadModuleCH> -->
-    <HeadModuleCHTab :navData="navDataGK" moreName="更多港口城市" moreLink="1.html"></HeadModuleCHTab>
+    <HeadModuleCHTab :navData="navDataGK" moreName="更多港口城市" moreLink="gkcity"></HeadModuleCHTab>
 
     <!-- 邮轮游记 -->
     <HeadModuleTit class="container" tit="邮轮游记" enTit="Cruise travel"/>
-    <!-- <HeadModuleNav class="container" :navData="navDataYJ" moreName="更多游记内容" moreLink="1.html"></HeadModuleNav> -->
-    <!-- <HeadModuleYJ></HeadModuleYJ> -->
-    <HeadModuleYJTab :navData="navDataYJ" moreName="更多游记内容" moreLink="1.html"></HeadModuleYJTab>
+    <HeadModuleYJTab :navData="navDataYJ" moreName="更多游记内容" moreLink="comingSoon"></HeadModuleYJTab>
   </div>
 </template>
 

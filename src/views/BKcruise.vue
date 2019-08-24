@@ -35,8 +35,8 @@
               </div>
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
-              <div class="bk-xs-cont-more">
-                <router-link to="comingSoon">更多</router-link>
+              <div class="bk-cont-more">
+                <router-link to="comingSoon">更多></router-link>
               </div>
             </div>
 
@@ -50,31 +50,31 @@
         <el-row>
           <el-col :span="8" v-for="(item, index) in articleData.list1" :key="item.id">
             <!-- 列1内容 -->
-            <div class="bk-xs-item conBg" v-if="index==0">
+            <div class="bk-xs-item conBg pUp" v-if="index==0">
               <div class="bk-xs-cont-tit">
                 {{item.articletitle}}
               </div>
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
-              <div class="bk-xs-cont-more">
-                <router-link to="comingSoon">更多</router-link>
+              <div class="bk-cont-more">
+                <router-link to="comingSoon">更多></router-link>
               </div>
             </div>
 
             <!-- 列2图片 -->
-            <div class="bk-xs-item imgBg" v-if="index==1">
+            <div class="bk-xs-item imgBg pDown" v-if="index==1">
               <img :src="item.coverimg" alt="">
             </div>
 
             <!-- 列3内容 -->
-            <div class="bk-xs-item conBg" v-if="index==2">
+            <div class="bk-xs-item conBg pUp" v-if="index==2">
               <div class="bk-xs-cont-tit">
                 {{item.articletitle}}
               </div>
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
-              <div class="bk-xs-cont-more">
-                <router-link to="comingSoon">更多</router-link>
+              <div class="bk-cont-more">
+                <router-link to="comingSoon">更多></router-link>
               </div>
             </div>
           </el-col>
@@ -114,47 +114,49 @@
       <!-- 预定锦囊--内容-------------------------------start -->
       <div class="bk-yudingjinnang">
         <el-row>
-          <el-col :span="12" v-for="(item, index) in articleData.list3" :key="item.id">
-            <!-- item左图右文 -->
-            <div class="bk-ydjn-item01" v-if="(index+1)%2==1">
-              <div class="imgBg bk-ydjn-item" >
-                <img :src="item.coverimg" alt="">
-              </div>
-
-              <div class="conBg bk-ydjn-item">
-                <div class="bk-ydjn-cont-tit">
-                  {{item.articletitle}}
+          <div v-for="(item, index) in articleData.list3" :key="item.id">
+            <!-- 左图右文 -->
+            <div class="bk-ydjn-item-01" v-if="(index+1) % 2 == 1">
+              <el-col :span="12" >
+                <div class="imgBg bk-ydjn-item">
+                  <img :src="item.coverimg" alt="">
                 </div>
-                <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
+              </el-col>
+              <el-col :span="12">
+                <div class="conBg bk-ydjn-item pLeft">
+                  <div class="bk-ydjn-cont-tit">
+                    {{item.articletitle}}
+                  </div>
+                  <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
+                  </div>
+                  <div class="bk-cont-more">
+                    <router-link to="comingSoon">更多></router-link>
+                  </div>
                 </div>
-                <div class="bk-ydjn-cont-more">
-                  <router-link to="comingSoon">更多</router-link>
-                </div>
-              </div>
+              </el-col>
             </div>
-            
 
-            <!-- item右图左文 -->
-            <div class="bk-ydjn-item02" v-if="(index+1)%2==0">
-              <div class="conBg bk-ydjn-item">
-                <div class="bk-ydjn-cont-tit">
-                  {{item.articletitle}}
+            <!-- 右图左文 -->
+            <div class="bk-ydjn-item-02" v-if="(index+1) % 2 == 0">
+              <el-col :span="12">
+                <div class="conBg bk-ydjn-item pRight">
+                  <div class="bk-ydjn-cont-tit">
+                    {{item.articletitle}}
+                  </div>
+                  <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
+                  </div>
+                  <div class="bk-cont-more">
+                    <router-link to="comingSoon">更多></router-link>
+                  </div>
                 </div>
-                <div class="bk-ydjn-cont-desc">
-                  邮轮旅行和传统旅行的区别在
-                  哪里？最直接的区别当然在于，
-                  邮轮旅行，是乘船的。不少人
-                  对于邮轮的印象还停留在“邮
-                  轮是...
+              </el-col>
+              <el-col :span="12" >
+                <div class="imgBg bk-ydjn-item">
+                  <img :src="item.coverimg" alt="">
                 </div>
-                <div class="bk-ydjn-cont-more">
-                  <router-link to="comingSoon">更多</router-link>
-                </div>
-              </div>
-              <div class="imgBg bk-ydjn-item" >
-              </div>
+              </el-col>
             </div>
-          </el-col>
+          </div>
         </el-row>
       </div>
       <!-- 预定锦囊--内容-------------------------------end -->
@@ -172,20 +174,15 @@
           <img src="../assets/img/bk-cx.jpg" alt="">
         </div>
         <el-row>
-          <el-col :span="8">
+          <el-col :span="8" v-for="item in articleData.list4" :key="item.id">
             <div class="conBg bk-cxzb-item">
               <div class="bk-cxzb-cont-tit">
-                邮轮旅行和传统旅行的区别在哪里？
+                {{item.articletitle}}
               </div>
-              <div class="bk-cxzb-cont-desc">
-                邮轮旅行和传统旅行的区别在
-                哪里？最直接的区别当然在于，
-                邮轮旅行，是乘船的。不少人
-                对于邮轮的印象还停留在“邮
-                轮是...
+              <div class="bk-cxzb-cont-desc" v-html="item.articlecontent">
               </div>
-              <div class="bk-cxzb-cont-more">
-                <router-link to="comingSoon">更多</router-link>
+              <div class="bk-cont-more">
+                <router-link to="comingSoon">更多></router-link>
               </div>
             </div>
           </el-col>
@@ -203,27 +200,13 @@
       <!-- 邮轮专栏--内容-------------------------------start -->
       <div class="bk-youlunzhuanlan">
         <el-row :gutter="30">
-          <el-col :span="8">
+          <el-col :span="8" v-for="item in articleData.list5" :key="item.id">
             <div class="bk-ylzl-item">
-              <div class="bk-ylzl-img imgBg"></div>
-              <div class="bk-ylzl-tit">
-                <router-link to="comingSoon">2019年国内邮轮最全时间表...</router-link>
+              <div class="bk-ylzl-img imgBg">
+                <img :src="item.coverimg" alt="">
               </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="bk-ylzl-item">
-              <div class="bk-ylzl-img imgBg"></div>
               <div class="bk-ylzl-tit">
-                <router-link to="comingSoon">2019年国内邮轮最全时间表...</router-link>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="bk-ylzl-item">
-              <div class="bk-ylzl-img imgBg"></div>
-              <div class="bk-ylzl-tit">
-                <router-link to="comingSoon">2019年国内邮轮最全时间表...</router-link>
+                <router-link to="comingSoon">{{item.articletitle}}</router-link>
               </div>
             </div>
           </el-col>
@@ -269,10 +252,24 @@ export default {
           }
         }
 
-        // 转义游轮介绍内容
+        // 转义预定锦囊内容
         if(res.body && res.body.list3){
           for(var i=0; i<res.body.list3.length; i++){
             res.body.list3[i].articlecontent = Base64.decode(res.body.list3[i].articlecontent)
+          }
+        }
+
+        // 转义出行准备内容
+        if(res.body && res.body.list4){
+          for(var i=0; i<res.body.list4.length; i++){
+            res.body.list4[i].articlecontent = Base64.decode(res.body.list4[i].articlecontent)
+          }
+        }
+
+        // 转义游轮专栏内容
+        if(res.body && res.body.list5){
+          for(var i=0; i<res.body.list5.length; i++){
+            res.body.list5[i].articlecontent = Base64.decode(res.body.list5[i].articlecontent)
           }
         }
         this.articleData = res.body
@@ -305,6 +302,15 @@ export default {
     }
   }
 
+  .bk-cont-more{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    color: #333333;
+    a{
+      color: #333333;
+    }
+  }
   // 新手入门
   .imgBg{
     background: #ededed;
@@ -314,6 +320,32 @@ export default {
   }
   .bk-xinshourumen{
     box-shadow:5px 5px 5px rgba(0,0,0,.35);
+    .pUp,.pDown{
+      position: relative;
+      &::before{
+        width:0;
+	      height:0;
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        margin-left: -8px;
+        border-right:16px solid transparent;
+        border-left:16px solid transparent;
+        // background: #ffffff;
+      }
+    }
+    .pUp{
+      &::before{
+        top:-16px!important;
+        border-bottom:16px solid #ffffff;
+      }
+    }
+    .pDown{
+      &::before{
+        border-top:16px solid #ffffff;
+      }
+    }
     .bk-xs-item{
       height: 400px;
       // overflow: hidden;
@@ -350,7 +382,9 @@ export default {
       width: 400px;;
       overflow: hidden;
       .bk-yljs-img{
+        width: 400px;
         overflow: hidden;
+        box-shadow:5px 5px 5px rgba(0,0,0,.35);
       }
       h2{
         color: #ffffff;
@@ -376,6 +410,32 @@ export default {
     .conBg{
       padding: 40px;
     }
+    .pLeft,.pRight{
+      position: relative;
+      &::before{
+        width:0;
+	      height:0;
+        content: "";
+        position: absolute;
+        top: 50%;
+        margin-top: -8px;
+        border-top:16px solid transparent;
+        border-bottom:16px solid transparent;
+        // background: #ffffff;
+      }
+    }
+    .pLeft{
+      &::before{
+        left: -16px;
+        border-right:16px solid #ffffff;
+      }
+    }
+    .pRight{
+      &::before{
+        right: -16px;
+        border-left:16px solid #ffffff;
+      }
+    }
     .bk-ydjn-item{
       height: 300px;
       img{
@@ -393,6 +453,8 @@ export default {
         color:#666666;
         font-size: 20px;
         line-height: 28px;
+        height: 170px;
+        overflow: hidden;
       }
     }
   }
@@ -421,6 +483,8 @@ export default {
         color:#666666;
         font-size: 20px;
         line-height: 28px;
+        height: 255px;
+        overflow: hidden;
       }
     }
   }

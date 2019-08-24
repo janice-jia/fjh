@@ -1,6 +1,6 @@
 <template>
   <div class="Banner">
-    <HeaderMenu></HeaderMenu>
+    <HeaderMenu activeIndex="1"></HeaderMenu>
     <div class="banner-search">
       <div class="container">
         <el-row>

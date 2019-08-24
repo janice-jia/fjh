@@ -1,14 +1,14 @@
 <template>
   <div class="company">
     <div class="company-banner">
-      <HeaderMenu></HeaderMenu>
+      <HeaderMenu activeIndex="2"></HeaderMenu>
       <img src="../assets/img/banner.jpg" alt=""/>
       <div class="com-search container">
         <el-input
           placeholder="如：丽星邮轮"
           v-model="searchVal">
         </el-input>
-        <img class="com-search-btn" @click="getList" src="../assets/img/header/search.png" alt="">
+        <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt="">
       </div>
     </div>
     <div class="container">
@@ -39,8 +39,7 @@
         </div>
         <div class="company-desc">{{item.description}}</div>
       </div>
-
-      <div class="page">
+      <div class="page" v-if="list.length > 0">
         <div class="block">
           <el-pagination
             background
@@ -81,6 +80,7 @@ export default {
   },
   methods: {
     getList(pageval){
+      this.list = []
       if(pageval) this.pageInfo.page = pageval
       var paramsData = {
         page: this.pageInfo.page,

@@ -35,8 +35,8 @@
               </div>
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
-              <div class="bk-xs-cont-more">
-                <router-link to="comingSoon">更多</router-link>
+              <div class="bk-cont-more">
+                <router-link to="comingSoon">更多></router-link>
               </div>
             </div>
 
@@ -56,8 +56,8 @@
               </div>
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
-              <div class="bk-xs-cont-more">
-                <router-link to="comingSoon">更多</router-link>
+              <div class="bk-cont-more">
+                <router-link to="comingSoon">更多></router-link>
               </div>
             </div>
 
@@ -73,8 +73,8 @@
               </div>
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
-              <div class="bk-xs-cont-more">
-                <router-link to="comingSoon">更多</router-link>
+              <div class="bk-cont-more">
+                <router-link to="comingSoon">更多></router-link>
               </div>
             </div>
           </el-col>
@@ -129,8 +129,8 @@
                   </div>
                   <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
                   </div>
-                  <div class="bk-ydjn-cont-more">
-                    <router-link to="comingSoon">更多</router-link>
+                  <div class="bk-cont-more">
+                    <router-link to="comingSoon">更多></router-link>
                   </div>
                 </div>
               </el-col>
@@ -145,8 +145,8 @@
                   </div>
                   <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
                   </div>
-                  <div class="bk-ydjn-cont-more">
-                    <router-link to="comingSoon">更多</router-link>
+                  <div class="bk-cont-more">
+                    <router-link to="comingSoon">更多></router-link>
                   </div>
                 </div>
               </el-col>
@@ -181,8 +181,8 @@
               </div>
               <div class="bk-cxzb-cont-desc" v-html="item.articlecontent">
               </div>
-              <div class="bk-cxzb-cont-more">
-                <router-link to="comingSoon">更多</router-link>
+              <div class="bk-cont-more">
+                <router-link to="comingSoon">更多></router-link>
               </div>
             </div>
           </el-col>
@@ -302,6 +302,15 @@ export default {
     }
   }
 
+  .bk-cont-more{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: normal;
+    color: #333333;
+    a{
+      color: #333333;
+    }
+  }
   // 新手入门
   .imgBg{
     background: #ededed;

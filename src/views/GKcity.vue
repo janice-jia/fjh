@@ -1,14 +1,14 @@
 <template>
   <div class="company gkCity">
     <div class="company-banner">
-      <HeaderMenu></HeaderMenu>
+      <HeaderMenu activeIndex="4"></HeaderMenu>
       <img src="../assets/img/banner.jpg" alt=""/>
       <div class="com-search container">
         <el-input
           placeholder="如：北欧"
           v-model="searchVal">
         </el-input>
-        <img class="com-search-btn" @click="getList" src="../assets/img/header/search.png" alt="">
+        <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt="">
       </div>
     </div>
     <div class="container">
@@ -22,13 +22,8 @@
           </div>
           <!-- 右文 -->
           <div class="left w400">
-            <div class="tit">日本</div>
-            <div class="desc">日本有众多港口，如冲绳，福冈，熊本，神户，
-鹿儿岛，长崎，细岛，油津等。您可去有东方夏
-威夷之称的冲绳观览白色的南国海滨；去亚洲的
-大门福冈享受海洋体育活动；带上宝贝去熊本拜
-访可爱的熊本熊；在异国风情的神户体验西洋与
-东瀛文化的交汇…</div>
+            <div class="tit">{{item.area}}</div>
+            <div class="desc">{{item.description}}</div>
             <div class="more">
               <router-link to="comingSoon" target="_blank">了解更多</router-link>
             </div>
@@ -40,13 +35,8 @@
         <div class="gkCityItem02" v-if="(index+1)%2==0">
           <!-- 左文字 -->
           <div class="left w400">
-            <div class="tit">日本</div>
-            <div class="desc">日本有众多港口，如冲绳，福冈，熊本，神户，
-鹿儿岛，长崎，细岛，油津等。您可去有东方夏
-威夷之称的冲绳观览白色的南国海滨；去亚洲的
-大门福冈享受海洋体育活动；带上宝贝去熊本拜
-访可爱的熊本熊；在异国风情的神户体验西洋与
-东瀛文化的交汇…</div>
+            <div class="tit">{{item.area}}</div>
+            <div class="desc">{{item.description}}</div>
             <div class="more">
               <router-link to="comingSoon" target="_blank">了解更多</router-link>
             </div>
@@ -60,7 +50,7 @@
       </div>
       <div style="clear:both"></div>
 
-      <div class="page">
+      <div class="page" v-if="list.length > 0">
         <div class="block">
           <el-pagination
             background
@@ -101,13 +91,14 @@ export default {
   },
   methods: {
     getList(pageval){
+      this.list = []
       if(pageval) this.pageInfo.page = pageval
       var paramsData = {
         page: this.pageInfo.page,
         limit: this.pageInfo.limit
       }
-      if(this.searchVal) paramsData.shipcompany = this.searchVal
-      this.$http.get('/API/shipcompany.ashx?command=GetShipCompanyPager', {params: paramsData}).then(function (res) {
+      if(this.searchVal) paramsData.area = this.searchVal
+      this.$http.get('/API/port.ashx?command=GetAreaPager', {params: paramsData}).then(function (res) {
         this.list = res.body.list
         this.pageInfo.total = parseInt(res.body.count)
       })
@@ -141,6 +132,7 @@ export default {
       width: 790px;
       background: #ededed;
       height: 100%;
+      overflow: hidden;
       img{
         max-width: 100%;
       }

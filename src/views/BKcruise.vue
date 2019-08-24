@@ -114,32 +114,31 @@
       <!-- 预定锦囊--内容-------------------------------start -->
       <div class="bk-yudingjinnang">
         <el-row>
-          <el-col :span="12">
-            <div class="imgBg bk-ydjn-item">
-            </div>
-          </el-col>
-          <el-col :span="12">
-            <div class="conBg bk-ydjn-item">
-              <div class="bk-ydjn-cont-tit">
-                邮轮旅行和传统旅行的区别在哪里？
+          <el-col :span="12" v-for="(item, index) in articleData.list3" :key="item.id">
+            <!-- item左图右文 -->
+            <div class="bk-ydjn-item01" v-if="(index+1)%2==1">
+              <div class="imgBg bk-ydjn-item" >
+                <img :src="item.coverimg" alt="">
               </div>
-              <div class="bk-ydjn-cont-desc">
-                邮轮旅行和传统旅行的区别在
-                哪里？最直接的区别当然在于，
-                邮轮旅行，是乘船的。不少人
-                对于邮轮的印象还停留在“邮
-                轮是...
-              </div>
-              <div class="bk-ydjn-cont-more">
-                <router-link to="comingSoon">更多</router-link>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="12">
-            <div class="conBg bk-ydjn-item">
+
               <div class="conBg bk-ydjn-item">
                 <div class="bk-ydjn-cont-tit">
-                  邮轮旅行和传统旅行的区别在哪里？
+                  {{item.articletitle}}
+                </div>
+                <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
+                </div>
+                <div class="bk-ydjn-cont-more">
+                  <router-link to="comingSoon">更多</router-link>
+                </div>
+              </div>
+            </div>
+            
+
+            <!-- item右图左文 -->
+            <div class="bk-ydjn-item02" v-if="(index+1)%2==0">
+              <div class="conBg bk-ydjn-item">
+                <div class="bk-ydjn-cont-tit">
+                  {{item.articletitle}}
                 </div>
                 <div class="bk-ydjn-cont-desc">
                   邮轮旅行和传统旅行的区别在
@@ -152,10 +151,8 @@
                   <router-link to="comingSoon">更多</router-link>
                 </div>
               </div>
-            </div>
-          </el-col>
-          <el-col :span="12">
-            <div class="imgBg bk-ydjn-item">
+              <div class="imgBg bk-ydjn-item" >
+              </div>
             </div>
           </el-col>
         </el-row>
@@ -271,6 +268,13 @@ export default {
             res.body.list2[i].articlecontent = Base64.decode(res.body.list2[i].articlecontent)
           }
         }
+
+        // 转义游轮介绍内容
+        if(res.body && res.body.list3){
+          for(var i=0; i<res.body.list3.length; i++){
+            res.body.list3[i].articlecontent = Base64.decode(res.body.list3[i].articlecontent)
+          }
+        }
         this.articleData = res.body
       })
     }
@@ -374,6 +378,9 @@ export default {
     }
     .bk-ydjn-item{
       height: 300px;
+      img{
+        max-width: 100%;
+      }
       .bk-ydjn-cont-tit{
         color: #ee6b03;
         font-size: 24px;

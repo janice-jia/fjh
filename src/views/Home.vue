@@ -7,7 +7,7 @@
     
     <!-- 邮轮百科 -->
     <HeadModuleTit class="container" tit="邮轮百科" enTit="Cruise encyclopedia"/>
-    <HeadModuleBKTab :navData="navDataBK" moreName="更多百科内容" moreLink="comingSoon"></HeadModuleBKTab>
+    <HeadModuleBKTab :navData="navDataBK" moreName="更多百科内容" moreLink="bkcruise"></HeadModuleBKTab>
 
     <!-- 港口城市 -->
     <HeadModuleTit class="container" tit="港口城市" enTit="The port city of"/>

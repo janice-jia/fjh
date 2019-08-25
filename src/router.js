@@ -6,6 +6,7 @@ import ComingSoon from './views/ComingSoon.vue'
 import GKcity from './views/GKcity.vue'
 import BKcruise from './views/BKcruise.vue'
 import Travelog from './views/Travelog.vue'
+import Airline from './views/Airline.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -52,6 +53,12 @@ export default new Router({
             path: '/travelog',
             name: 'travelog',
             component: Travelog
+        },
+        // 游轮航线
+        {
+            path: '/airline',
+            name: 'airline',
+            component: Airline
         }
     ]
 })

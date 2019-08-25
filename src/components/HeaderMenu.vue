@@ -12,7 +12,7 @@
           <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
           <el-menu-item index="1"><router-link to="home" active-class="activeClass" target="_blank">首页</router-link></el-menu-item>
           <el-menu-item index="2"><router-link to="company" active-class="activeClass" target="_blank">邮轮公司</router-link></el-menu-item>
-          <el-menu-item index="3"><router-link to="comingSoon" active-class="activeClass" target="_blank">邮轮航线</router-link></el-menu-item>
+          <el-menu-item index="3"><router-link to="airline" active-class="activeClass" target="_blank">邮轮航线</router-link></el-menu-item>
           <el-menu-item index="4"><router-link to="gkcity" active-class="activeClass" target="_blank">港口城市</router-link></el-menu-item>
           <el-menu-item index="5"><router-link to="bkcruise" active-class="activeClass" target="_blank">邮轮百科</router-link></el-menu-item>
           <el-menu-item index="6"><router-link to="travelog" active-class="activeClass" target="_blank">邮轮游记</router-link></el-menu-item>
@@ -29,7 +29,7 @@
             :direction="direction">
             <p class="appnav"><router-link to="home" target="_blank">首页</router-link></p>
             <p class="appnav"><router-link to="company" target="_blank">邮轮公司</router-link></p>
-            <p class="appnav"><router-link to="comingSoon" target="_blank">邮轮航线</router-link></p>
+            <p class="appnav"><router-link to="airline" target="_blank">邮轮航线</router-link></p>
             <p class="appnav"><router-link to="gkcity" target="_blank">港口城市</router-link></p>
             <p class="appnav"><router-link to="bkcruise" target="_blank">邮轮百科</router-link></p>
             <p class="appnav"><router-link to="comingSoon" target="_blank">邮轮游记</router-link></p>

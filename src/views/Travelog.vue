@@ -2,8 +2,8 @@
 <template>
   <div class="company travelog">
     <div class="company-banner">
-      <HeaderMenu></HeaderMenu>
-      <img src="../assets/img/banner.jpg" alt />
+      <HeaderMenu activeIndex="6"></HeaderMenu>
+      <img src="../assets/img/bannerYj.jpg" alt />
       <div class="com-search container">
         <el-input placeholder="如：丽星邮轮" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList" src="../assets/img/header/search.png" alt />
@@ -11,7 +11,7 @@
     </div>
     <div class="container">
       <!-- 过滤选项 start -->
-      <div class="travelog-filter">
+      <!-- <div class="travelog-filter">
         <el-row type="flex" justify="space-around">
           <el-col v-for="(item,index) in filter" :key="index">
             <div class="filter-option">
@@ -19,26 +19,22 @@
             </div>
           </el-col>
         </el-row>
-      </div>
+      </div> -->
       <!-- 过滤选项 end -->
       <!-- 游记 item -->
       <div class="travelog-item">
         <el-row :gutter="30">
-          <el-col :span="8">
+          <el-col :span="8" v-for="item in list" :key="item.id">
             <div class="item-detail">
               <div class="item-img">
-                <img :src="travelImg" />
-                <div class="tag tag-lead">头条</div>
-                <div class="tag tag-cream">精华</div>
+                <img :src="item.coverimg" />
+                <!-- <div class="tag tag-lead">头条</div>
+                <div class="tag tag-cream">精华</div> -->
               </div>
               <div class="item-info">
-                <p>
-                  张家界：左手长沙右手张家界，初探湘西武陵源
-                  张家界：左手长沙右手张家界，初探湘西武陵源
-                  张家界：左手长沙右手张家界，初探湘西武陵源
-                  张家界：左手长沙右手张家界，初探湘西武陵源
+                <p v-html="item.articlecontent">
                 </p>
-                <div class="item-active">
+                <!-- <div class="item-active">
                   <span class="item-read">
                     <img :src="iconRead" />
                     <span>17856</span>
@@ -51,103 +47,7 @@
                     <img :src="iconComment" />
                     <span>30</span>
                   </span>
-                </div>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="item-detail">
-              <div class="item-img">
-                <img :src="travelImg" />
-              </div>
-              <div class="item-info">
-                <p>张家界：左手长沙右手张家界，初探湘西武陵源</p>
-                <div class="item-active">
-                  <span class="item-read">
-                    <img :src="iconRead" />
-                    <span>17856</span>
-                  </span>
-                  <span class="item-like">
-                    <img :src="iconLik" />
-                    <span>78</span>
-                  </span>
-                  <span class="item-comment">
-                    <img :src="iconComment" />
-                    <span>30</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="item-detail">
-              <div class="item-img">
-                <img :src="travelImg" />
-              </div>
-              <div class="item-info">
-                <p>张家界：左手长沙右手张家界，初探湘西武陵源</p>
-                <div class="item-active">
-                  <span class="item-read">
-                    <img :src="iconRead" />
-                    <span>17856</span>
-                  </span>
-                  <span class="item-like">
-                    <img :src="iconLik" />
-                    <span>78</span>
-                  </span>
-                  <span class="item-comment">
-                    <img :src="iconComment" />
-                    <span>30</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="item-detail">
-              <div class="item-img">
-                <img :src="travelImg" />
-              </div>
-              <div class="item-info">
-                <p>张家界：左手长沙右手张家界，初探湘西武陵源张家界：左手长沙右手张家界，初探湘西武陵源 张家界：左手长沙右手张家界，初探湘西武陵源 张家界：左手长沙右手张家界，初探湘西武陵源</p>
-                <div class="item-active">
-                  <span class="item-read">
-                    <img :src="iconRead" />
-                    <span>17856</span>
-                  </span>
-                  <span class="item-like">
-                    <img :src="iconLik" />
-                    <span>78</span>
-                  </span>
-                  <span class="item-comment">
-                    <img :src="iconComment" />
-                    <span>30</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="item-detail">
-              <div class="item-img">
-                <img :src="travelImg" />
-              </div>
-              <div class="item-info">
-                <p>张家界：左手长沙右手张家界，初探湘西武陵源</p>
-                <div class="item-active">
-                  <span class="item-read">
-                    <img :src="iconRead" />
-                    <span>17856</span>
-                  </span>
-                  <span class="item-like">
-                    <img :src="iconLik" />
-                    <span>78</span>
-                  </span>
-                  <span class="item-comment">
-                    <img :src="iconComment" />
-                    <span>30</span>
-                  </span>
-                </div>
+                </div> -->
               </div>
             </div>
           </el-col>
@@ -172,11 +72,12 @@
   </div>
 </template>
 <script>
-import travelImg from "../assets/logo.png";
 import iconRead from "../assets/img/icon-1.png";
 import iconLik from "../assets/img/icon-2.png";
 import iconComment from "../assets/img/icon-3.png";
 import HeaderMenu from "../components/HeaderMenu.vue";
+
+let Base64 = require('js-base64').Base64
 export default {
   name: "Travelog",
   components: {
@@ -203,7 +104,6 @@ export default {
         { option: "和谁出行" },
         { option: "游记玩法" }
       ],
-      travelImg: travelImg,
       iconRead: iconRead,
       iconLik: iconLik,
       iconComment: iconComment
@@ -217,14 +117,21 @@ export default {
       if (pageval) this.pageInfo.page = pageval;
       var paramsData = {
         page: this.pageInfo.page,
-        limit: this.pageInfo.limit
+        limit: this.pageInfo.limit,
+        // 文章分类，，，邮轮游记
+        categoryid: 2
       };
       if (this.searchVal) paramsData.shipcompany = this.searchVal;
-      this.$http
-        .get("/API/shipcompany.ashx?command=GetShipCompanyPager", {
+      this.$http.get("/API/article.ashx?command=GetArticleBySearch", {
           params: paramsData
         })
         .then(function(res) {
+          // 转义内容
+          if(res.body && res.body.list){
+            for(var i=0; i<res.body.list.length; i++){
+              res.body.list[i].articlecontent = Base64.decode(res.body.list[i].articlecontent)
+            }
+          }
           this.list = res.body.list;
           this.pageInfo.total = parseInt(res.body.count);
         });
@@ -302,6 +209,12 @@ export default {
     position: relative;
     & .item-img {
       max-width: 100%;
+      img{
+        max-width: 100%;
+      }
+      height: 280px;
+      overflow: hidden;
+      background: #cacaca;
       & .tag {
         position: absolute;
         left: 0;
@@ -325,6 +238,8 @@ export default {
     }
     & .item-info {
       padding: 20px;
+      height: 67px;
+      overflow: hidden;
       & p {
         font-size: 16px;
         overflow: hidden;

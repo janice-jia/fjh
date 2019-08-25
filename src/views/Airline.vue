@@ -1,7 +1,7 @@
 <template>
   <div class="airline">
     <div class="company-banner">
-      <HeaderMenu activeIndex="2"></HeaderMenu>
+      <HeaderMenu activeIndex="3"></HeaderMenu>
       <img src="../assets/img/banner.jpg" alt />
       <div class="com-search container">
         <el-input placeholder="如：丽星邮轮" v-model="searchVal"></el-input>
@@ -10,7 +10,7 @@
     </div>
     <div class="container">
       <div class="airline-filter">
-        <div class="airline-filter-count">
+        <!-- <div class="airline-filter-count">
           <p>
             共
             <span>{{ airlineCount }}</span>个产品
@@ -23,7 +23,7 @@
             type="info"
             color="#ffffff"
           >{{tag}}</el-tag>
-        </div>
+        </div> -->
         <div class="airline-filter-city content">
           <p class="filter-title">出发城市：</p>
           <div class="filter-detail">
@@ -31,7 +31,7 @@
             <p v-for="item in hotCity" :key="item">{{ item }}</p>
           </div>
         </div>
-        <div class="airline-filter-city content"></div>
+        <!-- <div class="airline-filter-city content"></div> -->
         <div class="airline-filter-line content">
           <p class="filter-title">游轮航线：</p>
           <div class="filter-detail">
@@ -44,21 +44,49 @@
             <p v-for="item in logo" :key="item">{{ item }}</p>
           </div>
         </div>
-        <div class="airline-filter-days content">
+        <!-- 行程天数 -->
+        <!-- <div class="airline-filter-days content">
           <p class="filter-title">行程天数：</p>
           <div class="filter-detail">
             <p v-for="item in days" :key="item">{{ item }}</p>
           </div>
-        </div>
-        <div class="airline-filter-country content">
+        </div> -->
+
+        <!-- 途经国家 -->
+        <!-- <div class="airline-filter-country content">
           <p class="filter-title">途经国家：</p>
           <div class="filter-detail">
             <p v-for="item in country" :key="item">{{ item }}</p>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="airline-list">
-        <div class="airline-item">
+        <div class="airline-item" v-for="item in list" :key="item.id">
+          <div class="airline-item-img">
+            <img :src="item.coverimg" />
+          </div>
+          <div class="airline-item-info">
+            <p class="info-title">{{item.title}}</p>
+            <p class="address">{{item.departureport}}出发 | {{item.arrivalport}}抵港</p>
+            <!-- <p class="light">
+              <span>推荐班期：</span> 2019 12-10 周二
+            </p> -->
+            <p class="light">
+              <span>班期特色：</span>{{item.itineraryfeature}}
+            </p>
+            <!-- <p class="light">
+              <span>当前卖家：</span>北京七海假期国际旅行社有限公司
+            </p> -->
+            <div class="eval">
+              <!-- <p>3764条评价</p> -->
+              <p>
+                <span>4.6</span>/5分
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="airline-item">
           <div class="airline-item-img">
             <img :src="airlineImg" />
           </div>
@@ -81,7 +109,7 @@
               </p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="page" v-if="list.length > 0">
         <div class="block">
@@ -164,7 +192,7 @@ export default {
       };
       if (this.searchVal) paramsData.shipcompany = this.searchVal;
       this.$http
-        .get("/API/shipcompany.ashx?command=GetShipCompanyPager", {
+        .get("/API/itinerary.ashx?command=GetItineraryPager", {
           params: paramsData
         })
         .then(function(res) {
@@ -281,15 +309,19 @@ export default {
     & .airline-item-img {
       width: 400px;
       height: 300px;
-      display: inline-block;
+      float: left;
+      overflow: hidden;
+      background: #ededed;
+      img{
+        max-width: 100%;
+      }
     }
     & .airline-item-info {
       width: 780px;
-      display: inline-block;
       font-size: 14px;
+      float: left;
       position: relative;
-      padding-right: 200px;
-      padding-top: 30px;
+      padding: 30px 100px 0 30px;
       & .info-title {
         font-size: 22px;
         color: #333333;
@@ -301,6 +333,8 @@ export default {
       }
        & .light {
         margin-bottom: 20px;
+        height: 18px;
+        overflow: hidden;
         color: #333333;
         & span {
           color: #999999;

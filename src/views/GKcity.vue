@@ -2,7 +2,7 @@
   <div class="company gkCity">
     <div class="company-banner">
       <HeaderMenu activeIndex="4"></HeaderMenu>
-      <img src="../assets/img/banner.jpg" alt=""/>
+      <img src="../assets/img/bannerCity.jpg" alt=""/>
       <div class="com-search container">
         <el-input
           placeholder="如：北欧"

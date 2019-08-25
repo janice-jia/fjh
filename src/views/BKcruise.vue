@@ -1,7 +1,7 @@
 <template>
   <div class="company bkcruise">
     <div class="company-banner">
-      <HeaderMenu></HeaderMenu>
+      <HeaderMenu activeIndex="5"></HeaderMenu>
       <img src="../assets/img/banner.jpg" alt=""/>
       <div class="com-search container">
         <el-input
@@ -438,8 +438,10 @@ export default {
     }
     .bk-ydjn-item{
       height: 300px;
+      overflow: hidden;
       img{
         max-width: 100%;
+        // max-height: 100%;
       }
       .bk-ydjn-cont-tit{
         color: #ee6b03;

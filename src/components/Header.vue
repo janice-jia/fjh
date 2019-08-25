@@ -22,7 +22,20 @@
         <el-col :span="12">
           <el-row>
             <!-- <el-col :span="16" class="rightTxt"><router-link to="comingSoon" target="_blank">法嘉华官网</router-link></el-col> -->
-            <el-col :span="16" class="rightTxt"><a href="http://www.opvoyage.com" target="_blank">法嘉华官网</a></el-col>
+            <el-col :span="16" class="rightTxt">
+              <a class="gwLink" href="http://www.opvoyage.com" target="_blank">法嘉华官网</a>
+              <div class="app">
+                <div :class="showApp ? 'appLogo appHover' : 'appLogo' " 
+                  @mouseover="showApp=!showApp" 
+                  @mouseout="showApp=!showApp">
+                  <img src="../assets/img/app.png" alt="">
+                </div>
+                <div class="appCode" v-if="showApp">
+                  <img src="../assets/img/appcode.jpg" alt="" />
+                  <p>法嘉华手机端</p>
+                </div>
+              </div>
+            </el-col>
             <el-col :span="8"  class="rightTxt"><router-link to="comingSoon" target="_blank">法嘉华分销系统</router-link></el-col>
           </el-row>
         </el-col>
@@ -33,7 +46,12 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  data() {
+    return {
+      showApp: false
+    }
+  }
 }
 </script>
 
@@ -50,6 +68,47 @@ export default {
     text-align: right;
     a{
       color: #666666;
+    }
+    .gwLink{
+      float: right;
+    }
+    .app{
+      width: 28px;
+      text-align: center;
+      float: right;
+      margin-right: 10px;
+      position: relative;
+      &:hover{
+        background: #ffffff;
+      }
+      .appHover{
+        background: #ffffff;
+      }
+      .appLogo{
+        padding-top: 3px;
+      }
+      .appCode{
+        position: absolute;
+        right: 0;
+        top: 45px;
+        z-index: 100;
+        height: 100px;
+        img{
+          height: 81px;
+          float: left;
+        }
+        p{
+          float: left;
+          width: 100%;
+          height: 18px;
+          line-height: 18px;
+          color: #ffffff;
+          font-size: 12px;
+          background: #ee6b03;
+          text-align: center;
+          margin: 0!important;
+        }
+      }
     }
   }
   .fjh_lang{
@@ -70,5 +129,10 @@ export default {
 }
 .el-header {
   padding: 0!important;
+}
+@media screen and (max-width: 650px) {
+  .app{
+    display: none;
+  }
 }
 </style>

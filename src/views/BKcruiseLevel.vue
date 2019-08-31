@@ -19,7 +19,7 @@
               {{item.articletitle}}
             </p>
             <div class="eval">
-              <router-link :to="{ name: 'gkcityinfo', params: { id: item.id }}" target="_blank">查看详情 ></router-link>
+              <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}" target="_blank">查看详情 ></router-link>
             </div>
           </div>
           <div class="bkcruiseLevel-item-con" v-html="item.articlecontent">

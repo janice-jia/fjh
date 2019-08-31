@@ -36,7 +36,7 @@
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
               <div class="bk-cont-more">
-                <router-link to="comingSoon">更多></router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
               </div>
             </div>
 
@@ -57,7 +57,7 @@
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
               <div class="bk-cont-more">
-                <router-link to="comingSoon">更多></router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
               </div>
             </div>
 
@@ -74,7 +74,7 @@
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
               <div class="bk-cont-more">
-                <router-link to="comingSoon">更多></router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
               </div>
             </div>
           </el-col>
@@ -97,7 +97,13 @@
               <div class="bk-yljs-img">
                 <img :src="item.coverimg" alt="">
               </div>
-              <h2>[ {{item.articletitle}} ]</h2>
+              <h2>
+                <span>[</span> 
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">
+                {{item.articletitle}}
+                </router-link> 
+                <span>]</span>
+                </h2>
             </div>
           </el-col>
         </el-row>
@@ -130,7 +136,7 @@
                   <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
                   </div>
                   <div class="bk-cont-more">
-                    <router-link to="comingSoon">更多></router-link>
+                    <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
                   </div>
                 </div>
               </el-col>
@@ -146,7 +152,7 @@
                   <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
                   </div>
                   <div class="bk-cont-more">
-                    <router-link to="comingSoon">更多></router-link>
+                    <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
                   </div>
                 </div>
               </el-col>
@@ -182,7 +188,7 @@
               <div class="bk-cxzb-cont-desc" v-html="item.articlecontent">
               </div>
               <div class="bk-cont-more">
-                <router-link to="comingSoon">更多></router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
               </div>
             </div>
           </el-col>
@@ -206,7 +212,7 @@
                 <img :src="item.coverimg" alt="">
               </div>
               <div class="bk-ylzl-tit">
-                <router-link to="comingSoon">{{item.articletitle}}</router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">{{item.articletitle}}</router-link>
               </div>
             </div>
           </el-col>
@@ -399,7 +405,17 @@ export default {
         width: 100%;
         overflow: hidden;
         padding: 0 20px;
-        background: rgba(0,0,0,.3)
+        background: rgba(0,0,0,.3);
+        span{
+          float: left;
+        }
+        a{
+          color: #ffffff;
+          width: 340px;
+          display: inline-block;
+          float: left;
+          overflow: hidden;
+        }
       }
     }
   }

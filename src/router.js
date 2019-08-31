@@ -10,6 +10,8 @@ import GKcityLevel from './views/GKcityLevel.vue'
 import GKcityInfo from './views/GKcityInfo.vue'
 import BKcruise from './views/BKcruise.vue'
 import BKcruiseLevel from './views/BKcruiseLevel.vue'
+import BKcruiseInfo from './views/BKcruiseInfo.vue'
+
 
 import Travelog from './views/Travelog.vue'
 import Airline from './views/Airline.vue'
@@ -74,15 +76,21 @@ export default new Router({
         },
         // 游轮百科
         {
+            path: '/bkcruise',
+            name: 'bkcruise',
+            component: BKcruise
+        },
+        // 游轮百科二级
+        {
             path: '/bkcruiselevel:id',
             name: 'bkcruiselevel',
             component: BKcruiseLevel
         },
-        // 游轮百科二级
+        // 游轮百科详细
         {
-            path: '/bkcruise',
-            name: 'bkcruise',
-            component: BKcruise
+            path: '/bkcruiseinfo:id',
+            name: 'bkcruiseinfo',
+            component: BKcruiseInfo
         },
         // 游轮游记
         {

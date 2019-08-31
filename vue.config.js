@@ -50,16 +50,7 @@ module.exports = {
             pathRewrite: {
               '^/API': '/API'
             }
-        },
-        // 图片地址转发
-        // '/upload/': {
-        //   target: 'http://www.opvcruise.com/',
-        //   ws: true,
-        //   changeOrigin: true,
-        //   pathRewrite: {
-        //     '^/upload/': '/upload/'
-        //   }
-        // }
+        }
     }
   }
 }

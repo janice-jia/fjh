@@ -13,31 +13,33 @@
     </div>
     <div class="container">
       <div class="companyItem" v-for="item in list" :key="item.id">
-        <!-- 背景图 -->
-        <div class="companyItem-bg">
-          <img :src="item.coverimg" alt="">
-          <!-- <div class="company-logo">
-            <img src="../assets/img/com_logo.jpg" alt="">
-          </div> -->
-        </div>
-        <div style="margin: 30px;">
-          <el-row type="flex" class="row-bg"  justify="end" align="bottom">
-            <el-col :span="7">
-              <div class="company-tit">{{item.shipcompany}}</div>
-            </el-col>
-            <el-col :span="4">
-              <div class="company-tit-2" >
-                <div> 旗下船队 <span>{{item.shipcount}}</span> 条</div>
-              </div>
-            </el-col>
-            <el-col :span="4">
-              <div class="company-tit-2"  align="bottom">
-                航线数量 <span>{{item.itinerarycount}}</span> 条
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-        <div class="company-desc">{{item.description}}</div>
+        <router-link :to="{ name: 'companylevel', params: { shipcompanyid: item.id }}">
+          <!-- 背景图 -->
+          <div class="companyItem-bg">
+            <img :src="item.coverimg" alt="">
+            <!-- <div class="company-logo">
+              <img src="../assets/img/com_logo.jpg" alt="">
+            </div> -->
+          </div>
+          <div style="margin: 30px;">
+            <el-row type="flex" class="row-bg"  justify="end" align="bottom">
+              <el-col :span="7">
+                <div class="company-tit">{{item.shipcompany}}</div>
+              </el-col>
+              <el-col :span="4">
+                <div class="company-tit-2" >
+                  <div> 旗下船队 <span>{{item.shipcount}}</span> 条</div>
+                </div>
+              </el-col>
+              <el-col :span="4">
+                <div class="company-tit-2"  align="bottom">
+                  航线数量 <span>{{item.itinerarycount}}</span> 条
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="company-desc">{{item.description}}</div>
+        </router-link>
       </div>
       <div class="page" v-if="list.length > 0">
         <div class="block">

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Company from './views/Company.vue'
+import CompanyLevel from './views/CompanyLevel.vue'
 import ComingSoon from './views/ComingSoon.vue'
 import GKcity from './views/GKcity.vue'
 import BKcruise from './views/BKcruise.vue'
@@ -35,6 +36,10 @@ export default new Router({
             path: '/company',
             name: 'company',
             component: Company
+        },{
+            path: '/companylevel:shipcompanyid',
+            name: 'companylevel',
+            component: CompanyLevel
         },
         // 港口城市
         {

@@ -6,6 +6,8 @@ import CompanyLevel from './views/CompanyLevel.vue'
 import CompanyInfo from './views/CompanyInfo.vue'
 import ComingSoon from './views/ComingSoon.vue'
 import GKcity from './views/GKcity.vue'
+import GKcityLevel from './views/GKcityLevel.vue'
+import GKcityInfo from './views/GKcityInfo.vue'
 import BKcruise from './views/BKcruise.vue'
 import Travelog from './views/Travelog.vue'
 import Airline from './views/Airline.vue'
@@ -55,6 +57,18 @@ export default new Router({
             path: '/gkcity',
             name: 'gkcity',
             component: GKcity
+        },
+        // 港口二级
+        {
+            path: '/gkcitylevel:id',
+            name: 'gkcitylevel',
+            component: GKcityLevel
+        },
+        // 港口城市详细
+        {
+            path: '/gkcityinfo:id',
+            name: 'gkcityinfo',
+            component: GKcityInfo
         },
         // 游轮百科
         {

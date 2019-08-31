@@ -9,6 +9,8 @@ import GKcity from './views/GKcity.vue'
 import GKcityLevel from './views/GKcityLevel.vue'
 import GKcityInfo from './views/GKcityInfo.vue'
 import BKcruise from './views/BKcruise.vue'
+import BKcruiseLevel from './views/BKcruiseLevel.vue'
+
 import Travelog from './views/Travelog.vue'
 import Airline from './views/Airline.vue'
 Vue.use(Router)
@@ -71,6 +73,12 @@ export default new Router({
             component: GKcityInfo
         },
         // 游轮百科
+        {
+            path: '/bkcruiselevel:id',
+            name: 'bkcruiselevel',
+            component: BKcruiseLevel
+        },
+        // 游轮百科二级
         {
             path: '/bkcruise',
             name: 'bkcruise',

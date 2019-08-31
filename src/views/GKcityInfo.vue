@@ -167,16 +167,16 @@ export default {
           margin-left: 20px;
         }
       }
-          .center{
-            text-align: center;
-            padding-top: 20px;
-            font-size: 16px;
-            color: #999999;
-            .tag-item{
-              text-align: center;
-              border-right: 1px solid #e5e5e5;
-            }
-          }
+      .center{
+        text-align: center;
+        padding-top: 20px;
+        font-size: 16px;
+        color: #999999;
+        .tag-item{
+          text-align: center;
+          border-right: 1px solid #e5e5e5;
+        }
+      }
     }
     .info02{
       font-size: 16px;

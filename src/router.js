@@ -9,6 +9,7 @@ import GKcity from './views/GKcity.vue'
 import BKcruise from './views/BKcruise.vue'
 import Travelog from './views/Travelog.vue'
 import Airline from './views/Airline.vue'
+import AirLineInfo from './views/AirLineInfo.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -73,6 +74,12 @@ export default new Router({
             path: '/airline',
             name: 'airline',
             component: Airline
+        },
+         // 游轮航线详情
+         {
+            path: '/airlineinfo',
+            name: 'airlineinfo',
+            component: AirLineInfo
         }
     ]
 })

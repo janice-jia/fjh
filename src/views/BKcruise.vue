@@ -16,7 +16,7 @@
       <div class="bk-tit">
         <h2>新手入门</h2>
         <p class="tit2"> NEW TO CRUISING</p>
-        <p class="more"><router-link to="comingSoon">更多</router-link></p>
+        <p class="more"><router-link :to="{ name: 'bkcruiselevel', params: { id: 3 }}">更多</router-link></p>
       </div>
 
       <!-- 新手入门--内容-------------------------------start -->
@@ -36,7 +36,7 @@
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
               <div class="bk-cont-more">
-                <router-link to="comingSoon">更多></router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
               </div>
             </div>
 
@@ -57,7 +57,7 @@
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
               <div class="bk-cont-more">
-                <router-link to="comingSoon">更多></router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
               </div>
             </div>
 
@@ -74,7 +74,7 @@
               <div class="bk-xs-cont-desc" v-html="item.articlecontent">
               </div>
               <div class="bk-cont-more">
-                <router-link to="comingSoon">更多></router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
               </div>
             </div>
           </el-col>
@@ -86,7 +86,7 @@
       <div class="bk-tit">
         <h2>邮轮介绍</h2>
         <p class="tit2">CRUISE EXPERIENCE</p>
-        <p class="more"><router-link to="comingSoon">更多</router-link></p>
+        <p class="more"><router-link :to="{ name: 'bkcruiselevel', params: { id: 4 }}">更多</router-link></p>
       </div>
 
       <!-- 邮轮介绍--内容-------------------------------start -->
@@ -97,7 +97,13 @@
               <div class="bk-yljs-img">
                 <img :src="item.coverimg" alt="">
               </div>
-              <h2>[ {{item.articletitle}} ]</h2>
+              <h2>
+                <span>[</span> 
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">
+                {{item.articletitle}}
+                </router-link> 
+                <span>]</span>
+                </h2>
             </div>
           </el-col>
         </el-row>
@@ -108,7 +114,7 @@
       <div class="bk-tit">
         <h2>预定锦囊</h2>
         <p class="tit2">CHOOSING A CRUISE</p>
-        <p class="more"><router-link to="comingSoon">更多</router-link></p>
+        <p class="more"><router-link :to="{ name: 'bkcruiselevel', params: { id: 5 }}">更多</router-link></p>
       </div>
 
       <!-- 预定锦囊--内容-------------------------------start -->
@@ -130,7 +136,7 @@
                   <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
                   </div>
                   <div class="bk-cont-more">
-                    <router-link to="comingSoon">更多></router-link>
+                    <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
                   </div>
                 </div>
               </el-col>
@@ -146,7 +152,7 @@
                   <div class="bk-ydjn-cont-desc" v-html="item.articlecontent">
                   </div>
                   <div class="bk-cont-more">
-                    <router-link to="comingSoon">更多></router-link>
+                    <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
                   </div>
                 </div>
               </el-col>
@@ -165,7 +171,7 @@
       <div class="bk-tit">
         <h2>出行准备</h2>
         <p class="tit2">CRUISE PREPARATION</p>
-        <p class="more"><router-link to="comingSoon">更多</router-link></p>
+        <p class="more"><router-link :to="{ name: 'bkcruiselevel', params: { id: 6 }}">更多</router-link></p>
       </div>
 
       <!-- 出行准备--内容-------------------------------start -->
@@ -182,7 +188,7 @@
               <div class="bk-cxzb-cont-desc" v-html="item.articlecontent">
               </div>
               <div class="bk-cont-more">
-                <router-link to="comingSoon">更多></router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
               </div>
             </div>
           </el-col>
@@ -194,7 +200,7 @@
       <div class="bk-tit">
         <h2>邮轮专栏</h2>
         <p class="tit2">CRUISE COLUMN</p>
-        <p class="more"><router-link to="comingSoon">更多</router-link></p>
+        <p class="more"><router-link :to="{ name: 'bkcruiselevel', params: { id: 7 }}">更多</router-link></p>
       </div>
 
       <!-- 邮轮专栏--内容-------------------------------start -->
@@ -206,7 +212,7 @@
                 <img :src="item.coverimg" alt="">
               </div>
               <div class="bk-ylzl-tit">
-                <router-link to="comingSoon">{{item.articletitle}}</router-link>
+                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">{{item.articletitle}}</router-link>
               </div>
             </div>
           </el-col>
@@ -399,7 +405,17 @@ export default {
         width: 100%;
         overflow: hidden;
         padding: 0 20px;
-        background: rgba(0,0,0,.3)
+        background: rgba(0,0,0,.3);
+        span{
+          float: left;
+        }
+        a{
+          color: #ffffff;
+          width: 340px;
+          display: inline-block;
+          float: left;
+          overflow: hidden;
+        }
       }
     }
   }

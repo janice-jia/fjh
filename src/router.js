@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Company from './views/Company.vue'
 import CompanyLevel from './views/CompanyLevel.vue'
+import CompanyInfo from './views/CompanyInfo.vue'
 import ComingSoon from './views/ComingSoon.vue'
 import GKcity from './views/GKcity.vue'
 import BKcruise from './views/BKcruise.vue'
@@ -36,7 +37,15 @@ export default new Router({
             path: '/company',
             name: 'company',
             component: Company
-        },{
+        },
+        // 邮轮公司详情页面
+        {
+            path: '/companyInfo:id',
+            name: 'companyInfo',
+            component: CompanyInfo
+        }
+        // 邮轮公司二级
+        ,{
             path: '/companylevel:shipcompanyid',
             name: 'companylevel',
             component: CompanyLevel

@@ -15,7 +15,10 @@
             <img :src="item.coverimg" />
           </div>
           <div class="companyLevel-item-tit">
-            <p class="info-title">{{item.shipname}}<router-link to="comingSoon" target="_blank">查看详情 ></router-link></p>
+            <p class="info-title">
+              {{item.shipname}}
+              <router-link :to="{ name: 'companyInfo', params: { id: item.id }}" target="_blank">查看详情 ></router-link>
+            </p>
             <p class="light">
               <span>吨位：{{item.tonnage}}</span>
               <span>载客：{{item.guests}}</span>

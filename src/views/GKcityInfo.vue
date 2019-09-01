@@ -1,7 +1,7 @@
 <template>
   <div class="cityInfo">
     <div class="cityInfo-banner">
-      <HeaderMenu activeIndex="2"></HeaderMenu>
+      <HeaderMenu activeIndex="4"></HeaderMenu>
       <img src="../assets/img/cityinfo.jpg" alt=""/>
       
       <div class="com-page-info">

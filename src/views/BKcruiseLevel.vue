@@ -25,8 +25,8 @@
           <div class="bkcruiseLevel-item-con" v-html="item.articlecontent">
           </div>
           <div class="publishtime">
-            <p><img src="../assets/img/time.png" alt/> 更新于 2019-08-29</p>
-            <p><img src="../assets/img/youyong.png" alt/> 有用 717</p>
+            <p><img src="../assets/img/time.png" alt/> 更新于 {{item.travledate}}</p>
+            <p><img src="../assets/img/youyong.png" alt/> 有用 {{item.daycount}}</p>
           </div>
         </div>
       </div>

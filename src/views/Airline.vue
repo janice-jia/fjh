@@ -62,6 +62,7 @@
       </div>
       <div class="airline-list">
         <div class="airline-item" v-for="item in list" :key="item.id">
+          <router-link :to="{ name: 'airlineinfo', params: { id: item.id }}">
           <div class="airline-item-img">
             <img :src="item.coverimg" />
           </div>
@@ -84,6 +85,7 @@
               </p>
             </div>
           </div>
+          </router-link>
         </div>
 
         <!-- <div class="airline-item">

@@ -1,7 +1,7 @@
 <template>
   <div class="airLineInfo">
     <div class="companyInfo-banner">
-      <HeaderMenu activeIndex="2"></HeaderMenu>
+      <HeaderMenu activeIndex="3"></HeaderMenu>
       <img src="../assets/img/cominfo.jpg" alt />
 
       <div class="com-page-info">
@@ -90,7 +90,7 @@
         <div class="star-item">
           <el-row type="flex">
             <el-col class="star-item-info" v-for="(item,index) in 3" :key="index">
-              <img src />
+              <div class="star-item-infoimg"><img src /></div>
               <p class="info-title">红房子西餐厅</p>
               <p>楼层：9 | 容纳：268 | 消费：免费</p>
               <p>红房子西餐厅为游客提供中式及西式套餐</p>
@@ -102,7 +102,9 @@
     <!-- 日程安排 -->
     <div class="container schedule">
       <div class="schedule-list">
-        <img src />
+        <div class="schedule-listimg">
+          <img src />
+        </div>
         <div class="list-summary">
           <table cellspacing="0">
             <th>日期</th>
@@ -298,19 +300,15 @@ export default {
     };
   },
   mounted() {
-    this.getList();
+    this.getInfo();
   },
   methods: {
-    getList(pageval) {
+    getInfo() {
       this.list = [];
-      if (pageval) this.pageInfo.page = pageval;
-      var paramsData = {
-        page: this.pageInfo.page,
-        limit: this.pageInfo.limit
-      };
-      if (this.searchVal) paramsData.shipcompany = this.searchVal;
+      var paramsData = {};
+      if (this.$route.params.id) paramsData.id = this.$route.params.id;
       this.$http
-        .get("/API/shipcompany.ashx?command=GetShipCompanyPager", {
+        .get("/API/itinerary.ashx?command=GetItineraryDetailByItineraryId", {
           params: paramsData
         })
         .then(function(res) {
@@ -453,12 +451,16 @@ export default {
       width: 100%;
       .star-item-info {
         width: 360px;
-        border: 1px solid #eeeeee;
         box-shadow: 0 0 1px rgba(0, 0, 0, 0.35);
+        border: 1px solid #eeeeee;
         margin-right: 30px;
-        img {
+        .star-item-infoimg{
           width: 100%;
+          background: #e5e5e5;
           height: 210px;
+          img {
+            max-width: 100%;
+          }
         }
         p {
           padding-left: 20px;
@@ -481,10 +483,14 @@ export default {
   background: #ffffff;
   .schedule-list {
     height: 342px;
-    img {
+    .schedule-listimg{
       width: 606px;
       height: 100%;
       float: left;
+      background: #e5e5e5;
+      img{
+        max-width: 100%;
+      }
     }
     .list-summary {
       display: inline-block;

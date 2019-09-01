@@ -134,7 +134,7 @@ export default {
     border: -10px;
   }
 }
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   .HeadModulePP{
     .el-carousel__container{
       height: 300px;

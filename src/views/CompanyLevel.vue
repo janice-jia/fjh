@@ -147,39 +147,6 @@ export default {
 };
 </script>
 <style lang="scss">
-.company-banner {
-  position: relative;
-  text-align: center;
-  padding-bottom: 30px;
-  img {
-    max-width: 100%;
-  }
-  .com-search {
-    height: 80px;
-    padding: 10px;
-    width: 1180px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.35);
-    position: absolute;
-    left: 50%;
-    bottom: -5px;
-    margin-left: -590px;
-    input {
-      background: #ededed;
-      height: 60px;
-      font-size: 24px;
-      color: #cacaca;
-    }
-    .com-search-btn {
-      position: absolute;
-      right: 30px;
-      bottom: 50%;
-      margin-bottom: -12px;
-      cursor: pointer;
-    }
-  }
-}
 .companyLevel{
   // 航线filter
   .companyLevel-filter {

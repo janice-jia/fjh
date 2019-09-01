@@ -59,7 +59,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   .yl_baike{
     .yl_baike_img{
       height: 135px;

@@ -130,7 +130,22 @@ export default {
 .el-header {
   padding: 0!important;
 }
-@media screen and (max-width: 650px) {
+
+.appMenu{
+  display: none;
+  height: 100px;
+  line-height: 100px;
+  font-size: 34px;
+  font-weight: bold;
+  width: 100px;
+  color: #ffffff;
+  float: right;
+  text-align: center;
+  cursor: pointer;
+  padding-top:32px;
+}
+
+@media screen and (max-width: 750px) {
   .app{
     display: none;
   }

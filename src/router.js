@@ -107,7 +107,7 @@ export default new Router({
         },
          // 游轮航线详情
          {
-            path: '/airlineinfo',
+            path: '/airlineinfo:id',
             name: 'airlineinfo',
             component: AirLineInfo
         }

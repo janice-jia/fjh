@@ -147,7 +147,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   .yl_chengshi{
     .yl_chengshi_img{
       height: 100px!important;

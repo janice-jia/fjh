@@ -105,7 +105,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   .pcMenu{
     display: none!important;
   }

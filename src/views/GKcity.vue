@@ -130,6 +130,7 @@ export default {
     }
     .w800{
       width: 790px;
+      max-width: 100%;
       background: #ededed;
       height: 100%;
       overflow: hidden;
@@ -179,5 +180,20 @@ export default {
       float: left;
     }
   }
+}
+@media screen and (max-width: 750px) {
+  .gkCityItem{
+    height: 180px!important;
+    .w800{
+      width: 300px!important;
+    }
+    .w400{
+      width: 150px!important;
+      .desc{
+        max-height: 65px!important;
+      }
+    }
+  }
+  
 }
 </style>

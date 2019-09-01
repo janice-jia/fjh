@@ -220,42 +220,8 @@ export default {
 };
 </script>
 <style lang="scss">
-.company-banner {
-  position: relative;
-  text-align: center;
-  padding-bottom: 30px;
-  img {
-    max-width: 100%;
-  }
-  .com-search {
-    height: 80px;
-    padding: 10px;
-    width: 1180px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.35);
-    position: absolute;
-    left: 50%;
-    bottom: -5px;
-    margin-left: -590px;
-    input {
-      background: #ededed;
-      height: 60px;
-      font-size: 24px;
-      color: #cacaca;
-    }
-    .com-search-btn {
-      position: absolute;
-      right: 30px;
-      bottom: 50%;
-      margin-bottom: -12px;
-      cursor: pointer;
-    }
-  }
-}
 // 航线filter
 .airline-filter {
-  width: 1180px;
   margin-top: 60px;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.35);
   & .airline-filter-count {
@@ -302,7 +268,6 @@ export default {
   }
 }
 .airline-list {
-  width: 1180px;
   & .airline-item {
     background: #ffffff;
     margin-top: 30px;
@@ -371,5 +336,9 @@ export default {
     box-sizing: border-box;
     margin: 0 auto;
   }
+}
+
+@media screen and (max-width: 750px) {
+  
 }
 </style>

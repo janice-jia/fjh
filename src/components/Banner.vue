@@ -210,18 +210,6 @@ export default {
   .el-carousel__container{
     height: 850px;
   }
-  .appMenu{
-    display: none;
-    height: 100px;
-    line-height: 100px;
-    font-size: 34px;
-    font-weight: bold;
-    width: 100px;
-    color: #ffffff;
-    float: right;
-    text-align: center;
-    cursor: pointer;
-  }
 }
 .appnav{
   padding: 10px;
@@ -285,7 +273,7 @@ export default {
 }
 
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   .Banner{
     height: 425px;
     .banner-img{

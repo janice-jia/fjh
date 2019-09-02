@@ -9,10 +9,12 @@
         <div class="info01">
           <el-row>
             <el-col :span="4">
-              <img src="../assets/img/cominfologo.jpg" alt />
+              <div class="coverimgBg">
+                <img :src="detail.coverimg" alt />
+              </div>
             </el-col>
             <el-col :span="20">
-              <p class="cntit">丽星邮轮·双子星号7天6晚目的地参团·【1元换购指定大交通B】厦门-宫吉岛（日本） -厦门深度游7天6晚</p>
+              <p class="cntit">{{detail.title}}</p>
             </el-col>
           </el-row>
         </div>
@@ -21,7 +23,7 @@
         <div class="info02">
           <el-row type="flex" class="row-bg" justify="center">
             <el-col :span="10">
-              <div class="tag-item">出发城市：上海</div>
+              <div class="tag-item">出发城市：{{detail.departureport}}</div>
             </el-col>
             <el-col :span="5">
               <div class="tag-item">出发时间：2019-09-24 周二出发</div>
@@ -49,7 +51,8 @@
         <el-divider>产品特色</el-divider>
       </div>
       <div class="feature-detail">
-        <p>体验闽南特色，一元换购指定大交通（单趟）</p>
+        <p>{{detail.itineraryfeature}}</p>
+        <!-- <p>体验闽南特色，一元换购指定大交通（单趟）</p>
         <p>行程特色：</p>
         <p v-for="(item,index) in featureList" :key="index">* {{item}}</p>
         <p>======================</p>
@@ -63,9 +66,9 @@
         <p class="red">* 武汉，黄石，出发地前往厦门去程动车票（单程）。</p>
         <p>去程参考车次D2285，深圳待定</p>
         <p class="red">***** 根据客人出发地选择以上其中一个城市出发动车二等座次车票（单程）</p>
-        <p class="red">***** 厦门回程车票需要客户自理</p>
+        <p class="red">***** 厦门回程车票需要客户自理</p> -->
       </div>
-      <div class="close">收起 ^</div>
+      <!-- <div class="close">收起 ^</div> -->
     </div>
     <!-- 双子星号 -->
     <div class="container star">
@@ -117,28 +120,10 @@
               起航
               <span class="currTime">当地时间</span>
             </th>
-            <tr>
-              <td>第1天（9月24日）</td>
-              <td>中国，厦门</td>
+            <tr v-for="item in dayList" :key="item.id">
+              <td>{{item.days}}</td>
+              <td>{{item.departurecity}}</td>
               <td class="time"></td>
-              <td class="time">23:00</td>
-            </tr>
-            <tr>
-              <td>第2天（9月25日）</td>
-              <td>海上巡游</td>
-              <td class="time"></td>
-              <td class="time"></td>
-            </tr>
-            <tr>
-              <td>第3天（9月26日）</td>
-              <td>日本，宫古岛</td>
-              <td class="time">07:00</td>
-              <td class="time">15:00</td>
-            </tr>
-            <tr>
-              <td>第4天（9月27日）</td>
-              <td>中国，厦门</td>
-              <td class="time">18:00</td>
               <td class="time"></td>
             </tr>
           </table>
@@ -150,46 +135,17 @@
         </div>
       </div>
       <div class="schedule-detail">
-        <div class="detail-title">
-          <span class="left">DAY1</span>
-          <span>丽星邮轮（东渡邮轮码头，中国）</span>
-          <span class="right">2019年9月24日</span>
-        </div>
-        <div class="detail-info">
-          <p>厦门 预计20:00-21:00登船 23：00离港</p>
-          <p>前往厦门东渡国际邮轮码头搭乘丽星邮轮公司精心打造的“ 双子星号”，开始令人人难忘的海上旅程。</p>
-          <p>温馨提醒：关闸时间为晚上21：00，请尽早抵达，如超过关闸时间还没办理完手续将被视为自动放弃，无法退回所缴费用。</p>
-          <p>备注：根据抵达时间合理安排行程.可自由安排游览</p>
-          <p class="breakfast">早餐：自理；午餐：自理；晚餐：邮轮上</p>
-          <p>住宿：邮轮上</p>
-        </div>
-        <div class="detail-title">
-          <span class="left">DAY2</span>
-          <span>海上巡游</span>
-          <span class="right">2019年9月25日</span>
-        </div>
-        <div class="detail-info">
-          <p>公海</p>
-          <p>
-            今天您可以充分享受船上的休闲娱乐设施及各种美食，这里有24小时停不了的各种娱乐活动例如晨运、甲板上学习健身操、社交舞或到健身中心学
-            习如何使用各种健身器械，在柔和的阳光下，您可以去游泳、享受日光浴，到按摩池里舒解压力，您还可选择观赏电影、切磋牌艺或卡拉OK大展歌
-            艺，每晚您还可以欣赏来自世界各地歌舞艺员表演的精彩节目。不论您属于哪种个性，总能找到适合自己的休闲娱乐项目。
-          </p>
-          <p class="breakfast">早餐：邮轮上；午餐：邮轮上；晚餐：邮轮上</p>
-          <p>住宿：邮轮上</p>
-        </div>
-        <div class="detail-title">
-          <span class="left">DAY3</span>
-          <span>丽星邮轮（八重山群岛港，日本）</span>
-          <span class="right">2019年9月26日</span>
-        </div>
-        <div class="detail-info">
-          <p>厦门 预计20:00-21:00登船 23：00离港</p>
-          <p>前往厦门东渡国际邮轮码头搭乘丽星邮轮公司精心打造的“ 双子星号”，开始令人人难忘的海上旅程。</p>
-          <p>温馨提醒：关闸时间为晚上21：00，请尽早抵达，如超过关闸时间还没办理完手续将被视为自动放弃，无法退回所缴费用。</p>
-          <p>备注：根据抵达时间合理安排行程.可自由安排游览</p>
-          <p class="breakfast">早餐：自理；午餐：自理；晚餐：邮轮上</p>
-          <p>住宿：邮轮上</p>
+        <div v-for="item in dayList" :key="item.id">
+          <div class="detail-title">
+            <span class="left">{{item.days}}</span>
+            <span>{{item.departurecity}}</span>
+            <!-- <span class="right">2019年9月24日</span> -->
+          </div>
+          <div class="detail-info">
+            <p>{{item.description}}</p>
+            <p>{{item.foods}}</p>
+            <p>住宿：{{item.hotel}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -202,7 +158,10 @@
         <div class="title">费用包含</div>
         <div class="detail">
           <ul>
-            <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li>
+            <li>
+              {{detail.feedetail}}
+            </li>
+            <!-- <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li> -->
           </ul>
         </div>
       </div>
@@ -212,15 +171,15 @@
           <ul>
             <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li>
           </ul>
-        </div>
+        </div> 
       </div>
     </div>
     <!-- 出行步骤 -->
-    <div class="container step">
+    <!-- <div class="container step">
       <div class="divider step-title">
         <el-divider>出行步骤</el-divider>
       </div>
-    </div>
+    </div> -->
     <!-- 预定须知 -->
     <div class="container book">
       <div class="divider book-title">
@@ -268,10 +227,10 @@ export default {
         "产品特色",
         "行程介绍",
         "费用说明",
-        "签证说明",
-        "出行步骤",
+        // "签证说明",
+        // "出行步骤",
         "预定须知",
-        "用户点评"
+        // "用户点评"
       ],
       featureList: [
         "畅游日本，感受不一样的日本之旅，邂逅美丽海岛；",
@@ -296,25 +255,38 @@ export default {
         "保险：旅行社责任险（具体解释权归保险公司）；建议游客自行购买旅游人身意外保险",
         "导服：全程优秀国语导游",
         "购物：全程安排2次购物（约120分钟/店），丝绸文化馆、乳胶平买商城、珠宝平买商城、金门厨具展示馆4选2（自愿购物，敬请配合）"
-      ]
+      ],
+      // 详细信息
+      detail:{},
+      // 日程
+      dayList: []
     };
   },
   mounted() {
+    this.getDetail();
     this.getInfo();
   },
   methods: {
+    // 获取详细
+    getDetail(){
+      var paramsData = {};
+      if (this.$route.params.id) paramsData.id = this.$route.params.id;
+      this.$http.get("/API/itinerary.ashx?command=GetItineraryDetail", {
+        params: paramsData
+      }).then(function(res) {
+        this.detail = res.body;
+      });
+    },
+    // 获取详细---日程
     getInfo() {
       this.list = [];
       var paramsData = {};
-      if (this.$route.params.id) paramsData.id = this.$route.params.id;
-      this.$http
-        .get("/API/itinerary.ashx?command=GetItineraryDetailByItineraryId", {
-          params: paramsData
-        })
-        .then(function(res) {
-          this.list = res.body.list;
-          this.pageInfo.total = parseInt(res.body.count);
-        });
+      if (this.$route.params.id) paramsData.itineraryid = this.$route.params.id;
+      this.$http.get("/API/itinerary.ashx?command=GetItineraryDetailByItineraryId", {
+        params: paramsData
+      }).then(function(res) {
+        this.dayList = res.body;
+      });
     }
   }
 };
@@ -335,12 +307,16 @@ export default {
     margin-left: -600px;
     .info01 {
       border-bottom: 1px solid #e5e5e5;
+      .coverimgBg{
+        height: 110px;
+        background: #e5e5e5;
+      }
       img {
         max-width: 100%;
         max-height: 100%;
       }
       .cntit {
-        padding-top: 20px;
+        padding: 20px 0 0 20px;
         font-size: 26px;
         color: #333333;
         .entit {

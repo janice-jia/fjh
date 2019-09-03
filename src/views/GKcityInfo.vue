@@ -113,7 +113,7 @@ export default {
   },
   data() {
     return {
-      list: [],
+      detail: [],
       searchVal: '',
       activeIndex: 1,
     }
@@ -124,15 +124,10 @@ export default {
   methods: {
     getList(pageval){
       this.list = []
-      if(pageval) this.pageInfo.page = pageval
-      var paramsData = {
-        page: this.pageInfo.page,
-        limit: this.pageInfo.limit
-      }
-      if(this.searchVal) paramsData.shipcompany = this.searchVal
-      this.$http.get('/API/shipcompany.ashx?command=GetShipCompanyPager', {params: paramsData}).then(function (res) {
-        this.list = res.body.list
-        this.pageInfo.total = parseInt(res.body.count)
+      var paramsData = {}
+      if (this.$route.params.id) paramsData.portid = this.$route.params.id
+      this.$http.get('/API/port.ashx?command=GetPortDetail', {params: paramsData}).then(function (res) {
+        this.detail = res.body
       })
     }
   }

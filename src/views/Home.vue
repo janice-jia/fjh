@@ -31,6 +31,7 @@ import HeadModuleBKTab from '../components/HeadModuleBKTab.vue'
 import HeadModuleCHTab from '../components/HeadModuleCHTab.vue'
 // 游记
 import HeadModuleYJTab from '../components/HeadModuleYJTab.vue'
+let Base64 = require('js-base64').Base64
 
 export default {
   name: 'home',
@@ -68,6 +69,11 @@ export default {
     getGKnav(){
       this.$http.get('/API/index.ashx?command=GetAreaCity').then(function (res) {
         res.body.list = this.formatterNavVal(res.body.list, 'areaname')
+        if(res.body && res.body.list){
+          for(var i=0; i<res.body.list.length; i++){
+            res.body.list[i].description = Base64.decode(res.body.list[i].description)
+          }
+        }
         this.navDataGK = res.body.list
       })
     },

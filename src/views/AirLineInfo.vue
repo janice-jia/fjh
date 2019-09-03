@@ -26,10 +26,10 @@
               <div class="tag-item">出发城市：{{detail.departureport}}</div>
             </el-col>
             <el-col :span="5">
-              <div class="tag-item">出发时间：2019-09-24 周二出发</div>
+              <!-- <div class="tag-item">出发时间：2019-09-24 周二出发</div> -->
             </el-col>
             <el-col :span="9">
-              <div class="tag-item">旅行：国旅环球</div>
+              <!-- <div class="tag-item">旅行：国旅环球</div> -->
             </el-col>
           </el-row>
         </div>
@@ -73,16 +73,37 @@
     <!-- 双子星号 -->
     <div class="container star">
       <div class="divider star-title">
-        <el-divider>双子星号</el-divider>
+        <el-divider>{{shipDetail.shipname}}</el-divider>
       </div>
       <div class="star-detail">
         <p class="detail-intro">
-          丽星邮轮全面翻新升级排水量达50,764吨的双子星号。工程耗资5,000万美元，包括升级导航系统、船身彩绘设计以及翻新船上的各项设施如客房、餐
-          厅、娱乐及康乐设施、零售及美容服务场所等。为了让旅客享受更全面的度假体验，双子星号新增设的免税购物区可让客人选购各款名贵腕表、珠宝及
-          手袋等等，为多采多姿的海上假...
+          {{shipDetail.description}}
           <span>了解更多 ></span>
         </p>
         <div class="star-tag">
+          <el-tabs v-model="activeName" @tab-click="handleClick">
+            <!-- 仓房介绍 -->
+            <el-tab-pane label="舱房介绍" name="first">
+              <div class="star-item">
+                <el-row type="flex">
+                  <el-col class="star-item-info" v-for="(item,index) in 3" :key="index">
+                    <div class="star-item-infoimg"><img src /></div>
+                    <p class="info-title">红房子西餐厅</p>
+                    <p>楼层：9 | 容纳：268 | 消费：免费</p>
+                    <p>红房子西餐厅为游客提供中式及西式套餐</p>
+                  </el-col>
+                </el-row>
+              </div>
+            </el-tab-pane>
+            <!-- 海上美食 -->
+            <el-tab-pane label="海上美食" name="second">配置管理</el-tab-pane>
+            <!-- 船上娱乐 -->
+            <el-tab-pane label="船上娱乐" name="third">角色管理</el-tab-pane>
+            <!-- 邮轮服务 -->
+            <el-tab-pane label="邮轮服务" name="fourth">定时任务补偿</el-tab-pane>
+          </el-tabs>
+
+          
           <el-menu :default-active="activeIndex" active-text-color="#ee6b03" mode="horizontal">
             <el-menu-item index="1">舱房介绍（4）</el-menu-item>
             <el-menu-item index="2">海上美食（11）</el-menu-item>
@@ -90,23 +111,14 @@
             <el-menu-item index="4">邮轮服务（1）</el-menu-item>
           </el-menu>
         </div>
-        <div class="star-item">
-          <el-row type="flex">
-            <el-col class="star-item-info" v-for="(item,index) in 3" :key="index">
-              <div class="star-item-infoimg"><img src /></div>
-              <p class="info-title">红房子西餐厅</p>
-              <p>楼层：9 | 容纳：268 | 消费：免费</p>
-              <p>红房子西餐厅为游客提供中式及西式套餐</p>
-            </el-col>
-          </el-row>
-        </div>
+        
       </div>
     </div>
     <!-- 日程安排 -->
     <div class="container schedule">
       <div class="schedule-list">
         <div class="schedule-listimg">
-          <img src />
+          <img :src="detail.coverimg" />
         </div>
         <div class="list-summary">
           <table cellspacing="0">
@@ -155,24 +167,23 @@
         <el-divider>费用说明</el-divider>
       </div>
       <div class="price-include">
-        <div class="title">费用包含</div>
+        {{detail.feedetail}}
+        <!-- <div class="title">费用包含</div>
         <div class="detail">
           <ul>
-            <li>
-              {{detail.feedetail}}
-            </li>
-            <!-- <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li> -->
+            
+            <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li>
           </ul>
-        </div>
+        </div> -->
       </div>
-      <div class="price-exclude">
+      <!-- <div class="price-exclude">
         <div class="title">费用不包含</div>
         <div class="detail">
           <ul>
             <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li>
           </ul>
         </div> 
-      </div>
+      </div> -->
     </div>
     <!-- 出行步骤 -->
     <!-- <div class="container step">
@@ -186,7 +197,8 @@
         <el-divider>预定须知</el-divider>
       </div>
       <div class="book-item">
-        <div class="title">
+        {{detail.bookingdetail}}
+        <!-- <div class="title">
           <el-menu default-active="1" class="el-menu-vertical">
             <el-menu-item index="1">
               <span slot="title">预定限制</span>
@@ -206,7 +218,7 @@
           <ul>
             <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -259,7 +271,9 @@ export default {
       // 详细信息
       detail:{},
       // 日程
-      dayList: []
+      dayList: [],
+      // 邮轮基本信息
+      shipDetail: {}
     };
   },
   mounted() {
@@ -275,6 +289,7 @@ export default {
         params: paramsData
       }).then(function(res) {
         this.detail = res.body;
+        this.getShipDetail(this.detail.shipid);
       });
     },
     // 获取详细---日程
@@ -286,6 +301,13 @@ export default {
         params: paramsData
       }).then(function(res) {
         this.dayList = res.body;
+      });
+    },
+    // 获取邮轮基本信息
+    getShipDetail(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetBaseInfo&shipid="+parseInt(shipid)).then(function(res) {
+        this.shipDetail = res.body;
       });
     }
   }
@@ -470,6 +492,8 @@ export default {
     }
     .list-summary {
       display: inline-block;
+      height: 342px;
+      overflow-y: auto;
       table {
         margin-left: 10px;
         color: #333333;

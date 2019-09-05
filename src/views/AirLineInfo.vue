@@ -80,36 +80,101 @@
           {{shipDetail.description}}
           <span>了解更多 ></span>
         </p>
-        <div class="star-tag">
+        <div class="star-tag fjh-tabs">
           <el-tabs v-model="activeName" @tab-click="handleClick">
             <!-- 仓房介绍 -->
-            <el-tab-pane label="舱房介绍" name="first">
+            <el-tab-pane :label="'舱房介绍（' + cabinsInfoList.length + '）'" name="first">
+              <table style="width: 100%" class="cangtable">
+                <tr>
+                  <th width="220">图片</th>
+                  <th width="200">名称</th>
+                  <th width="130">容纳</th>
+                  <th width="150">楼层</th>
+                  <th width="170">面积</th>
+                  <th>窗型</th>
+                  <th></th>
+                </tr>
+                <tr v-for="(item,index) in cabinsInfoList" :key="index">
+                  <td>
+                    <div class="image">
+                      <img :src="item.img" />
+                    </div>
+                  </td>
+                  <td class="red">{{item.cabinsname}}</td>
+                  <td>{{item.guests ? item.guests + '人' : ''}}</td>
+                  <td>{{item.floor}}</td>
+                  <td>{{item.area}}</td>
+                  <td>{{item.windowtype}}</td>
+                  <td class="red">详情 v</td>
+                </tr>
+              </table>
+              <!-- <div class="star-item">
+                <el-row type="flex">
+                  <el-col class="star-item-info" v-for="(item,index) in cabinsInfoList" :key="index">
+                    <div class="star-item-infoimg">
+                      <img :src="item.imgurl" />
+                    </div>
+                    <p class="info-title">{{item.foodname}}</p>
+                    <p>楼层：{{item.floor}} | 容纳：{{item.guests}} | 消费：免费</p>
+                    <p>{{item.description}}</p>
+                  </el-col>
+                </el-row>
+              </div> -->
+            </el-tab-pane>
+            <!-- 海上美食 -->
+            <el-tab-pane :label="'海上美食（' + foodInfoList.length + '）'" name="second">
               <div class="star-item">
                 <el-row type="flex">
-                  <el-col class="star-item-info" v-for="(item,index) in 3" :key="index">
-                    <div class="star-item-infoimg"><img src /></div>
-                    <p class="info-title">红房子西餐厅</p>
-                    <p>楼层：9 | 容纳：268 | 消费：免费</p>
-                    <p>红房子西餐厅为游客提供中式及西式套餐</p>
+                  <el-col class="star-item-info" v-for="(item,index) in foodInfoList" :key="index" v-if="index < 3">
+                    <div class="star-item-infoimg">
+                      <img :src="item.imgurl" />
+                    </div>
+                    <p class="info-title">{{item.foodname}}</p>
+                    <p class="info-tag">楼层：{{item.floor}} | 容纳：{{item.guests}}</p>
+                    <p class="info-desc">{{item.description}}</p>
                   </el-col>
                 </el-row>
               </div>
             </el-tab-pane>
-            <!-- 海上美食 -->
-            <el-tab-pane label="海上美食" name="second">配置管理</el-tab-pane>
             <!-- 船上娱乐 -->
-            <el-tab-pane label="船上娱乐" name="third">角色管理</el-tab-pane>
-            <!-- 邮轮服务 -->
-            <el-tab-pane label="邮轮服务" name="fourth">定时任务补偿</el-tab-pane>
+            <el-tab-pane :label="'船上娱乐（' + amusementInfoList.length + '）'" name="third">
+              <div class="star-item">
+                <el-row type="flex">
+                  <el-col class="star-item-info" v-for="(item,index) in amusementInfoList" :key="index" v-if="index < 3">
+                    <div class="star-item-infoimg">
+                      <img :src="item.imgurl" />
+                    </div>
+                    <p class="info-title">{{item.amusementname}}</p>
+                    <p class="info-tag">楼层：{{item.floor}} | 容纳：{{item.guests}}</p>
+                    <p class="info-desc">{{item.description}}</p>
+                  </el-col>
+                </el-row>
+              </div>
+            </el-tab-pane>
+            <!-- 邮轮购物 -->
+            <el-tab-pane :label="'邮轮购物（' + shopInfoList.length + '）'" name="fourth">
+              <div class="star-item">
+                <el-row type="flex">
+                  <el-col class="star-item-info" v-for="(item,index) in shopInfoList" :key="index" v-if="index < 3">
+                    <div class="star-item-infoimg">
+                      <img :src="item.imgurl" />
+                    </div>
+                    <p class="info-title">{{item.shopname}}</p>
+                    <p class="info-tag">楼层：{{item.floor}} | 容纳：{{item.guests}}</p>
+                    <p class="info-desc">{{item.description}}</p>
+                  </el-col>
+                </el-row>
+              </div>
+            </el-tab-pane>
           </el-tabs>
 
           
-          <el-menu :default-active="activeIndex" active-text-color="#ee6b03" mode="horizontal">
+          <!-- <el-menu :default-active="activeIndex" active-text-color="#ee6b03" mode="horizontal">
             <el-menu-item index="1">舱房介绍（4）</el-menu-item>
             <el-menu-item index="2">海上美食（11）</el-menu-item>
             <el-menu-item index="3">船上娱乐（22）</el-menu-item>
             <el-menu-item index="4">邮轮服务（1）</el-menu-item>
-          </el-menu>
+          </el-menu> -->
         </div>
         
       </div>
@@ -234,7 +299,7 @@ export default {
     return {
       list: [],
       searchVal: "",
-      activeIndex: 1,
+      activeName: 'first',
       infoTagList: [
         "产品特色",
         "行程介绍",
@@ -251,7 +316,6 @@ export default {
         "畅游日本，感受不一样的日本之旅，邂逅美丽海岛；",
         "畅游日本，感受不一样的日本之旅，邂逅美丽海岛。"
       ],
-      activeIndex: "2",
       priceInclude: [
         "领队服务费（厦门接站开始）",
         "行程中所示的陆地段游览、用车及景点门票（注明自费的除外）",
@@ -273,7 +337,15 @@ export default {
       // 日程
       dayList: [],
       // 邮轮基本信息
-      shipDetail: {}
+      shipDetail: {},
+      // 美食信息
+      foodInfoList: [],
+      // 娱乐信息
+      amusementInfoList: [],
+      // 购物信息
+      shopInfoList:[],
+      // 舱房信息
+      cabinsInfoList: []
     };
   },
   mounted() {
@@ -289,7 +361,16 @@ export default {
         params: paramsData
       }).then(function(res) {
         this.detail = res.body;
+        // 游轮详细信息
         this.getShipDetail(this.detail.shipid);
+        // 邮轮美食信息
+        this.getFoodInfoList(this.detail.shipid);
+        // 邮轮娱乐信息
+        this.getAmusementInfoList(this.detail.shipid);
+        // 邮轮购物信息
+        this.getShopInfoList(this.detail.shipid);
+        // 邮轮舱房信息
+        this.getCabinsInfoList(this.detail.shipid)
       });
     },
     // 获取详细---日程
@@ -308,6 +389,35 @@ export default {
       if(!shipid) return
       this.$http.get("/API/ship.ashx?command=GetBaseInfo&shipid="+parseInt(shipid)).then(function(res) {
         this.shipDetail = res.body;
+      });
+    },
+    // 获取邮轮美食
+    getFoodInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetFoodInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.foodInfoList = res.body;
+      });
+    },
+    // 获取邮轮娱乐
+    getAmusementInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetAmusementInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.amusementInfoList = res.body;
+      });
+      
+    },
+    // 获取邮轮购物
+    getShopInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetShopInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.shopInfoList = res.body;
+      });
+    },
+    // 获取邮轮仓房介绍
+    getCabinsInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetCabinsInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.cabinsInfoList = res.body;
       });
     }
   }
@@ -430,8 +540,16 @@ export default {
     .star-tag {
       margin-top: 50px;
       padding-bottom: 50px;
-      padding-left: 110px;
-      padding-right: 110px;
+      .el-tabs {
+        .el-tabs__header {
+          padding-left: 125px;
+        } 
+        .el-tabs__item{
+          margin-bottom: 10px;
+        }
+      }
+      // padding-left: 110px;
+      // padding-right: 110px;
       .el-menu {
         border-bottom: none;
         .el-menu-item {
@@ -461,14 +579,27 @@ export default {
           }
         }
         p {
-          padding-left: 20px;
+          padding:0 10px;
           color: #999999;
           font-size: 16px;
-          margin-bottom: 14px;
         }
         .info-title {
           font-size: 24px;
           color: #333333;
+          height: 50px;
+          line-height: 50px;
+          overflow: hidden;
+        }
+        .info-tag{
+          margin-top: 10px;
+          height: 20px;
+          overflow: hidden;
+        }
+        .info-desc{
+          margin: 10px 0;
+          height: 25px;
+          line-height:25px;
+          overflow: hidden;
         }
       }
     }

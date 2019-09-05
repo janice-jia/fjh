@@ -93,14 +93,14 @@
 
     <div class="container infoDetail">
       <!-- 舱房介绍 -->
-      <div class="detail detail-introduce">
+      <div class="detail detail-introduce fjh-tabs">
         <div class="detail-title">舱房介绍</div>
         <el-tabs v-model="activeName">
           <el-tab-pane :label="'内舱房\n4类'" name="first">内舱房</el-tab-pane>
           <el-tab-pane :label="'海景房\n7类'" name="second">海景房</el-tab-pane>
           <el-tab-pane :label="'阳台房\n1类'" name="third">阳台房</el-tab-pane>
           <el-tab-pane :label="'套房\n2类'" name="fourth">
-            <table style="width: 100%">
+            <table style="width: 100%" class="cangtable">
               <tr>
                 <th width="220">图片</th>
                 <th width="200">名称</th>
@@ -128,7 +128,7 @@
         </el-tabs>
       </div>
       <!-- 海上美食 -->
-      <div class="detail detail-food">
+      <div class="detail detail-food fjh-tabs">
         <div class="detail-title">海上美食</div>
         <el-tabs v-model="activeName2">
           <el-tab-pane :label="'自助餐厅\n2间'" name="first">自助餐厅</el-tab-pane>
@@ -150,7 +150,7 @@
         </el-tabs>
       </div>
       <!-- 邮轮玩乐 -->
-      <div class="detail detail-play">
+      <div class="detail detail-play fjh-tabs">
         <div class="detail-title">邮轮玩乐</div>
         <el-tabs v-model="activeName2">
           <el-tab-pane :label="'船上娱乐\n14个'" name="first">自助餐厅</el-tab-pane>
@@ -173,7 +173,7 @@
         </el-tabs>
       </div>
       <!-- 甲板导航 -->
-      <div class="detail detail-nav">
+      <div class="detail detail-nav fjh-tabs">
         <div class="detail-title">甲板导航</div>
         <el-tabs v-model="activeName3">
           <el-tab-pane label="5层" name="first">
@@ -434,59 +434,6 @@ export default {
       font-size: 36px;
       text-align: center;
     }
-    .el-tabs {
-      margin-top: 40px;
-      .el-tabs__header {
-        text-align: center;
-        padding-left: 250px;
-      }
-      .el-tabs__nav-wrap::after {
-        background: none;
-        width: 0;
-      }
-      .el-tabs__item {
-        font-size: 24px;
-        padding: 0 50px;
-        margin-bottom: 45px;
-        white-space: pre-line;
-      }
-      .is-active {
-        border: none;
-      }
-    }
-    table {
-      margin-top: 50px;
-      border-collapse: collapse;
-      color: #333333;
-      tr {
-        border-bottom: 1px solid #e5e5e5;
-        th {
-          font-size: 20px;
-          height: 40px;
-          line-height: 40px;
-          color: #999999;
-          text-align: left;
-          &:first-child {
-            padding-left: 40px;
-          }
-        }
-        td {
-          height: 170px;
-          font-size: 20px;
-          .image {
-            width: 200px;
-            height: 150px;
-            background-color: #ededed;
-            img {
-              max-width: 100%;
-            }
-          }
-          &.red {
-            color: #ee6b03;
-          }
-        }
-      }
-    }
   }
   .detail-introduce {
     padding-top: 60px;
@@ -697,4 +644,65 @@ export default {
     }
   }
 }
+
+// 公用start---------------------------------------
+// 重新定义tab样式
+.fjh-tabs{
+  .el-tabs {
+    margin-top: 40px;
+    .el-tabs__header {
+      text-align: center;
+      padding-left: 250px;
+    }
+    .el-tabs__nav-wrap::after {
+      background: none;
+      width: 0;
+    }
+    .el-tabs__item {
+      font-size: 24px;
+      padding: 0 50px;
+      margin-bottom: 45px;
+      white-space: pre-line;
+    }
+    .is-active {
+      border: none;
+    }
+  }
+}
+// 舱房table
+.cangtable {
+  margin-top: 50px;
+  border-collapse: collapse;
+  color: #333333;
+  tr {
+    border-bottom: 1px solid #e5e5e5;
+    th {
+      font-size: 20px;
+      height: 40px;
+      line-height: 40px;
+      color: #999999;
+      text-align: left;
+      &:first-child {
+        padding-left: 40px;
+      }
+    }
+    td {
+      height: 170px;
+      font-size: 20px;
+      .image {
+        width: 200px;
+        height: 150px;
+        background-color: #ededed;
+        img {
+          max-width: 100%;
+        }
+      }
+      &.red {
+        color: #ee6b03;
+      }
+    }
+  }
+}
+// 公用end-----------------------------------------
+
 </style>

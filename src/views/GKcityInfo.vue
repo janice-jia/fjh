@@ -10,11 +10,12 @@
           <el-row>
             <el-col :span="4">
               <div class="left">
-                塔林<span>Tallinn</span>
+                {{detail.portname}}
+                <!-- <span>Tallinn</span> -->
               </div>
             </el-col>
             <el-col :span="18">
-              <div class="center">
+              <!-- <div class="center">
                 <el-row type="flex" class="row-bg" justify="left">
                   <el-col :span="6">
                     <div class="tag-item">
@@ -32,43 +33,23 @@
                     </div>
                   </el-col>
                 </el-row>
-              </div>
+              </div> -->
             </el-col>
           </el-row>
         </div>
         
         <!-- 简介 -->
         <div class="info02">
-          塔林是800多年的历史的古城，也是欧洲面积最小的首都之一，1997年塔林古城被列入联合国世界遗产保护目录。塔林(Tallin)源于由“丹麦的”(Taani)和“城堡”(linna)，
-意为“丹麦的地堡”。1219年丹麦人最早在此建立城堡，1227年-1346年被丹麦人占领了一百多年。1917年前又叫“列韦里”此名来源于丹麦语,意为“沙洲”或“暗礁”。
-作为中世纪汉萨同盟的贸易城市，曾一度被德国贵族所主宰，然后便是苏俄的入侵。1991年爱沙尼亚恢复独立后重获新生，塔林亦成为首都。
+          {{detail.description}}
         </div>
       </div>
     </div>
 
     <div class="container infoCon">
         <div class="info-tag">
-          <el-row type="flex" class="row-bg" justify="center">
+          <el-row type="flex" class="row-bg" justify="start">
             <el-col :span="3">
-              <div class="info-tag-item">塔林老城</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="info-tag-item">塔林老城</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="info-tag-item">塔林老城</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="info-tag-item">塔林老城</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="info-tag-item">塔林老城</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="info-tag-item">塔林老城</div>
-            </el-col>
-            <el-col :span="3">
-              <div class="info-tag-item">邮轮点评</div>
+              <div class="info-tag-item">{{detail.portname}}</div>
             </el-col>
           </el-row>
         </div>
@@ -78,8 +59,8 @@
             <!-- 幻灯片 -->
             <template>
               <el-carousel :interval="5000" arrow="always">
-                <el-carousel-item v-for="item in 4" :key="item">
-                  <h3>{{ item }}</h3>
+                <el-carousel-item v-for="item in detail.imglist" :key="item">
+                  <img :src="item.imgurl" alt="">
                 </el-carousel-item>
               </el-carousel>
             </template>
@@ -113,17 +94,17 @@ export default {
   },
   data() {
     return {
-      detail: [],
+      detail: {},
       searchVal: '',
       activeIndex: 1,
     }
   },
   mounted(){
-    this.getList()
+    this.getDetail()
   },
   methods: {
-    getList(pageval){
-      this.list = []
+    getDetail(pageval){
+      this.detail = {}
       var paramsData = {}
       if (this.$route.params.id) paramsData.portid = this.$route.params.id
       this.$http.get('/API/port.ashx?command=GetPortDetail', {params: paramsData}).then(function (res) {
@@ -192,6 +173,7 @@ export default {
       background: #ffffff;
       height: 100px;
       line-height: 100px;
+      padding: 0 30px;
       .info-tag-item{
         font-size: 28px;
         font-weight: normal;
@@ -210,6 +192,9 @@ export default {
   .cityinfo-citys-l{
     float: left;
     width: 730px;
+    img{
+      max-width: 100%;
+    }
   }
   .cityinfo-citys-r{
     float: right;

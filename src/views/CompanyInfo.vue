@@ -78,15 +78,15 @@
           <el-col :span="3">
             <div class="info-tag-item">甲板导航</div>
           </el-col>
-          <el-col :span="3">
+          <!-- <el-col :span="3">
             <div class="info-tag-item">常见问题</div>
-          </el-col>
+          </el-col> -->
           <el-col :span="3">
             <div class="info-tag-item">精选游记</div>
           </el-col>
-          <el-col :span="3">
+          <!-- <el-col :span="3">
             <div class="info-tag-item">邮轮点评</div>
-          </el-col>
+          </el-col> -->
         </el-row>
       </div>
     </div>
@@ -110,17 +110,17 @@
                 <th>窗型</th>
                 <th></th>
               </tr>
-              <tr v-for="(item,index) in tableData" :key="index">
+              <tr v-for="(item,index) in cabinsInfoList" :key="index">
                 <td>
                   <div class="image">
                     <img :src="item.img" />
                   </div>
                 </td>
-                <td class="red">{{item.name}}</td>
-                <td>{{item.container}}</td>
+                <td class="red">{{item.cabinsname}}</td>
+                <td>{{item.guests ? item.guests + '人' : ''}}</td>
                 <td>{{item.floor}}</td>
                 <td>{{item.area}}</td>
-                <td>{{item.window}}</td>
+                <td>{{item.windowtype}}</td>
                 <td class="red">详情 v</td>
               </tr>
             </table>
@@ -135,13 +135,13 @@
           <el-tab-pane :label="'特色餐饮\n7间'" name="second">
             <div class="detail-item">
               <el-row type="flex">
-                <el-col class="item-info" v-for="(item,index) in 3" :key="index">
+                <el-col class="item-info" v-for="(item,index) in foodInfoList" :key="index" v-if="index < 3">
                   <div class="image">
-                    <img src />
+                    <img :src="item.imgurl" />
                   </div>
-                  <p class="info-title">红房子西餐厅</p>
-                  <p>楼层：9 | 容纳：268 | 消费：免费</p>
-                  <p>红房子西餐厅为游客提供中式及西式套餐</p>
+                  <p class="info-title">{{item.foodname}}</p>
+                  <p class="info-tag">楼层：{{item.floor}} | 容纳：{{item.guests}}</p>
+                  <p class="info-desc">{{item.description}}</p>
                 </el-col>
               </el-row>
             </div>
@@ -157,13 +157,13 @@
           <el-tab-pane :label="'运动健身\n5个'" name="second">
             <div class="detail-item">
               <el-row type="flex">
-                <el-col class="item-info" v-for="(item,index) in 3" :key="index">
+                <el-col class="item-info" v-for="(item,index) in amusementInfoList" :key="index" v-if="index < 3">
                   <div class="image">
-                    <img src />
+                    <img :src="item.imgurl" />
                   </div>
-                  <p class="info-title">按摩池</p>
-                  <p>楼层：9 | 容纳：268 | 消费：免费</p>
-                  <p>红房子西餐厅为游客提供中式及西式套餐</p>
+                  <p class="info-title">{{item.amusementname}}</p>
+                  <p class="info-tag">楼层：{{item.floor}} | 容纳：{{item.guests}}</p>
+                  <p class="info-desc">{{item.description}}</p>
                 </el-col>
               </el-row>
             </div>
@@ -179,28 +179,28 @@
           <el-tab-pane label="5层" name="first">
             <div class="detail-detail">
               <div class="image">
-                <img src />
+                <img :src="deckInfoList[0].imgurl"/>
               </div>
               <div class="info">
                 <div class="info-item">
                   <div class="title">船舱类型</div>
                   <div class="detail">
                     <div class="detail-item">
-                      <p>内舱房</p>
+                      <p>{{deckInfoList[0].cabins}}</p>
                       <div class="room">DD</div>
                     </div>
-                    <div class="detail-item">
+                    <!-- <div class="detail-item">
                       <p>海景房</p>
                       <div class="room">CF</div>
                       <div class="room">CD</div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <div class="info-item">
                   <div class="title">邮轮玩乐</div>
                   <div class="detail">
                     <div class="detail-item">
-                      <p>无</p>
+                      <p>{{deckInfoList[0].amusement}}</p>
                     </div>
                   </div>
                 </div>
@@ -226,7 +226,7 @@
         </el-tabs>
       </div>
       <!-- 常见问题 -->
-      <div class="detail detail-problem">
+      <!-- <div class="detail detail-problem">
         <div class="detail-title">常见问题</div>
         <div class="content">
           <div class="item" v-for="(item,index) in 3" :key="index">
@@ -242,7 +242,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- 精选游记 -->
       <div class="detail detail-select">
         <div class="detail-title">精选游记</div>
@@ -315,7 +315,9 @@ export default {
       // 购物信息
       shopInfoList:[],
       // 舱房信息
-      cabinsInfoList: []
+      cabinsInfoList: [],
+      // 加班导航信息
+      deckInfoList: []
     };
   },
   mounted() {
@@ -329,7 +331,9 @@ export default {
     // 邮轮购物信息
     this.getShopInfoList(this.$route.params.id);
     // 邮轮舱房信息
-    this.getCabinsInfoList(this.$route.params.id)
+    this.getCabinsInfoList(this.$route.params.id);
+    // 邮轮甲板导航信息
+    this.getDeckInfoList(this.$route.params.id);
   },
   methods: {
     getBaseInfo(pageval) {
@@ -374,6 +378,13 @@ export default {
       if(!shipid) return
       this.$http.get("/API/ship.ashx?command=GetCabinsInfoList&shipid="+parseInt(shipid)).then(function(res) {
         this.cabinsInfoList = res.body;
+      });
+    },
+    // 加班导航
+    getDeckInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetDeckInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.deckInfoList = res.body;
       });
     }
   }
@@ -520,9 +531,22 @@ export default {
           margin-bottom: 14px;
         }
         .info-title {
-          margin-top: 20px;
           font-size: 24px;
           color: #333333;
+          height: 50px;
+          line-height: 50px;
+          overflow: hidden;
+        }
+        .info-tag{
+          margin-top: 10px;
+          height: 20px;
+          overflow: hidden;
+        }
+        .info-desc{
+          margin: 10px 0;
+          height: 25px;
+          line-height:25px;
+          overflow: hidden;
         }
       }
     }

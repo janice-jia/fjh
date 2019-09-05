@@ -16,10 +16,10 @@
             <el-col :span="8">
               <div class="center">
                 <p class="cntit">
-                  双子星号
+                  {{baseInfo.shipname}}
                   <span>简介></span>
                 </p>
-                <p class="entit">Superstar Gemini</p>
+                <!-- <p class="entit">Superstar Gemini</p> -->
               </div>
             </el-col>
             <el-col :span="8">
@@ -38,25 +38,25 @@
         <div class="info02 comInfo">
           <el-row type="flex" class="row-bg" justify="center">
             <el-col :span="3">
-              <div class="tag-item">吨位：asass</div>
+              <div class="tag-item">吨位：{{baseInfo.tonnage}}</div>
             </el-col>
             <el-col :span="3">
-              <div class="tag-item">载客：asass</div>
+              <div class="tag-item">载客：{{baseInfo.guests}}</div>
             </el-col>
             <el-col :span="3">
-              <div class="tag-item">翻修：asass</div>
+              <div class="tag-item">翻修：{{baseInfo.overhaul}}</div>
             </el-col>
             <el-col :span="3">
-              <div class="tag-item">楼层：asass</div>
+              <div class="tag-item">楼层：{{baseInfo.floor}}</div>
             </el-col>
             <el-col :span="3">
-              <div class="tag-item">长度：asass</div>
+              <div class="tag-item">长度：{{baseInfo.length}}</div>
             </el-col>
             <el-col :span="3">
-              <div class="tag-item">宽度：asass</div>
+              <div class="tag-item">宽度：{{baseInfo.width}}</div>
             </el-col>
             <el-col :span="3">
-              <div class="tag-item">船速：asass</div>
+              <div class="tag-item">船速：{{baseInfo.speed}}</div>
             </el-col>
           </el-row>
         </div>
@@ -282,6 +282,7 @@ export default {
       list: [],
       searchVal: "",
       activeIndex: 1,
+      baseInfo: {},
       activeName: "fourth",
       activeName2: "second",
       activeName3: "first",
@@ -302,29 +303,78 @@ export default {
           area: "30-35m²",
           window: "方窗"
         }
-      ]
+      ],
+      // 日程
+      dayList: [],
+      // 邮轮基本信息
+      shipDetail: {},
+      // 美食信息
+      foodInfoList: [],
+      // 娱乐信息
+      amusementInfoList: [],
+      // 购物信息
+      shopInfoList:[],
+      // 舱房信息
+      cabinsInfoList: []
     };
   },
   mounted() {
-    this.getList();
+    this.getBaseInfo();
+    // 游轮详细信息
+    this.getShipDetail(this.$route.params.id);
+    // 邮轮美食信息
+    this.getFoodInfoList(this.$route.params.id);
+    // 邮轮娱乐信息
+    this.getAmusementInfoList(this.$route.params.id);
+    // 邮轮购物信息
+    this.getShopInfoList(this.$route.params.id);
+    // 邮轮舱房信息
+    this.getCabinsInfoList(this.$route.params.id)
   },
   methods: {
-    getList(pageval) {
-      this.list = [];
-      if (pageval) this.pageInfo.page = pageval;
-      var paramsData = {
-        page: this.pageInfo.page,
-        limit: this.pageInfo.limit
-      };
-      if (this.searchVal) paramsData.shipcompany = this.searchVal;
-      this.$http
-        .get("/API/shipcompany.ashx?command=GetShipCompanyPager", {
-          params: paramsData
-        })
-        .then(function(res) {
-          this.list = res.body.list;
-          this.pageInfo.total = parseInt(res.body.count);
-        });
+    getBaseInfo(pageval) {
+      this.baseInfo = [];
+      var paramsData = {};
+      if (this.$route.params.id) paramsData.shipid = this.$route.params.id;
+      this.$http.get("/API/ship.ashx?command=GetBaseInfo", {params: paramsData}).then(function(res) {
+        this.baseInfo = res.body;
+      });
+    },
+    // 获取邮轮基本信息
+    getShipDetail(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetBaseInfo&shipid="+parseInt(shipid)).then(function(res) {
+        this.shipDetail = res.body;
+      });
+    },
+    // 获取邮轮美食
+    getFoodInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetFoodInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.foodInfoList = res.body;
+      });
+    },
+    // 获取邮轮娱乐
+    getAmusementInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetAmusementInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.amusementInfoList = res.body;
+      });
+      
+    },
+    // 获取邮轮购物
+    getShopInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetShopInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.shopInfoList = res.body;
+      });
+    },
+    // 获取邮轮仓房介绍
+    getCabinsInfoList(shipid){
+      if(!shipid) return
+      this.$http.get("/API/ship.ashx?command=GetCabinsInfoList&shipid="+parseInt(shipid)).then(function(res) {
+        this.cabinsInfoList = res.body;
+      });
     }
   }
 };

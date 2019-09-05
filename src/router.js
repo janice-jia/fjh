@@ -14,6 +14,7 @@ import BKcruiseInfo from './views/BKcruiseInfo.vue'
 
 
 import Travelog from './views/Travelog.vue'
+import TravelogInfo from './views/TravelogInfo.vue'
 import Airline from './views/Airline.vue'
 import AirLineInfo from './views/AirLineInfo.vue'
 Vue.use(Router)
@@ -99,6 +100,12 @@ export default new Router({
             name: 'travelog',
             component: Travelog
         },
+         // 游轮游记
+         {
+            path: '/traveloginfo:id',
+            name: 'traveloginfo',
+            component: TravelogInfo
+         },
         // 游轮航线
         {
             path: '/airline',

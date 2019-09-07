@@ -100,15 +100,15 @@ export default new Router({
             name: 'travelog',
             component: Travelog
         },
-         // 游轮游记
-         {
-            path: '/traveloginfo:id',
-            name: 'traveloginfo',
-            component: TravelogInfo
-         },
+        // 游轮游记详细
+        {
+        path: '/traveloginfo:id',
+        name: 'traveloginfo',
+        component: TravelogInfo
+        },
         // 游轮航线
         {
-            path: '/airline',
+            path: '/airline:searchVal?',
             name: 'airline',
             component: Airline
         },

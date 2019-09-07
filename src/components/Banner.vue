@@ -17,9 +17,11 @@
                 <el-table :data="cityList">
                   <el-table-column width="80" property="areaname" label="出发城市"></el-table-column>
                   <el-table-column width="350">
-                    <span @click="showSearchVal('isActiveCh', group.areaname)" v-for="group in cityList" :key="group.areaname">
-                      {{group.areaname}}
-                    </span>
+                    <template slot-scope="scope">
+                      <span @click="showSearchVal('isActiveCh', group.portname)" v-for="group in scope.row.child" :key="group.id">
+                        {{group.portname}}
+                      </span>
+                    </template>
                   </el-table-column>
                 </el-table>
               </el-popover>
@@ -32,16 +34,29 @@
               <el-popover
                 ref="popover2"
                 placement="bottom-start"
-                width="450"
+                width="200"
                 trigger="click"
                 v-model="isActiveHX">
-                <el-table :data="cityList">
-                  <el-table-column width="80" property="areaname" label="出发航线"></el-table-column>
-                  <el-table-column width="350">
-                    <span @click="showSearchVal('isActiveHX', group.areaname)" v-for="group in cityList" :key="group.areaname">
-                      {{group.areaname}}
-                    </span>
+                <el-table :data="cityList" type="index">
+                  <el-table-column
+                    label="出发航线"
+                    width="180">
+                  <template slot-scope="scope">
+                        <span style="width:90%; text-align:center;" @click="showSearchVal('isActiveHX', scope.row.areaname)" >
+                          {{scope.row.areaname}}
+                        </span>
+                      </template>
                   </el-table-column>
+                  
+                  <!-- <el-table-column width="80" property="areaname" label="出发航线"></el-table-column>
+                  <el-table-column width="350">
+                    <template slot-scope="scope">
+                      <span @click="showSearchVal('isActiveHX', group.portname)" v-for="group in scope.row.child" :key="group.id">
+                        {{group.portname}}
+                      </span>
+                    </template>
+                  </el-table-column>
+                   -->
                 </el-table>
               </el-popover>
             </div>
@@ -94,9 +109,11 @@
                 <el-table :data="cityList">
                   <el-table-column width="80" property="areaname" label="目的地"></el-table-column>
                   <el-table-column width="350">
-                    <span @click="showSearchVal('isActiveMD', group.areaname)" v-for="group in cityList" :key="group.areaname">
-                      {{group.areaname}}
-                    </span>
+                    <template slot-scope="scope">
+                      <span @click="showSearchVal('isActiveMD', group.portname)" v-for="group in scope.row.child" :key="group.id">
+                        {{group.portname}}
+                      </span>
+                    </template>
                   </el-table-column>
                 </el-table>
               </el-popover>
@@ -118,10 +135,10 @@
           </el-col>
           <el-col :span="4">
             <div class="ylInput">
-              <el-input clear="" v-model="search.user" placeholder="请输入邮轮名称"></el-input>
-              <router-link to="comingSoon" target="_blank">
+              <el-input clear="" v-model="searchval" placeholder="请输入邮轮名称"></el-input>
+              <a href="javascript:;" @click="handSearch()">
                 <img class="searchBtn" src="../assets/img/header/search.png" alt="">
-              </router-link>
+              </a>
             </div>
           </el-col>
         </el-row>
@@ -151,7 +168,7 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       city:[1,2,3],
-      search:{},
+      searchval: '',
       cityList: [],
       isActiveCh:false,
       isActiveHX:false,
@@ -168,12 +185,20 @@ export default {
     this.getCityList()
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    handSearch() {
+      var searchVal = {}
+      searchVal.departureport = (this.isActiveChName == '出发城市' ? '' : this.isActiveChName)
+      searchVal.area = (this.isActiveHXName == '出发航线' ? '' : this.isActiveHXName)
+      searchVal.shipcompany = (this.isActiveYLName == '热门游轮' ? '' : this.isActiveYLName)
+      searchVal.arrivalport = (this.isActiveMDName == '目的地' ? '' : this.isActiveMDName)
+      searchVal.searchval = this.searchval
+      searchVal = JSON.stringify(searchVal)
+      // console.info('searchval====',searchval)
+      this.$router.push({path:'airline', query:{searchVal: searchVal}})
     },
     getCityList(){
       this.$http.get('/API/index.ashx?command=GetAreaCity').then(function (res) {
-        console.info('res.body===', res.body)
+        // console.info('res.body===', res.body)
         this.cityList = res.body.list
       })
     },
@@ -297,7 +322,7 @@ export default {
   font-size: #999999;
   span{
     display: inline-block;
-    width: 60px;
+    width: 105px;
     font-size: 12px;
     color: #333333;
     cursor: pointer;

@@ -4,17 +4,17 @@
       <HeaderMenu activeIndex="3"></HeaderMenu>
       <img src="../assets/img/banner.jpg" alt />
       <div class="com-search container">
-        <el-input placeholder="如：丽星邮轮" v-model="searchVal"></el-input>
+        <el-input placeholder="如：邮轮名称，港口城市" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt />
       </div>
     </div>
     <div class="container">
       <div class="airline-filter">
-        <!-- <div class="airline-filter-count">
-          <p>
+        <div class="airline-filter-count" v-if="tags.length>0">
+          <!-- <p>
             共
             <span>{{ airlineCount }}</span>个产品
-          </p>
+          </p> -->
           <el-tag
             v-for="tag in tags"
             :key="tag"
@@ -23,27 +23,48 @@
             type="info"
             color="#ffffff"
           >{{tag}}</el-tag>
-        </div> -->
+          <span @click="clearAll()">清除全部</span>
+        </div>
         <div class="airline-filter-city content">
           <p class="filter-title">出发城市：</p>
           <div class="filter-detail">
-            <p class="hot">热门港口</p>
-            <p v-for="item in hotCity" :key="item">{{ item }}</p>
+            <!-- <p class="hot">热门港口</p> -->
+            <!-- <p v-for="(item, index) in hotCity" :key="index">{{ item }}</p> -->
+            <p v-for="(item, index) in cityList" :key="index">
+              <span>
+                {{ item.areaname }}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="airline-filter-city content">
+          <p class="filter-title">目的地：</p>
+          <div class="filter-detail">
+            <!-- <p class="hot">热门港口</p> -->
+            <!-- <p v-for="(item, index) in hotCity" :key="index">{{ item }}</p> -->
+            <p v-for="(item, index) in cityList" :key="index">{{ item.areaname }}航线</p>
           </div>
         </div>
         <!-- <div class="airline-filter-city content"></div> -->
         <div class="airline-filter-line content">
           <p class="filter-title">游轮航线：</p>
           <div class="filter-detail">
-            <p v-for="item in lines" :key="item">{{ item }}</p>
+            <p class="hoverBg" v-for="(item, index) in cityList" :key="index">
+              <span v-bind:class="{ hoverBg: (searchParams.area== item.areaname)}">
+                {{ item.areaname }}航线
+              </span>
+            </p>
           </div>
         </div>
         <div class="airline-filter-logo content">
           <p class="filter-title">游轮品牌：</p>
           <div class="filter-detail">
-            <p v-for="item in logo" :key="item">{{ item }}</p>
+            <p v-for="(item, index) in lineList" :key="index">
+              <span v-bind:class="{ hoverBg: (searchParams.shipcompany== item.shipcompany)}">{{ item.shipcompany }}</span>
+            </p>
           </div>
         </div>
+        <div style="clear: both"></div>
         <!-- 行程天数 -->
         <!-- <div class="airline-filter-days content">
           <p class="filter-title">行程天数：</p>
@@ -60,6 +81,14 @@
           </div>
         </div> -->
       </div>
+      <!-- 搜索内容为空 -->
+      <div class="kong" v-if="list.length===0">
+        <img src="../assets/img/kong.svg" alt="">
+        <p>
+          暂无内容
+        </p>
+      </div>
+
       <div class="airline-list">
         <div class="airline-item" v-for="item in list" :key="item.id">
           <router-link :to="{ name: 'airlineinfo', params: { id: item.id }}">
@@ -141,6 +170,7 @@ export default {
     return {
       list: [],
       searchVal: "",
+      searchParams: {},
       activeIndex: 1,
       pageInfo: {
         page: 1,
@@ -149,26 +179,9 @@ export default {
       },
       airlineImg: airlineImg,
       airlineCount: 474,
-      tags: ["标签：上海"],
-      hotCity: ["香港", "上海", "香港", "上海", "香港", "上海", "香港", "上海"],
-      lines: [
-        "日本航线",
-        "东南亚航线",
-        "港澳台航线",
-        "阿拉斯加航线",
-        "日本航线",
-        "东南亚航线",
-        "港澳台航线",
-        "阿拉斯加航线"
-      ],
-      logo: [
-        "皇家加勒比国际航线",
-        "歌诗达邮轮",
-        "公主邮轮",
-        "皇家加勒比国际航线",
-        "歌诗达邮轮",
-        "公主邮轮"
-      ],
+      tags: [],
+      cityList: [],
+      lineList: [],
       days: [
         "1~3天",
         "4~6天",
@@ -182,17 +195,44 @@ export default {
     };
   },
   mounted() {
-    this.getList();
+    this.getPPnav();
+    this.getCityList()
+    this.setSearch();
   },
   methods: {
+    setSearch(){
+      // 首页带过来的查询条件设置选中
+      // console.info('this.$route====', this.$route)
+      if(!this.$route.query.searchVal){
+        this.getList();
+      }else{
+        this.tags = [];
+        let searchVal = JSON.parse(this.$route.query.searchVal)
+        this.searchVal = searchVal.searchval
+        this.searchParams = searchVal
+
+        if(this.searchParams.departureport)
+          this.tags.push('出发城市：'+this.searchParams.departureport)
+        if(this.searchParams.arrivalport)
+          this.tags.push('目的地：'+this.searchParams.arrivalport)
+        if(this.searchParams.area)
+          this.tags.push('游轮航线：'+this.searchParams.area)
+        if(this.searchParams.shipcompany)
+          this.tags.push('游轮品牌：'+this.searchParams.shipcompany)
+        this.getList();
+      }
+    },
+    getCityList(){
+      this.$http.get('/API/index.ashx?command=GetAreaCity').then(function (res) {
+        // console.info('res.body===', res.body)
+        this.cityList = res.body.list
+      })
+    },
     getList(pageval) {
       this.list = [];
       if (pageval) this.pageInfo.page = pageval;
-      var paramsData = {
-        page: this.pageInfo.page,
-        limit: this.pageInfo.limit
-      };
-      if (this.searchVal) paramsData.shipcompany = this.searchVal;
+      // 搜索参数
+      var paramsData = this.getSearchParams()
       this.$http
         .get("/API/itinerary.ashx?command=GetItineraryPager", {
           params: paramsData
@@ -201,6 +241,34 @@ export default {
           this.list = res.body.list;
           this.pageInfo.total = parseInt(res.body.count);
         });
+    },
+    // 获取参数
+    getSearchParams(){
+      var paramsData = {
+        page: this.pageInfo.page,
+        limit: this.pageInfo.limit
+      };
+      if (this.searchVal) 
+        paramsData.keys = this.searchVal;
+      // 出发城市
+      if(this.searchParams.departureport)
+        paramsData.departureport = this.searchParams.departureport;
+      // 目的地
+      if(this.searchParams.arrivalport)
+        paramsData.arrivalport = this.searchParams.arrivalport;
+      // 游轮航线
+      if(this.searchParams.area)
+        paramsData.area = this.searchParams.area;
+      // 游轮品牌
+      if(this.searchParams.shipcompany)
+        paramsData.shipcompany = this.searchParams.shipcompany;
+      return paramsData
+    },
+    // 清空全部
+    clearAll(){
+      this.tags = [];
+      this.searchParams = {};
+      this.getList()
     },
     // 标签关闭
     handleClose(tag) {
@@ -215,7 +283,13 @@ export default {
     },
     currentPage() {
       console.info(11);
-    }
+    },
+    // 邮轮品牌
+    getPPnav(){
+      this.$http.get('/API/index.ashx?command=GetShipCompany').then(function (res) {
+        this.lineList = res.body
+      })
+    },
   }
 };
 </script>
@@ -243,23 +317,32 @@ export default {
   & .content {
     margin-left: 30px;
     margin-right: 30px;
-    height: 50px;
+    min-height: 50px;
     line-height: 50px;
     border-bottom: 1px solid #e5e5e5;
     & .filter-title {
-      display: inline-block;
+      // display: inline-block;
       font-size: 14px;
       color: #333333;
       font-weight: 700;
+      width: 80px;
+      float: left;
     }
     & .filter-detail {
-      display: inline-block;
+      width: 1000px;
+      float: left;
+      // display: inline-block;
       margin-left: 40px;
       font-size: 14px;
       color: #333333;
       & p {
         display: inline-block;
         margin-right: 40px;
+        .hoverBg{
+          background: #ee6b03;
+          color: #ffffff;
+          padding: 1px 5px;
+        }
       }
       & .hot {
         color: #999999;

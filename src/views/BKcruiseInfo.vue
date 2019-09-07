@@ -1,7 +1,7 @@
 <template>
   <div class="bkcruiseinfo">
     <div class="bkcruiseinfo-banner">
-      <HeaderMenu activeIndex="6"></HeaderMenu>
+      <HeaderMenu activeIndex="5"></HeaderMenu>
       <img src="../assets/img/bkcruiseinfo.jpg" alt=""/>
       
       <div class="com-page-info">
@@ -24,15 +24,15 @@
       </div>
 
 
-      <div class="next">
+      <!-- <div class="next">
         下一篇：<router-link to="comingSoon" target="_blank">船上有儿童托管中心吗？是否免费？</router-link>
-      </div>
-      <div class="youyong">
+      </div> -->
+      <!-- <div class="youyong">
         <button>
           <span>有用{{detail.consumption}}</span>
         </button>
         <p>如果本文对你有帮助,请点击"有用"</p>
-      </div>
+      </div> -->
       <div style="clear:both">&nbsp;</div>
     </div>
   </div>

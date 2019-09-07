@@ -12,6 +12,17 @@
       </div>
     </div>
     <div class="container">
+      <!-- 搜索内容为空 -->
+      <div class="kong" v-if="list.length===0">
+        <img src="../assets/img/kong.svg" alt="">
+        <p v-if="searchVal">
+          您搜索的"{{searchVal}}"暂无内容
+        </p>
+        <p v-if="!searchVal">
+          暂无内容
+        </p>
+      </div>
+
       <div class="gkCityItem" v-for="(item, index) in list" :key="item.id">
         <div style="clear:both"></div>
         <!-- item结构1 -->

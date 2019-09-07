@@ -7,10 +7,10 @@
       <div class="com-page-info">
         <!-- 标题，，， -->
         <div class="left">
-          <div class="info01">成都今夜请将我遗忘</div>
+          <div class="info01">{{detail.articletitle}}</div>
 
           <!-- 时间 -->
-          <div class="info02">2019.08.27</div>
+          <div class="info02">{{detail.createdate}}</div>
           <div class="tag">
             <div class="toutiao">头条</div>
             <div class="jinghua">精华</div>
@@ -26,7 +26,7 @@
               </el-col>
               <el-col :span="6">
                 <img src="../assets/img/yjicon02.png" alt />
-                <span>喜欢22</span>
+                <span>喜欢{{detail.consumption}}</span>
               </el-col>
               <el-col :span="6">
                 <img src="../assets/img/yjicon03.png" alt />
@@ -42,20 +42,22 @@
             <el-row :gutter="20">
               <el-col :span="13">
               <img src="../assets/img/yjicon05.png" alt />
-              <span>天数：11天</span></el-col>
+              <span>天数：{{detail.daycount}}天</span></el-col>
               <el-col :span="11">
               <img src="../assets/img/yjicon06.png" alt />
-              <span>时间：8月</span></el-col>
+              <span>时间：{{detail.travledate}}</span></el-col>
             </el-row>
           </div>
           <div class="with">
             <el-row :gutter="20">
               <el-col :span="13">
-              <img src="../assets/img/yjicon07.png" alt />
-              <span>人均：250000元</span></el-col>
-              <el-col :span="11">
-              <img src="../assets/img/yjicon08.png" alt />
-              <span>和谁：和朋友</span></el-col>
+                <img src="../assets/img/yjicon07.png" alt />
+                <span>人均：250000元</span>
+              </el-col>
+              <!-- <el-col :span="11">
+                <img src="../assets/img/yjicon08.png" alt />
+                <span>和谁：和朋友</span>
+              </el-col> -->
             </el-row>
           </div>
         </div>
@@ -64,57 +66,18 @@
 
     <div class="container infoCon">
       <div class="infoCon-01">
-        <p>写在前面的话</p>
+        <p>{{detail.articletitle}}</p>
       </div>
 
-      <div class="infoCon-02">
-        <p>
-          在邮轮上，即使是不占床的婴儿也需要计人头，因为船上的房间数与救生舱可以承载的总人数是成正比的，双人房只能
-          入住两个人，多了一个婴儿就需要入住三四人房或家庭房。
-        </p>
-        <p>
-          这类房型一般会以沙发床（折叠好是沙发，打开后是床）、上格床、上下铺等形式容纳第三、四人。一般三人房/家庭
-          房会有同行第三、第四人的优惠，会比订两间双人房划算很多。
-        </p>
-        <p>
-          这类房型一般会以沙发床（折叠好是沙发，打开后是床）、上格床、上下铺等形式容纳第三、四人。一般三人房/家庭
-          房会有同行第三、第四人的优惠，会比订两间双人房划算很多。
-        </p>
-        <p>
-          内舱、海景、阳台都会有一定比例的三四人房/家庭房，可以根据自己的预算选择。暑期是家庭出游的高峰，家庭房型
-          也非常抢手，一定要及早预订。
-        </p>
-        <img src="../assets/img/bkcruiseinfo01.jpg" alt />
+      <div class="infoCon-02" v-html="detail.articlecontent">
       </div>
-      <div class="infoCon-01">
-        <p>关于成都</p>
-      </div>
-
-      <div class="infoCon-02">
-        <p>
-          如果阖家出行且预算允许，套房是最佳选择。套房较一般房间外除了更豪华、面积更大之外，还会有一些特权，例如有
-          登船快速通道、离船快速通道、专享用餐区域等礼遇，这样老人小孩都能享受套房礼遇，上下船、吃饭，全都有VIP特
-          权，无须排队。
-        </p>
-        <p>
-          套房中的“家庭套房”是最适合一家入住的，一般5人起订，最多可住8-10人，布局类似我们的两居，且入住的人越多，
-          每个人的均价越低，有时甚至能比双人阳台房的人均价更便宜，正因如此，也非常抢手，很难预订。
-        </p>
-        <img src="../assets/img/bkcruiseinfo02.jpg" alt />
-        <img src="../assets/img/bkcruiseinfo02.jpg" alt />
-        <p>
-          “连通房”也是一家出行的最佳选择。连通房指的是2-3间间相邻房间，内有连通门可以打开。以海洋量子号上的三代
-          同堂连通房为例：由标准套房、阳台房及一间单人内舱房组成；三种房型被玄关连通，5人起订，至多能容纳10人。内
-          含三间卧室、三间浴室、一个连通阳台，即有私人空间，又能三代同堂。
-        </p>
-      </div>
-
       <div class="theEnd">~THE END～</div>
     </div>
   </div>
 </template>
 <script>
 import HeaderMenu from "../components/HeaderMenu.vue";
+let Base64 = require('js-base64').Base64
 export default {
   name: "ravelog",
   components: {
@@ -122,27 +85,26 @@ export default {
   },
   data() {
     return {
-      list: [],
+      detail: {},
       searchVal: "",
       activeIndex: 1
     };
   },
   mounted() {
-    this.getList();
+    this.getDetail();
   },
   methods: {
-    getList(pageval) {
-      this.list = [];
-      if (pageval) this.pageInfo.page = pageval;
+    getDetail(pageval) {
+      this.detail = {};
       var paramsData = {};
-      if (this.searchVal) paramsData.shipcompany = this.searchVal;
+      if (this.$route.params.id) paramsData.articleid = this.$route.params.id;
       this.$http
-        .get("/API/shipcompany.ashx?command=GetShipCompanyPager", {
+        .get("/API/article.ashx?command=GetArticleDetail", {
           params: paramsData
         })
         .then(function(res) {
-          this.list = res.body.list;
-          this.pageInfo.total = parseInt(res.body.count);
+          this.detail = res.body;
+          if(this.detail.articlecontent) this.detail.articlecontent= Base64.decode(this.detail.articlecontent)
         });
     }
   }
@@ -193,7 +155,7 @@ export default {
       position: absolute;
       right: 120px;
       top: 30px;
-      width: 30%;
+      width: 35%;
       .like {
         font-size: 14px;
         margin-bottom: 30px;

@@ -10,6 +10,17 @@
       </div>
     </div>
     <div class="container">
+
+      <!-- 搜索内容为空 -->
+      <div class="kong" v-if="list.length===0">
+        <img src="../assets/img/kong.svg" alt="">
+        <p v-if="searchVal">
+          您搜索的"{{searchVal}}"暂无内容
+        </p>
+        <p v-if="!searchVal">
+          暂无内容
+        </p>
+      </div>
       <!-- 过滤选项 start -->
       <!-- <div class="travelog-filter">
         <el-row type="flex" justify="space-around">
@@ -55,7 +66,7 @@
       </div>
       <!-- 游记 item end -->
       <!-- 分页 start -->
-      <div class="page">
+      <div class="page" v-if="list.length > 0">
         <div class="block">
           <el-pagination
             background

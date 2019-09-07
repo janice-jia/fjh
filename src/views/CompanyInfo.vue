@@ -95,11 +95,9 @@
       <!-- 舱房介绍 -->
       <div class="detail detail-introduce fjh-tabs">
         <div class="detail-title">舱房介绍</div>
-        <el-tabs v-model="activeName">
-          <el-tab-pane :label="'内舱房\n4类'" name="first">内舱房</el-tab-pane>
-          <el-tab-pane :label="'海景房\n7类'" name="second">海景房</el-tab-pane>
-          <el-tab-pane :label="'阳台房\n1类'" name="third">阳台房</el-tab-pane>
-          <el-tab-pane :label="'套房\n2类'" name="fourth">
+        <el-tabs v-model="activeCabins">
+          <el-tab-pane v-for="(item, index) in cabinsInfoList" :key="index" 
+          :label="item.typename+'\n'+item.children.length+'类'" :name="'cabins'+index">
             <table style="width: 100%" class="cangtable">
               <tr>
                 <th width="220">图片</th>
@@ -110,17 +108,17 @@
                 <th>窗型</th>
                 <th></th>
               </tr>
-              <tr v-for="(item,index) in cabinsInfoList" :key="index">
+              <tr v-for="(v,index1) in item.children" :key="index1">
                 <td>
                   <div class="image">
-                    <img :src="item.img" />
+                    <img :src="v.img" />
                   </div>
                 </td>
-                <td class="red">{{item.cabinsname}}</td>
-                <td>{{item.guests ? item.guests + '人' : ''}}</td>
-                <td>{{item.floor}}</td>
-                <td>{{item.area}}</td>
-                <td>{{item.windowtype}}</td>
+                <td class="red">{{v.cabinsname}}</td>
+                <td>{{v.guests ? v.guests + '人' : ''}}</td>
+                <td>{{v.floor}}</td>
+                <td>{{v.area}}</td>
+                <td>{{v.windowtype}}</td>
                 <td class="red">详情 v</td>
               </tr>
             </table>
@@ -130,64 +128,62 @@
       <!-- 海上美食 -->
       <div class="detail detail-food fjh-tabs">
         <div class="detail-title">海上美食</div>
-        <el-tabs v-model="activeName2">
-          <el-tab-pane :label="'自助餐厅\n2间'" name="first">自助餐厅</el-tab-pane>
-          <el-tab-pane :label="'特色餐饮\n7间'" name="second">
+        <el-tabs v-model="activeFood">
+          <el-tab-pane v-for="(item, index) in foodInfoList" :key="index" 
+          :label="item.typename+'\n'+item.children.length+'间'" :name="'food'+index">
             <div class="detail-item">
               <el-row type="flex">
-                <el-col class="item-info" v-for="(item,index) in foodInfoList" :key="index" v-if="index < 3">
+                <el-col class="item-info" v-for="(v,vi) in item.children" :key="vi" v-if="vi < 3">
                   <div class="image">
-                    <img :src="item.imgurl" />
+                    <img :src="v.imgurl ? v.imgurl : ''" />
                   </div>
-                  <p class="info-title">{{item.foodname}}</p>
-                  <p class="info-tag">楼层：{{item.floor}} | 容纳：{{item.guests}}</p>
-                  <p class="info-desc">{{item.description}}</p>
+                  <p class="info-title">{{v.foodname}}</p>
+                  <p class="info-tag">楼层：{{v.floor}} | 容纳：{{v.guests}}</p>
+                  <p class="info-desc">{{v.description}}</p>
                 </el-col>
               </el-row>
             </div>
           </el-tab-pane>
-          <el-tab-pane :label="'酒吧\n2间'" name="third">酒吧</el-tab-pane>
         </el-tabs>
       </div>
       <!-- 邮轮玩乐 -->
       <div class="detail detail-play fjh-tabs">
         <div class="detail-title">邮轮玩乐</div>
-        <el-tabs v-model="activeName2">
-          <el-tab-pane :label="'船上娱乐\n14个'" name="first">自助餐厅</el-tab-pane>
-          <el-tab-pane :label="'运动健身\n5个'" name="second">
+        <el-tabs v-model="activeAmusement">
+          <el-tab-pane v-for="(item, index) in amusementInfoList" :key="index" 
+          :label="item.typename+'\n'+item.children.length+'个'" :name="'amusement'+index">
             <div class="detail-item">
               <el-row type="flex">
-                <el-col class="item-info" v-for="(item,index) in amusementInfoList" :key="index" v-if="index < 3">
+                <el-col class="item-info" v-for="(v,vi) in item.children" :key="vi" v-if="vi < 3">
                   <div class="image">
-                    <img :src="item.imgurl" />
+                    <img :src="v.imgurl ? v.imgurl : ''" />
                   </div>
-                  <p class="info-title">{{item.amusementname}}</p>
-                  <p class="info-tag">楼层：{{item.floor}} | 容纳：{{item.guests}}</p>
-                  <p class="info-desc">{{item.description}}</p>
+                  <p class="info-title">{{v.amusementname}}</p>
+                  <p class="info-tag">楼层：{{v.floor}} | 容纳：{{v.guests}}</p>
+                  <p class="info-desc">{{v.description}}</p>
                 </el-col>
               </el-row>
             </div>
           </el-tab-pane>
-          <el-tab-pane :label="'海上休闲\n10个'" name="third">酒吧</el-tab-pane>
-          <el-tab-pane :label="'其他\n2个'" name="third">酒吧</el-tab-pane>
         </el-tabs>
       </div>
       <!-- 甲板导航 -->
       <div class="detail detail-nav fjh-tabs">
         <div class="detail-title">甲板导航</div>
-        <el-tabs v-model="activeName3">
-          <el-tab-pane label="5层" name="first">
+        <el-tabs v-model="activeDeck">
+          <el-tab-pane v-for="(item, index) in deckInfoList" :key="index" 
+          :label="item.floor" :name="'deck'+index">
             <div class="detail-detail">
               <div class="image">
-                <img :src="deckInfoList[0].imgurl"/>
+                <img :src="item.imgurl"/>
               </div>
               <div class="info">
                 <div class="info-item">
                   <div class="title">船舱类型</div>
                   <div class="detail">
                     <div class="detail-item">
-                      <p>{{deckInfoList[0].cabins}}</p>
-                      <div class="room">DD</div>
+                      <p>{{item.cabins}}</p>
+                      <!-- <div class="room">DD</div> -->
                     </div>
                     <!-- <div class="detail-item">
                       <p>海景房</p>
@@ -200,29 +196,29 @@
                   <div class="title">邮轮玩乐</div>
                   <div class="detail">
                     <div class="detail-item">
-                      <p>{{deckInfoList[0].amusement}}</p>
+                      <p>{{item.amusement}}</p>
                     </div>
                   </div>
                 </div>
-                <div class="info-item">
+                <!-- <div class="info-item">
                   <div class="title">甲板图例</div>
                   <div class="detail">
                     <div class="detail-item">
                       <p>残疾人舱房</p>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="6层" name="second">6层</el-tab-pane>
+          <!-- <el-tab-pane label="6层" name="second">6层</el-tab-pane>
           <el-tab-pane label="7层" name="third">7层</el-tab-pane>
           <el-tab-pane label="8层" name="fourth">8层</el-tab-pane>
           <el-tab-pane label="9层" name="fifth">9层</el-tab-pane>
           <el-tab-pane label="10层" name="sixth">10层</el-tab-pane>
           <el-tab-pane label="11层" name="seventh">11层</el-tab-pane>
           <el-tab-pane label="12层" name="eighth">12层</el-tab-pane>
-          <el-tab-pane label="13层" name="nine">13层</el-tab-pane>
+          <el-tab-pane label="13层" name="nine">13层</el-tab-pane> -->
         </el-tabs>
       </div>
       <!-- 常见问题 -->
@@ -283,9 +279,10 @@ export default {
       searchVal: "",
       activeIndex: 1,
       baseInfo: {},
-      activeName: "fourth",
-      activeName2: "second",
-      activeName3: "first",
+      activeCabins: 'cabins0',
+      activeAmusement: "amusement0",
+      activeFood: "food0",
+      activeDeck: "deck0",
       tableData: [
         {
           img: "",
@@ -344,6 +341,44 @@ export default {
         this.baseInfo = res.body;
       });
     },
+    // 格式化分类类型二维数组
+    formatterTagType(dataList,type){
+      let newDataList = []
+      // 1,,,,,,追加分配
+      dataList.forEach(v => {
+        // 判断是否有分类标识
+        let isType = false;
+        newDataList.forEach((nv, index) => {
+          if(nv.typename == v[type]) {
+            isType = true;
+          }
+        })
+        if(!isType){
+          // 新增
+          newDataList.push({
+            typename:v[type],
+            children: []
+          })
+        }
+      })
+
+      // 2,,,,,,追加分类下的数据
+      dataList.forEach(v => {
+        // 判断是否有分类标识
+        let addIndex = null;
+        newDataList.forEach((nv, index) => {
+          if(nv.typename == v[type]) {
+            addIndex = index
+          }
+        })
+
+        if(addIndex !== null){
+          newDataList[addIndex].children.push(v)
+        }
+      });
+      console.info('newDataList======', newDataList)
+      return newDataList;
+    },
     // 获取邮轮基本信息
     getShipDetail(shipid){
       if(!shipid) return
@@ -356,6 +391,7 @@ export default {
       if(!shipid) return
       this.$http.get("/API/ship.ashx?command=GetFoodInfoList&shipid="+parseInt(shipid)).then(function(res) {
         this.foodInfoList = res.body;
+        this.foodInfoList = this.formatterTagType(this.foodInfoList, 'foodtype')
       });
     },
     // 获取邮轮娱乐
@@ -363,6 +399,7 @@ export default {
       if(!shipid) return
       this.$http.get("/API/ship.ashx?command=GetAmusementInfoList&shipid="+parseInt(shipid)).then(function(res) {
         this.amusementInfoList = res.body;
+        this.amusementInfoList = this.formatterTagType(this.amusementInfoList, 'amusementtype')
       });
       
     },
@@ -378,6 +415,7 @@ export default {
       if(!shipid) return
       this.$http.get("/API/ship.ashx?command=GetCabinsInfoList&shipid="+parseInt(shipid)).then(function(res) {
         this.cabinsInfoList = res.body;
+        this.cabinsInfoList = this.formatterTagType(this.cabinsInfoList, 'cabinsname')
       });
     },
     // 加班导航
@@ -385,6 +423,7 @@ export default {
       if(!shipid) return
       this.$http.get("/API/ship.ashx?command=GetDeckInfoList&shipid="+parseInt(shipid)).then(function(res) {
         this.deckInfoList = res.body;
+        // this.deckInfoList = this.formatterTagType(this.deckInfoList, 'floor')
       });
     }
   }
@@ -474,6 +513,7 @@ export default {
       height: 100px;
       line-height: 100px;
       .info-tag-item {
+        cursor: pointer;
         font-size: 28px;
         font-weight: normal;
         color: #333333;
@@ -503,9 +543,6 @@ export default {
   }
   .detail-food,
   .detail-play {
-    .el-tabs .el-tabs__header {
-      padding-left: 300px;
-    }
     .detail-item {
       width: 100%;
       margin-top: 30px;
@@ -513,6 +550,7 @@ export default {
         border: 1px solid #eeeeee;
         box-shadow: 0 0 1px rgba(0, 0, 0, 0.35);
         margin-left: 30px;
+        max-width: 380px;
         &:first-child {
           margin-left: 0;
         }
@@ -551,13 +589,7 @@ export default {
       }
     }
   }
-  .detail-play .el-tabs .el-tabs__header {
-    padding-left: 200px;
-  }
   .detail-nav .el-tabs {
-    .el-tabs__header {
-      padding-left: 185px;
-    }
     .el-tabs__item {
       padding: 0 25px;
       margin-bottom: 10px;
@@ -725,8 +757,8 @@ export default {
   .el-tabs {
     margin-top: 40px;
     .el-tabs__header {
-      text-align: center;
-      padding-left: 250px;
+      max-width: 90%;
+      margin: 0 auto;
     }
     .el-tabs__nav-wrap::after {
       background: none;

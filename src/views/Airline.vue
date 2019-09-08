@@ -22,6 +22,7 @@
             @close="handleClose(tag)"
             type="info"
             color="#ffffff"
+            disable-transitions="true"
           >{{tag}}</el-tag>
           <span @click="clearAll()">清除全部</span>
         </div>
@@ -31,20 +32,50 @@
             <!-- <p class="hot">热门港口</p> -->
             <!-- <p v-for="(item, index) in hotCity" :key="index">{{ item }}</p> -->
             <p v-for="(item, index) in cityList" :key="index">
-              <span>
+              <span @click="showCFcityFn(index)" v-bind:class="{ hoverBorder: (index == showCfCityIndex)}">
                 {{ item.areaname }}
               </span>
             </p>
           </div>
         </div>
+        <!-- 出发------城市二级展开收缩效果 -->
+        <el-collapse-transition>
+          <div class="showCFcity" v-if="showCFcity && (showCfCityIndex || showCfCityIndex==0)">
+            <span 
+              v-for="(item, index) in cityList[showCfCityIndex].child" 
+              :key="index"
+              v-bind:class="{ hoverBg: (item.portname == searchParams.departureport)}"
+              @click="changeSearch('departureport', item.portname)"
+            >
+              {{ item.portname }}
+            </span>
+          </div>
+        </el-collapse-transition>
         <div class="airline-filter-city content">
           <p class="filter-title">目的地：</p>
           <div class="filter-detail">
             <!-- <p class="hot">热门港口</p> -->
             <!-- <p v-for="(item, index) in hotCity" :key="index">{{ item }}</p> -->
-            <p v-for="(item, index) in cityList" :key="index">{{ item.areaname }}航线</p>
+            <p v-for="(item, index) in cityList" :key="index">
+              <span @click="showMDcityFn(index)" v-bind:class="{ hoverBorder: (index == showMDCityIndex)}">
+                {{ item.areaname }}
+              </span>
+            </p>
           </div>
         </div>
+        <!-- 目的地-------城市二级展开收缩效果 -->
+        <el-collapse-transition>
+          <div class="showCFcity" v-if="showMDcity && (showMDCityIndex || showMDCityIndex==0)">
+            <span 
+              v-for="(item, index) in cityList[showMDCityIndex].child" 
+              :key="index"
+              v-bind:class="{ hoverBg: (item.portname == searchParams.arrivalport)}"
+              @click="changeSearch('arrivalport', item.portname)"
+            >
+              {{ item.portname }}
+            </span>
+          </div>
+        </el-collapse-transition>
         <!-- <div class="airline-filter-city content"></div> -->
         <div class="airline-filter-line content">
           <p class="filter-title">游轮航线：</p>
@@ -109,9 +140,9 @@
             </p> -->
             <div class="eval">
               <!-- <p>3764条评价</p> -->
-              <p>
+              <!-- <p>
                 <span>4.6</span>/5分
-              </p>
+              </p> -->
             </div>
           </div>
           </router-link>
@@ -169,6 +200,10 @@ export default {
   data() {
     return {
       list: [],
+      showCFcity: false,
+      showCfCityIndex: null,
+      showMDcity: false,
+      showMDCityIndex: null,
       searchVal: "",
       searchParams: {},
       activeIndex: 1,
@@ -200,6 +235,21 @@ export default {
     this.setSearch();
   },
   methods: {
+    changeSearch(field, val){
+      this.searchParams[field] = val
+
+      this.tags = [];
+      if(this.searchParams.departureport)
+        this.tags.push('出发城市：'+this.searchParams.departureport)
+      if(this.searchParams.arrivalport)
+        this.tags.push('目的地：'+this.searchParams.arrivalport)
+      if(this.searchParams.area)
+        this.tags.push('游轮航线：'+this.searchParams.area)
+      if(this.searchParams.shipcompany)
+        this.tags.push('游轮品牌：'+this.searchParams.shipcompany)
+      this.getList();
+    },
+    // 首页跳转过来，，，设置搜索参数
     setSearch(){
       // 首页带过来的查询条件设置选中
       // console.info('this.$route====', this.$route)
@@ -290,6 +340,22 @@ export default {
         this.lineList = res.body
       })
     },
+    // 出发城市二级显示
+    showCFcityFn(showCfCityIndex){
+      if(this.showCfCityIndex == showCfCityIndex || !this.showCFcity){
+        this.showCFcity = !this.showCFcity
+      }
+      this.showCfCityIndex = showCfCityIndex
+      if(this.showCFcity) showCfCityIndex = null
+    },
+    // 目的城市二级显示
+    showMDcityFn(showMDCityIndex){
+      if(this.showMDCityIndex == showMDCityIndex || !this.showMDcity){
+        this.showMDcity = !this.showMDcity
+      }
+      this.showMDCityIndex = showMDCityIndex
+      if(this.showMDcity) showMDCityIndex = null
+    }
   }
 };
 </script>
@@ -312,6 +378,23 @@ export default {
     & p span {
       color: #ee6b03;
       font-size: 22px;
+    }
+  }
+  .showCFcity{
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.35);
+    line-height: 40px;
+    padding: 0 125px;
+    background: #ffffff;
+    span{
+      cursor: pointer;
+      text-align: center;
+      padding: 0 0 0 25px;
+      margin-right: 10px;
+    }
+    .hoverBg{
+      background: #ee6b03;
+      color: #ffffff;
+      padding: 1px 5px;
     }
   }
   & .content {
@@ -338,9 +421,14 @@ export default {
       & p {
         display: inline-block;
         margin-right: 40px;
+        cursor: pointer;
         .hoverBg{
           background: #ee6b03;
           color: #ffffff;
+          padding: 1px 5px;
+        }
+        .hoverBorder{
+          border: 1px solid #ee6b03;
           padding: 1px 5px;
         }
       }

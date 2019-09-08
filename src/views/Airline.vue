@@ -81,7 +81,10 @@
           <p class="filter-title">游轮航线：</p>
           <div class="filter-detail">
             <p class="hoverBg" v-for="(item, index) in cityList" :key="index">
-              <span v-bind:class="{ hoverBg: (searchParams.area== item.areaname)}">
+              <span 
+                v-bind:class="{ hoverBg: (searchParams.area== item.areaname)}"
+                @click="changeSearch('area', item.areaname)"
+              >
                 {{ item.areaname }}航线
               </span>
             </p>
@@ -91,7 +94,10 @@
           <p class="filter-title">游轮品牌：</p>
           <div class="filter-detail">
             <p v-for="(item, index) in lineList" :key="index">
-              <span v-bind:class="{ hoverBg: (searchParams.shipcompany== item.shipcompany)}">{{ item.shipcompany }}</span>
+              <span 
+                v-bind:class="{ hoverBg: (searchParams.shipcompany== item.shipcompany)}"
+                @click="changeSearch('shipcompany', item.shipcompany)"
+                >{{ item.shipcompany }}</span>
             </p>
           </div>
         </div>

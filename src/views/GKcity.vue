@@ -36,7 +36,7 @@
             <div class="tit">{{item.area}}</div>
             <div class="desc">{{item.description}}</div>
             <div class="more">
-              <router-link :to="{ name: 'gkcitylevel', params: { id: item.id }}" target="_blank">了解更多</router-link>
+              <router-link :to="{ name: 'gkcitylevel', params: { areaid: item.id }}" target="_blank">了解更多</router-link>
             </div>
           </div>
           <div style="clear:both"></div>
@@ -49,7 +49,7 @@
             <div class="tit">{{item.area}}</div>
             <div class="desc">{{item.description}}</div>
             <div class="more">
-              <router-link :to="{ name: 'gkcitylevel', params: { id: item.id }}" target="_blank">了解更多</router-link>
+              <router-link :to="{ name: 'gkcitylevel', params: { area: item.id }}" target="_blank">了解更多</router-link>
             </div>
           </div>
           <!-- 右图 -->

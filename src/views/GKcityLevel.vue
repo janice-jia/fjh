@@ -16,7 +16,7 @@
           </div>
           <div class="companyLevel-item-tit">
             <p class="info-title">
-              {{item.shipname}}
+              {{item.portname}}
               <router-link :to="{ name: 'gkcityinfo', params: { id: item.id }}" target="_blank">查看详情 ></router-link>
             </p>
             <p class="light">
@@ -61,7 +61,7 @@
           </div>
         </div> -->
       </div>
-      <div class="page" v-if="list.length > 0">
+      <div class="page" v-if="list && list.length > 0">
         <div class="block">
           <el-pagination
             background
@@ -111,14 +111,13 @@ export default {
         limit: this.pageInfo.limit
       };
       // 搜索
-      if (this.$route.params.shipcompanyid) {
-        paramsData.shipcompanyid = parseInt(this.$route.params.shipcompanyid)
+      if (this.$route.params.areaid) {
+        paramsData.areaid = parseInt(this.$route.params.areaid)
       }
-      if (this.searchVal) paramsData.shipcompany = this.searchVal;
-      paramsData.command = 'GetShipPager';
+      if (this.searchVal) paramsData.portname = this.searchVal;
       console.info('paramsData', paramsData)
       this.$http
-        .get("/API/ship.ashx", {
+        .get("/API/ship.ashx?command=GetPortPager", {
           params: paramsData
         })
         .then(function(res) {

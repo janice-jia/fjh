@@ -66,7 +66,7 @@ export default new Router({
         },
         // 港口二级
         {
-            path: '/gkcitylevel:id',
+            path: '/gkcitylevel:areaid',
             name: 'gkcitylevel',
             component: GKcityLevel
         },

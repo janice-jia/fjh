@@ -48,7 +48,7 @@ export default new Router({
         },
         // 邮轮公司详情页面
         {
-            path: '/companyInfo:id',
+            path: '/companyInfo:id:categoryid?',
             name: 'companyInfo',
             component: CompanyInfo
         }

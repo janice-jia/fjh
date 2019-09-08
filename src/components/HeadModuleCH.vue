@@ -15,7 +15,7 @@
               {{contInfoCH.description}}
             </div>
             <div class="yl_chengshi_more">
-              <router-link to="comingSoon">查看更多 ></router-link> 
+              <router-link :to="{name:'gkcityinfo', params: { id: contInfoCH.id }}">查看更多 ></router-link> 
             </div>
             </div>
           </el-col>
@@ -24,13 +24,15 @@
 
       <el-row :gutter="30">
       <el-col :span="8" v-for="(item, i) in contInfoCH.child" :key="i+1">
-        <div class="yl_chengshi_img">
-          <img :src="item.imgurl" alt="">
-        </div>
-        <div class="yl_chengshi_name">
-          <p class="tit"><router-link to="comingSoon">{{item.portname}}</router-link></p>
-          <p class="con">{{item.description}}</p>
-        </div>
+        <router-link :to="{name:'gkcityinfo', params: { id: item.id }}">
+          <div class="yl_chengshi_img">
+            <img :src="item.imgurl" alt="">
+          </div>
+          <div class="yl_chengshi_name">
+            <p class="tit"><router-link :to="{name:'gkcityinfo', params: { id: item.id }}">{{item.portname}}</router-link></p>
+            <p class="con">{{item.description}}</p>
+          </div>
+        </router-link>
       </el-col>
     </el-row>
 

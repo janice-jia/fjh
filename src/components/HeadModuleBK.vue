@@ -8,7 +8,7 @@
             <img :src="item.coverimg" alt="">
           </div>
           <div class="yl_baike_name">
-            <router-link to="comingSoon">{{item.articletitle}}</router-link>
+            <router-link :to="{name:'bkcruiseinfo', params: { id: item.id }}">{{item.articletitle}}</router-link>
           </div>
         </el-col>
       </el-row>

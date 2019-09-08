@@ -13,7 +13,7 @@
                 <div class="pinPL-con">
                   <p class="tit">
                     {{item.shipname}}
-                    <router-link to="comingSoon">查看更多></router-link>
+                    <router-link :to="{name:'companyInfo', params: { id: item.id }}">查看更多></router-link>
                   </p>
                   <p class="con">{{item.description}}</p>
                 </div>
@@ -22,12 +22,14 @@
             <el-col :span="9">
               <ul>
                 <li v-for="(vv, ii) in item.itinerarylist" :key="ii+1">
+                  <router-link :to="{name:'companyInfo', params: { id: vv.id }}">
                   <div class="pinPR">
                     <div class="pinPR-img">
                       <img :src="vv.coverimg" alt="">
                     </div>
                     <div class="pinPR-name">{{vv.title}}</div>
                   </div>
+                  </router-link>
                 </li>
               </ul>
             </el-col>

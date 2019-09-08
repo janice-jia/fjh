@@ -24,11 +24,11 @@
             </el-col>
             <el-col :span="8">
               <div class="right">
-                <p class="pf">
+                <!-- <p class="pf">
                   4.3
                   <span>/分</span>
-                </p>
-                <p class="dp">353人点评</p>
+                </p> -->
+                <!-- <p class="dp">353人点评</p> -->
               </div>
             </el-col>
           </el-row>
@@ -240,23 +240,23 @@
         </div>
       </div> -->
       <!-- 精选游记 -->
-      <div class="detail detail-select">
+      <div class="detail detail-select" v-if="yjList[0] && yjList[0].child && yjList[0].child.length>0">
         <div class="detail-title">精选游记</div>
         <div class="detail-item">
           <el-row type="flex" :gutter="30">
-            <el-col :span="8" v-for="(item,index) in 3" :key="index">
+            <el-col :span="8" v-for="(item,index) in yjList[0].child" :key="index">
               <div class="item-info">
                 <div class="image">
-                  <img src />
+                  <img :src="item.coerimg" />
                 </div>
                 <div class="center">
-                  <div class="photo">
+                  <!-- <div class="photo">
                     <img src />
-                  </div>
-                  <p class="username">潘潘三条子</p>
-                  <p class="time">2015-03-20</p>
-                  <p class="title">深度探秘双子星丽星邮轮</p>
-                  <p class="with">和谁：朋友</p>
+                  </div> -->
+                  <!-- <p class="username">潘潘三条子</p> -->
+                  <!-- <p class="time">2015-03-20</p> -->
+                  <p class="title">{{item.articletitle}}</p>
+                  <!-- <p class="with">和谁：朋友</p> -->
                 </div>
               </div>
             </el-col>
@@ -314,7 +314,9 @@ export default {
       // 舱房信息
       cabinsInfoList: [],
       // 加班导航信息
-      deckInfoList: []
+      deckInfoList: [],
+      // 游记
+      yjList: []
     };
   },
   mounted() {
@@ -331,6 +333,8 @@ export default {
     this.getCabinsInfoList(this.$route.params.id);
     // 邮轮甲板导航信息
     this.getDeckInfoList(this.$route.params.id);
+    // 获取游记
+    this.getYJlist(this.$route.params.categoryid)
   },
   methods: {
     getBaseInfo(pageval) {
@@ -423,6 +427,14 @@ export default {
       if(!shipid) return
       this.$http.get("/API/ship.ashx?command=GetDeckInfoList&shipid="+parseInt(shipid)).then(function(res) {
         this.deckInfoList = res.body;
+        // this.deckInfoList = this.formatterTagType(this.deckInfoList, 'floor')
+      });
+    },
+    // 游记
+    getYJlist(categoryid){
+      if(!categoryid) return
+      this.$http.get("/API/index.ashx?command=GetArticleTopByCategoryId&categoryid="+parseInt(categoryid)).then(function(res) {
+        this.yjList = res.body.list;
         // this.deckInfoList = this.formatterTagType(this.deckInfoList, 'floor')
       });
     }

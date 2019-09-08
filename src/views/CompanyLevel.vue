@@ -9,6 +9,16 @@
       </div>
     </div>
     <div class="container">
+      <!-- 搜索内容为空 -->
+      <div class="kong" v-if="list.length===0">
+        <img src="../assets/img/kong.svg" alt="">
+        <p v-if="searchVal">
+          您搜索的"{{searchVal}}"暂无内容
+        </p>
+        <p v-if="!searchVal">
+          暂无内容
+        </p>
+      </div>
       <div class="companyLevel-list">
         <div class="companyLevel-item" v-for="item in list" :key="item.id">
           <div class="companyLevel-item-img">
@@ -17,7 +27,7 @@
           <div class="companyLevel-item-tit">
             <p class="info-title">
               {{item.shipname}}
-              <router-link :to="{ name: 'companyInfo', params: { id: item.id }}" target="_blank">查看详情 ></router-link>
+              <router-link :to="{ name: 'companyInfo', params: { id: item.id,categoryid: shipcompanyid }}" target="_blank">查看详情 ></router-link>
             </p>
             <p class="light">
               <span>吨位：{{item.tonnage}}</span>
@@ -34,7 +44,7 @@
             <div class="eval">
               <!-- <p>3764条评价</p> -->
               <p>
-                <span>4.6</span>/5分
+                <!-- <span>4.6</span>/5分 -->
               </p>
             </div>
           </div>
@@ -96,6 +106,7 @@ export default {
       list: [],
       searchVal: "",
       activeIndex: 1,
+      shipcompanyid:null,
       pageInfo: {
         page: 1,
         limit: 10,
@@ -104,8 +115,8 @@ export default {
     };
   },
   mounted() {
-    if(this.$route.params.shipcompany){
-      this.searchVal = this.$route.params.shipcompany
+    if (this.$route.params.shipcompanyid) {
+      this.shipcompanyid = parseInt(this.$route.params.shipcompanyid)
     }
     this.getList();
   },
@@ -121,7 +132,7 @@ export default {
       if (this.$route.params.shipcompanyid) {
         paramsData.shipcompanyid = parseInt(this.$route.params.shipcompanyid)
       }
-      if (this.searchVal) paramsData.shipcompany = this.searchVal;
+      if (this.searchVal) paramsData.shipname = this.searchVal;
       paramsData.command = 'GetShipPager';
       console.info('paramsData', paramsData)
       this.$http

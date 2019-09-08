@@ -65,17 +65,15 @@
           </div>
           <div class="cityinfo-citys-r">
             <div class="tit">
-              塔林老城<span>Tallinn premature</span>
+              {{detail.portname}}
+              <!-- <span>Tallinn premature</span> -->
             </div>
             <div class="con">
-              塔林老城在1997年，被列为世界文化遗产，老城至今保存了比
-较完好的中世纪城堡，城中保留了很多中世纪的教堂，城市很多
-建筑也保持着中世纪风格。你可以沿着老城的城墙走走，感受这
-座古城的味道，或者爬到城市的高点，看看这座老城的全貌。
+              {{detail.description}}
             </div>
             <div class="desc">
-              <p>游玩时间：建议游玩0.0小时</p>
-              <p>地址：Vanalinn, Kesklinn, Tallinn</p>
+              <!-- <p>游玩时间：建议游玩0.0小时</p>
+              <p>地址：Vanalinn, Kesklinn, Tallinn</p> -->
             </div>
           </div>
         </div>

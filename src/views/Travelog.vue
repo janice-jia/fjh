@@ -5,7 +5,7 @@
       <HeaderMenu activeIndex="6"></HeaderMenu>
       <img src="../assets/img/bannerYj.jpg" alt />
       <div class="com-search container">
-        <el-input placeholder="如：丽星邮轮" v-model="searchVal"></el-input>
+        <el-input placeholder="如：游记标题" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList" src="../assets/img/header/search.png" alt />
       </div>
     </div>

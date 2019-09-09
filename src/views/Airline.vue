@@ -139,11 +139,14 @@
               <span>推荐班期：</span> 2019 12-10 周二
             </p> -->
             <p class="light">
-              <span>班期特色：</span>{{item.itineraryfeature}}
+              <span>线路特色：</span>{{item.itineraryfeature}}
             </p>
-            <!-- <p class="light">
-              <span>当前卖家：</span>北京七海假期国际旅行社有限公司
-            </p> -->
+            <p class="light">
+              <span>出发港：</span>{{item.departureport}}
+            </p>
+             <p class="light">
+              <span>到达港：</span>{{item.arrivalport}}
+            </p>
             <div class="eval">
               <!-- <p>3764条评价</p> -->
               <!-- <p>
@@ -324,6 +327,11 @@ export default {
     clearAll(){
       this.tags = [];
       this.searchParams = {};
+
+      this.showCFcity = false;
+      this.showCfCityIndex = null;
+      this.showMDcity = false;
+      this.showMDCityIndex = null;
       this.getList()
     },
     // 标签关闭

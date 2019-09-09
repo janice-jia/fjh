@@ -4,7 +4,7 @@
       <HeaderMenu activeIndex="4"></HeaderMenu>
       <img src="../assets/img/banner.jpg" alt />
       <div class="com-search container">
-        <el-input placeholder="如：丽星邮轮" v-model="searchVal"></el-input>
+        <el-input placeholder="如：港口城市" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt />
       </div>
     </div>
@@ -117,7 +117,7 @@ export default {
       if (this.searchVal) paramsData.portname = this.searchVal;
       console.info('paramsData', paramsData)
       this.$http
-        .get("/API/ship.ashx?command=GetPortPager", {
+        .get("/API/port.ashx?command=GetPortPager", {
           params: paramsData
         })
         .then(function(res) {
@@ -240,9 +240,10 @@ export default {
           color: #333333;
         }
         & .light {
-          height: 18px;
+          height: 48px;
           overflow: hidden;
           color: #333333;
+          line-height: 24px;
           & span {
             font-size: 14px;
             color: #999999;

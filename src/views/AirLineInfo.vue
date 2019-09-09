@@ -39,14 +39,23 @@
     <div class="container infoCon">
       <div class="info-tag">
         <el-row type="flex" class="row-bg" justify="center">
-          <el-col :span="3" v-for="(item,index) in infoTagList" :key="index">
-            <div class="info-tag-item">{{item}}</div>
+          <el-col span="3" >
+            <div class="info-tag-item"><a href="#cpts">产品特色</a></div>
+          </el-col>
+          <el-col span="3" >
+            <div class="info-tag-item"><a href="#xcjs">行程介绍</a></div>
+          </el-col>
+          <el-col span="3" >
+            <div class="info-tag-item"><a href="#fysm">费用说明</a></div>
+          </el-col>
+          <el-col span="3" >
+            <div class="info-tag-item"><a href="#ydxz">预定须知</a></div>
           </el-col>
         </el-row>
       </div>
     </div>
     <!-- 产品特色 -->
-    <div class="container features">
+    <div class="container features" id="cpts">
       <div class="divider feature-title">
         <el-divider>产品特色</el-divider>
       </div>
@@ -180,7 +189,7 @@
       </div>
     </div>
     <!-- 日程安排 -->
-    <div class="container schedule">
+    <div class="container schedule" id="xcjs">
       <div class="schedule-list">
         <div class="schedule-listimg">
           <img :src="detail.coverimg" />
@@ -227,7 +236,7 @@
       </div>
     </div>
     <!-- 费用说明 -->
-    <div class="container price">
+    <div class="container price" id="fysm">
       <div class="divider price-title">
         <el-divider>费用说明</el-divider>
       </div>
@@ -257,7 +266,7 @@
       </div>
     </div> -->
     <!-- 预定须知 -->
-    <div class="container book">
+    <div class="container book" id="ydxz">
       <div class="divider book-title">
         <el-divider>预定须知</el-divider>
       </div>
@@ -300,15 +309,6 @@ export default {
       list: [],
       searchVal: "",
       activeName: 'first',
-      infoTagList: [
-        "产品特色",
-        "行程介绍",
-        "费用说明",
-        // "签证说明",
-        // "出行步骤",
-        "预定须知",
-        // "用户点评"
-      ],
       featureList: [
         "畅游日本，感受不一样的日本之旅，邂逅美丽海岛；",
         "畅游日本，感受不一样的日本之旅，邂逅美丽海岛；",
@@ -482,6 +482,9 @@ export default {
         font-size: 28px;
         font-weight: normal;
         color: #333333;
+        a{
+          color: #333333;
+        }
       }
     }
   }

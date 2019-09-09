@@ -67,22 +67,32 @@
       <div class="info-tag">
         <el-row type="flex" class="row-bg" justify="center">
           <el-col :span="3">
-            <div class="info-tag-item">舱房介绍</div>
+            <div class="info-tag-item">
+              <a href="#cfjs">舱房介绍</a>
+            </div>
           </el-col>
           <el-col :span="3">
-            <div class="info-tag-item">海上美食</div>
+            <div class="info-tag-item">
+              <a href="#hsms">海上美食</a>
+            </div>
           </el-col>
           <el-col :span="3">
-            <div class="info-tag-item">邮轮玩乐</div>
+            <div class="info-tag-item">
+              <a href="#ylwl">邮轮玩乐</a>
+            </div>
           </el-col>
           <el-col :span="3">
-            <div class="info-tag-item">甲板导航</div>
+            <div class="info-tag-item">
+              <a href="#jbdh">甲板导航</a>
+            </div>
           </el-col>
           <!-- <el-col :span="3">
             <div class="info-tag-item">常见问题</div>
           </el-col> -->
           <el-col :span="3">
-            <div class="info-tag-item">精选游记</div>
+            <div class="info-tag-item">
+              <a href="#jxyh">精选游记</a>
+            </div>
           </el-col>
           <!-- <el-col :span="3">
             <div class="info-tag-item">邮轮点评</div>
@@ -93,7 +103,7 @@
 
     <div class="container infoDetail">
       <!-- 舱房介绍 -->
-      <div class="detail detail-introduce fjh-tabs">
+      <div class="detail detail-introduce fjh-tabs" id="cfjs">
         <div class="detail-title">舱房介绍</div>
         <el-tabs v-model="activeCabins">
           <el-tab-pane v-for="(item, index) in cabinsInfoList" :key="index" 
@@ -126,7 +136,7 @@
         </el-tabs>
       </div>
       <!-- 海上美食 -->
-      <div class="detail detail-food fjh-tabs">
+      <div class="detail detail-food fjh-tabs" id="hsms">
         <div class="detail-title">海上美食</div>
         <el-tabs v-model="activeFood">
           <el-tab-pane v-for="(item, index) in foodInfoList" :key="index" 
@@ -147,7 +157,7 @@
         </el-tabs>
       </div>
       <!-- 邮轮玩乐 -->
-      <div class="detail detail-play fjh-tabs">
+      <div class="detail detail-play fjh-tabs" id="ylwl">
         <div class="detail-title">邮轮玩乐</div>
         <el-tabs v-model="activeAmusement">
           <el-tab-pane v-for="(item, index) in amusementInfoList" :key="index" 
@@ -168,7 +178,7 @@
         </el-tabs>
       </div>
       <!-- 甲板导航 -->
-      <div class="detail detail-nav fjh-tabs">
+      <div class="detail detail-nav fjh-tabs" id="jbdh">
         <div class="detail-title">甲板导航</div>
         <el-tabs v-model="activeDeck">
           <el-tab-pane v-for="(item, index) in deckInfoList" :key="index" 
@@ -529,6 +539,9 @@ export default {
         font-size: 28px;
         font-weight: normal;
         color: #333333;
+        a{
+          color: #333333;
+        }
       }
     }
   }

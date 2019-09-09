@@ -30,14 +30,16 @@
 
             <!-- 列2内容 -->
             <div class="bk-xs-item conBg" v-if="index==1">
-              <div class="bk-xs-cont-tit">
-                {{item.articletitle}}
-              </div>
-              <div class="bk-xs-cont-desc" v-html="item.articlecontent">
-              </div>
-              <div class="bk-cont-more">
-                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
-              </div>
+              <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">
+                <div class="bk-xs-cont-tit">
+                  {{item.articletitle}}
+                </div>
+                <div class="bk-xs-cont-desc" v-html="item.articlecontent">
+                </div>
+                <div class="bk-cont-more">
+                  <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
+                </div>
+              </router-link>
             </div>
 
             <!-- 列3图片 -->
@@ -51,14 +53,16 @@
           <el-col :span="8" v-for="(item, index) in articleData.list1" :key="item.id">
             <!-- 列1内容 -->
             <div class="bk-xs-item conBg pUp" v-if="index==0">
-              <div class="bk-xs-cont-tit">
-                {{item.articletitle}}
-              </div>
-              <div class="bk-xs-cont-desc" v-html="item.articlecontent">
-              </div>
-              <div class="bk-cont-more">
-                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
-              </div>
+              <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">
+                <div class="bk-xs-cont-tit">
+                  {{item.articletitle}}
+                </div>
+                <div class="bk-xs-cont-desc" v-html="item.articlecontent">
+                </div>
+                <div class="bk-cont-more">
+                  <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
+                </div>
+              </router-link>
             </div>
 
             <!-- 列2图片 -->
@@ -68,14 +72,16 @@
 
             <!-- 列3内容 -->
             <div class="bk-xs-item conBg pUp" v-if="index==2">
-              <div class="bk-xs-cont-tit">
-                {{item.articletitle}}
-              </div>
-              <div class="bk-xs-cont-desc" v-html="item.articlecontent">
-              </div>
-              <div class="bk-cont-more">
-                <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
-              </div>
+              <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">
+                <div class="bk-xs-cont-tit">
+                  {{item.articletitle}}
+                </div>
+                <div class="bk-xs-cont-desc" v-html="item.articlecontent">
+                </div>
+                <div class="bk-cont-more">
+                  <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}">更多></router-link>
+                </div>
+              </router-link>
             </div>
           </el-col>
         </el-row>

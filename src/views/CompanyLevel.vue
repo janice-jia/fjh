@@ -4,7 +4,7 @@
       <HeaderMenu activeIndex="2"></HeaderMenu>
       <img src="../assets/img/banner.jpg" alt />
       <div class="com-search container">
-        <el-input placeholder="如：丽星邮轮" v-model="searchVal"></el-input>
+        <el-input placeholder="请输入邮轮公司名称" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt />
       </div>
     </div>
@@ -259,7 +259,8 @@ export default {
           color: #333333;
         }
         & .light {
-          height: 18px;
+          height: 48px;
+          line-height: 24px;
           overflow: hidden;
           color: #333333;
           & span {

@@ -1,13 +1,10 @@
 <template>
-  <div class="companyLevel">
+  <div class="bkcruiseLevel">
     <div class="company-banner">
-      <HeaderMenu activeIndex="2"></HeaderMenu>
-      <img src="../assets/img/company_msc.jpeg" v-if="shipcompanyid==1" alt />
-      <img src="../assets/img/company_costa.jpeg" v-if="shipcompanyid==2" alt />
-      <img src="../assets/img/banner.jpg" v-if="shipcompanyid!=1&&shipcompanyid!=2" alt />
-
+      <HeaderMenu activeIndex="5"></HeaderMenu>
+      <img src="../assets/img/banner.jpg" alt />
       <div class="com-search container">
-        <el-input placeholder="请输入邮轮公司名称" v-model="searchVal"></el-input>
+        <el-input placeholder="如：亲子游" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt />
       </div>
     </div>
@@ -22,64 +19,27 @@
           暂无内容
         </p>
       </div>
-      <div class="companyLevel-list">
-        <div class="companyLevel-item" v-for="item in list" :key="item.id">
-          <div class="companyLevel-item-img">
+      
+      <div class="bkcruiseLevel-list">
+        <div class="bkcruiseLevel-item" v-for="item in list" :key="item.id">
+          <div class="bkcruiseLevel-item-img">
             <img :src="item.coverimg" />
           </div>
-          <div class="companyLevel-item-tit">
+          <div class="bkcruiseLevel-item-tit">
             <p class="info-title">
-              {{item.shipname}}
-              <router-link :to="{ name: 'companyInfo', params: { id: item.id,categoryid: shipcompanyid }}" target="_blank">查看详情 ></router-link>
+              {{item.articletitle}}
             </p>
-            <p class="light">
-              <span>吨位：{{item.tonnage}}</span>
-              <span>载客：{{item.guests}}</span>
-              <span>翻修：{{item.overhaul}}</span>
-              <span>楼层：{{item.floor}}</span>
-              <span>长度：{{item.length}}</span>
-              <span>宽度：{{item.width}}</span>
-              <span>船速：{{item.speed}}</span>
-            </p>
-            <!-- <p class="light">
-              <span>当前卖家：</span>北京七海假期国际旅行社有限公司
-            </p> -->
             <div class="eval">
-              <!-- <p>3764条评价</p> -->
-              <p>
-                <!-- <span>4.6</span>/5分 -->
-              </p>
+              <router-link :to="{ name: 'bkcruiseinfo', params: { id: item.id }}" target="_blank">查看详情 ></router-link>
             </div>
           </div>
-          <div class="companyLevel-item-con">
-            {{item.description}}
+          <div class="bkcruiseLevel-item-con" v-html="item.articlecontent">
+          </div>
+          <div class="publishtime">
+            <p><img src="../assets/img/time.png" alt/> 更新于 {{item.createdate}}</p>
+            <!-- <p><img src="../assets/img/youyong.png" alt/> 有用 {{item.daycount}}</p> -->
           </div>
         </div>
-
-        <!-- <div class="airline-item">
-          <div class="airline-item-img">
-            <img :src="airlineImg" />
-          </div>
-          <div class="airline-item-info">
-            <p class="info-title">歌诗达邮轮【幸运号】 16天14晚 跟团游·亚洲风情全览(新加坡-兰卡威-新加坡-兰卡威新加坡-兰卡威新加坡-兰卡威新加坡-兰卡威)</p>
-            <p class="address">北京出发 | 新加坡抵港</p>
-            <p class="light">啧啧啧啧啧啧222
-              <span>推荐班期：</span> 2019 12-10 周二
-            </p>
-            <p class="light">
-              <span>班期特色：</span>亚洲风情全览
-            </p>
-            <p class="light">
-              <span>当前卖家：</span>北京七海假期国际旅行社有限公司
-            </p>
-            <div class="eval">
-              <p>3764条评价</p>
-              <p>
-                <span>4.6</span>/5分
-              </p>
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="page" v-if="list.length > 0">
         <div class="block">
@@ -98,9 +58,10 @@
   </div>
 </template>
 <script>
-import HeaderMenu from "../components/HeaderMenu.vue";
+import HeaderMenu from "../components/HeaderMenu.vue"
+let Base64 = require('js-base64').Base64
 export default {
-  name: "Airline",
+  name: "bkcruisesearch",
   components: {
     HeaderMenu
   },
@@ -109,7 +70,6 @@ export default {
       list: [],
       searchVal: "",
       activeIndex: 1,
-      shipcompanyid:null,
       pageInfo: {
         page: 1,
         limit: 10,
@@ -118,8 +78,8 @@ export default {
     };
   },
   mounted() {
-    if (this.$route.params.shipcompanyid) {
-      this.shipcompanyid = parseInt(this.$route.params.shipcompanyid)
+    if(this.$route.query.searchVal){
+      this.searchVal = this.$route.query.searchVal
     }
     this.getList();
   },
@@ -131,19 +91,18 @@ export default {
         page: this.pageInfo.page,
         limit: this.pageInfo.limit
       };
-      // 搜索
-      if (this.$route.params.shipcompanyid) {
-        paramsData.shipcompanyid = parseInt(this.$route.params.shipcompanyid)
-      }
-      if (this.searchVal) paramsData.shipname = this.searchVal;
-      paramsData.command = 'GetShipPager';
+      if (this.searchVal) paramsData.articletitle = this.searchVal;
       console.info('paramsData', paramsData)
       this.$http
-        .get("/API/ship.ashx", {
+        .get("/API/article.ashx?command=GetArticleBySearch", {
           params: paramsData
         })
         .then(function(res) {
           this.list = res.body.list;
+          for(var i=0; i< this.list.length; i++){
+            if(this.list[i].articlecontent)
+              this.list[i].articlecontent = Base64.decode(this.list[i].articlecontent)
+          }
           this.pageInfo.total = parseInt(res.body.count);
         });
     },
@@ -161,9 +120,9 @@ export default {
 };
 </script>
 <style lang="scss">
-.companyLevel{
+.bkcruiseLevel{
   // 航线filter
-  .companyLevel-filter {
+  .bkcruiseLevel-filter {
     width: 1180px;
     margin-top: 60px;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.35);
@@ -210,13 +169,13 @@ export default {
       }
     }
   }
-  .companyLevel-list {
-    & .companyLevel-item {
+  .bkcruiseLevel-list {
+    & .bkcruiseLevel-item {
       background: #ffffff;
       margin-top: 30px;
       height: 360px;
       box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.35);
-      & .companyLevel-item-img {
+      & .bkcruiseLevel-item-img {
         width: 400px;
         height: 360px;
         float: left;
@@ -226,13 +185,13 @@ export default {
           max-width: 100%;
         }
       }
-      & .companyLevel-item-tit {
+      & .bkcruiseLevel-item-tit {
         width: 780px;
         font-size: 14px;
         float: left;
         position: relative;
-        padding: 30px 100px 0 30px;
-        height: 140px;
+        padding: 30px 130px 0 30px;
+        height: 85px;
         overflow: hidden;
         &::after{
           content: '';
@@ -256,44 +215,42 @@ export default {
             margin-left: 20px;
           }
         }
-        & .address {
-          margin-top: 15px;
-          margin-bottom: 30px;
-          color: #333333;
-        }
-        & .light {
-          height: 48px;
-          line-height: 24px;
-          overflow: hidden;
-          color: #333333;
-          & span {
-            font-size: 14px;
-            color: #999999;
-            margin-right: 20px;
-          }
-        }
+        
         & .eval {
           position: absolute;
-          top: 30px;
+          top: 40px;
           right: 0;
           color: #999999;
-          & p {
-            display: inline-block;
-            margin-right: 20px;
-            & span {
-              font-size: 22px;
-              color: #ee6b03;
-            }
+          display: inline-block;
+          margin-right: 20px;
+          & a {
+            font-size: 18px;
+            color: #ee6b03;
           }
         }
       }
-      .companyLevel-item-con{
-        height: 219px;
+      .bkcruiseLevel-item-con{
+        height: 215px;
         padding: 20px 30px;
         overflow: hidden;
         font-size: 14px;
         color: #999999;
         line-height: 25px;
+      }
+      .publishtime{
+        font-size: 16px;
+        color: #999999;
+        float: left;
+        padding: 20px 30px 0 30px;
+        p{
+          display: inline-block;
+          line-height: 20px;
+          margin-right: 30px;
+          img{
+            float: left;
+            margin-right: 8px;
+          }
+        }
       }
     }
   }

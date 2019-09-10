@@ -8,7 +8,7 @@
           placeholder="如：华东"
           v-model="searchVal">
         </el-input>
-        <img class="com-search-btn" @click="getList" src="../assets/img/header/search.png" alt="">
+        <img class="com-search-btn" @click="search()" src="../assets/img/header/search.png" alt="">
       </div>
     </div>
     <div class="container">
@@ -248,6 +248,12 @@ export default {
     this.getList()
   },
   methods: {
+    // 搜索
+    search(){
+      if(this.searchVal){
+        this.$router.push({path:'bkcruisesearch', query:{searchVal: this.searchVal}})
+      }
+    },
     getList(){
       this.$http.get('/API/article.ashx?command=GetArticleByCategory').then(function (res) {
         // 转义新手入门内容

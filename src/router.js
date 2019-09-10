@@ -10,6 +10,7 @@ import GKcityLevel from './views/GKcityLevel.vue'
 import GKcityInfo from './views/GKcityInfo.vue'
 import BKcruise from './views/BKcruise.vue'
 import BKcruiseLevel from './views/BKcruiseLevel.vue'
+import BKcruiseSearch from './views/BKcruiseSearch.vue'
 import BKcruiseInfo from './views/BKcruiseInfo.vue'
 
 
@@ -81,6 +82,12 @@ export default new Router({
             path: '/bkcruise',
             name: 'bkcruise',
             component: BKcruise
+        },
+        // 游轮百科搜索
+        {
+            path: '/bkcruisesearch:searchVal?',
+            name: 'bkcruisesearch',
+            component: BKcruiseSearch
         },
         // 游轮百科二级
         {

@@ -2,7 +2,10 @@
   <div class="companyInfo">
     <div class="companyInfo-banner">
       <HeaderMenu activeIndex="2"></HeaderMenu>
-      <img src="../assets/img/cominfo.jpg" alt />
+      <!-- <img src="../assets/img/cominfo.jpg" alt /> -->
+      <img src="../assets/img/company_msc.jpeg" v-if="categoryid==1" alt />
+      <img src="../assets/img/company_costa.jpeg" v-if="categoryid==2" alt />
+      <img src="../assets/img/cominfo.jpg" v-if="categoryid!=1&&categoryid!=2" alt />
 
       <div class="com-page-info">
         <!-- 标题，，，评分 -->
@@ -10,7 +13,9 @@
           <el-row>
             <el-col :span="8">
               <div class="left">
-                <img src="../assets/img/cominfologo.jpg" alt />
+                <img src="../assets/img/msc.png" v-if="categoryid==1" alt />
+                <img src="../assets/img/costa.png" v-if="categoryid==2"  alt />
+                <img src="../assets/img/cominfologo.jpg" v-if="categoryid!=1&&categoryid!=2"   alt />
               </div>
             </el-col>
             <el-col :span="8">
@@ -121,7 +126,7 @@
               <tr v-for="(v,index1) in item.children" :key="index1">
                 <td>
                   <div class="image">
-                    <img :src="v.img" />
+                    <img :src="v.imgurl" />
                   </div>
                 </td>
                 <td class="red">{{v.cabinsname}}</td>
@@ -185,7 +190,7 @@
           :label="item.floor" :name="'deck'+index">
             <div class="detail-detail">
               <div class="image">
-                <img :src="item.imgurl"/>
+                <img v-image-preview :src="item.imgurl"/>
               </div>
               <div class="info">
                 <div class="info-item">
@@ -326,10 +331,12 @@ export default {
       // 加班导航信息
       deckInfoList: [],
       // 游记
-      yjList: []
+      yjList: [],
+      categoryid: null
     };
   },
   mounted() {
+    if(this.$route.params.categoryid) this.categoryid = this.$route.params.categoryid
     this.getBaseInfo();
     // 游轮详细信息
     this.getShipDetail(this.$route.params.id);
@@ -390,7 +397,7 @@ export default {
           newDataList[addIndex].children.push(v)
         }
       });
-      console.info('newDataList======', newDataList)
+      // console.info('newDataList======', newDataList)
       return newDataList;
     },
     // 获取邮轮基本信息
@@ -455,6 +462,7 @@ export default {
 .companyInfo-banner {
   position: relative;
   padding-bottom: 30px;
+  text-align: center;
   img {
     max-width: 100%;
   }
@@ -472,11 +480,10 @@ export default {
       height: 120px;
       border-bottom: 1px solid #e5e5e5;
       .left {
-        vertical-align: middle;
+        padding: 10px 0 0 0;
         img {
           max-width: 100%;
           max-height: 100%;
-          height: 100px;
         }
       }
       .center {
@@ -582,6 +589,7 @@ export default {
         .image {
           width: 100%;
           height: 210px;
+          overflow: hidden;
           background: #ededed;
           img {
             max-width: 100%;

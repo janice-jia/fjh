@@ -4,7 +4,7 @@
     <div class="container">
     <el-row>
         <el-col :span="6">
-        <img class="logo" src="../assets/img/header/logo.png" alt="">
+        <img class="logo" src="../assets/img/logo.png" alt="">
         </el-col>
         <el-col :span="18">
         <!-- pc菜单 -->

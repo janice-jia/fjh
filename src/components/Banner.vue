@@ -364,4 +364,30 @@ export default {
     background: url(../assets/img/header/up.png) no-repeat;
   }
 }
+
+@media screen and (max-width: 750px) {
+  .banner-search .container{
+    padding: 10px 10px;
+  }
+  .el-button{
+    width: 90%;
+    text-align: left;
+    overflow: hidden;
+    white-space: normal;
+    padding-left: 0!important;
+    padding-right: 0!important;
+    text-align: left!important;
+    span{
+      width: 75%;
+      height: 20px;
+      line-height: 20px;
+      display: inline-block;
+      overflow: hidden;
+    }
+  }
+  .searchBtn::before{
+    background-size: 80%;
+    right: 5px;
+  }
+}
 </style>

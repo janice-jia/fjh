@@ -1,7 +1,7 @@
 <template>
 
 <div class="banner-nav">
-    <div class="container">
+    <div class="container"> 
     <el-row>
         <el-col :span="6">
         <img class="logo" src="../assets/img/logo.png" alt="">
@@ -71,7 +71,7 @@ export default {
   height: 100px;
   background: rgba(0, 0, 0, 0.3);
   .logo{
-    width: 78px;
+    // width: 78px;
     height: 72px;
     margin-top: 14px;
   }

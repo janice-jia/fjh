@@ -336,28 +336,28 @@ export default {
     };
   },
   mounted() {
-    if(this.$route.params.categoryid) this.categoryid = this.$route.params.categoryid
+    if(this.$route.query.categoryid) this.categoryid = this.$route.query.categoryid
     this.getBaseInfo();
     // 游轮详细信息
-    this.getShipDetail(this.$route.params.id);
+    this.getShipDetail(this.$route.query.id);
     // 邮轮美食信息
-    this.getFoodInfoList(this.$route.params.id);
+    this.getFoodInfoList(this.$route.query.id);
     // 邮轮娱乐信息
-    this.getAmusementInfoList(this.$route.params.id);
+    this.getAmusementInfoList(this.$route.query.id);
     // 邮轮购物信息
-    this.getShopInfoList(this.$route.params.id);
+    this.getShopInfoList(this.$route.query.id);
     // 邮轮舱房信息
-    this.getCabinsInfoList(this.$route.params.id);
+    this.getCabinsInfoList(this.$route.query.id);
     // 邮轮甲板导航信息
-    this.getDeckInfoList(this.$route.params.id);
+    this.getDeckInfoList(this.$route.query.id);
     // 获取游记
-    this.getYJlist(this.$route.params.categoryid)
+    this.getYJlist(this.$route.query.categoryid)
   },
   methods: {
     getBaseInfo(pageval) {
       this.baseInfo = [];
       var paramsData = {};
-      if (this.$route.params.id) paramsData.shipid = this.$route.params.id;
+      if (this.$route.query.id) paramsData.shipid = this.$route.query.id;
       this.$http.get("/API/ship.ashx?command=GetBaseInfo", {params: paramsData}).then(function(res) {
         this.baseInfo = res.body;
       });

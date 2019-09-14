@@ -30,7 +30,7 @@
           <div class="companyLevel-item-tit">
             <p class="info-title">
               {{item.shipname}}
-              <router-link :to="{ name: 'companyInfo', params: { id: item.id,categoryid: shipcompanyid }}" target="_blank">查看详情 ></router-link>
+              <router-link :to="{ path: 'companyInfo', query: { id: item.id,categoryid: shipcompanyid }}" target="_blank">查看详情 ></router-link>
             </p>
             <p class="light">
               <span>吨位：{{item.tonnage}}</span>

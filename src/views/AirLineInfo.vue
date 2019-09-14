@@ -45,12 +45,12 @@
           <el-col span="3" >
             <div class="info-tag-item"><a href="#xcjs">行程介绍</a></div>
           </el-col>
-          <el-col span="3" >
+          <!-- <el-col span="3" >
             <div class="info-tag-item"><a href="#fysm">费用说明</a></div>
           </el-col>
           <el-col span="3" >
             <div class="info-tag-item"><a href="#ydxz">预定须知</a></div>
-          </el-col>
+          </el-col> -->
         </el-row>
       </div>
     </div>
@@ -236,29 +236,30 @@
       </div>
     </div>
     <!-- 费用说明 -->
-    <div class="container price" id="fysm">
+
+    <!-- <div class="container price" id="fysm">
       <div class="divider price-title">
         <el-divider>费用说明</el-divider>
       </div>
       <div class="price-include">
         {{detail.feedetail}}
-        <!-- <div class="title">费用包含</div>
+        <div class="title">费用包含</div>
         <div class="detail">
           <ul>
             
             <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li>
           </ul>
-        </div> -->
+        </div>
       </div>
-      <!-- <div class="price-exclude">
+      <div class="price-exclude">
         <div class="title">费用不包含</div>
         <div class="detail">
           <ul>
             <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li>
           </ul>
         </div> 
-      </div> -->
-    </div>
+      </div>
+    </div> -->
     <!-- 出行步骤 -->
     <!-- <div class="container step">
       <div class="divider step-title">
@@ -266,13 +267,13 @@
       </div>
     </div> -->
     <!-- 预定须知 -->
-    <div class="container book" id="ydxz">
+    <!-- <div class="container book" id="ydxz">
       <div class="divider book-title">
         <el-divider>预定须知</el-divider>
       </div>
       <div class="book-item">
         {{detail.bookingdetail}}
-        <!-- <div class="title">
+        <div class="title">
           <el-menu default-active="1" class="el-menu-vertical">
             <el-menu-item index="1">
               <span slot="title">预定限制</span>
@@ -292,9 +293,9 @@
           <ul>
             <li v-for="(item, index) in priceInclude" :key="index">{{item}}。</li>
           </ul>
-        </div> -->
+        </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -512,6 +513,7 @@ export default {
 .features {
   .feature-detail {
     padding-left: 110px;
+    padding-bottom: 10px;
     font-size: 18px;
     color: #333333;
     p {

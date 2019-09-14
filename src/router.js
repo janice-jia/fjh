@@ -49,7 +49,7 @@ export default new Router({
         },
         // 邮轮公司详情页面
         {
-            path: '/companyInfo:id:categoryid?',
+            path: '/companyInfo',
             name: 'companyInfo',
             component: CompanyInfo
         }

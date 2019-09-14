@@ -13,7 +13,7 @@
                 <div class="pinPL-con">
                   <p class="tit">
                     {{item.shipname}}
-                    <router-link :to="{name:'companyInfo', params: { id: item.id }}">查看更多></router-link>
+                    <router-link :to="{path: 'companyInfo',  query: { id: item.id, categoryid:categoryid }}">查看更多></router-link>
                   </p>
                   <p class="con">{{item.description}}</p>
                 </div>
@@ -22,7 +22,7 @@
             <el-col :span="9">
               <ul>
                 <li v-for="(vv, ii) in item.itinerarylist" :key="ii+1">
-                  <router-link :to="{name:'companyInfo', params: { id: vv.id }}">
+                  <router-link :to="{path: 'companyInfo',  query: { id: vv.id, categoryid:categoryid  }}">
                   <div class="pinPR">
                     <div class="pinPR-img">
                       <img :src="vv.coverimg" alt="">
@@ -47,7 +47,8 @@
 export default {
   name: 'HeadModulePP',
   props: {
-    contInfoPP: Array
+    contInfoPP: Array,
+    categoryid: String
   },
   data() {
     return {

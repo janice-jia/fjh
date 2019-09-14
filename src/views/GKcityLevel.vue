@@ -19,11 +19,11 @@
               {{item.portname}}
               <router-link :to="{ name: 'gkcityinfo', params: { id: item.id }}" target="_blank">查看详情 ></router-link>
             </p>
-            <p class="light">
+            <!-- <p class="light">
               <span>当地语言：{{item.tonnage}}</span>
               <span>文化：{{item.guests}}</span>
               <span>信仰：{{item.overhaul}}</span>
-            </p>
+            </p> -->
             <div class="eval">
               <!-- <p>3764条评价</p> -->
               <!-- <p>

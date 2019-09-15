@@ -2,7 +2,7 @@
   <div class="traveloginfo">
     <div class="traveloginfo-banner">
       <HeaderMenu activeIndex="6"></HeaderMenu>
-      <img src="../assets/img/bkcruiseinfo.jpg" alt />
+      <img src="../assets/img/bannerYJ.jpg" alt />
 
       <div class="com-page-info">
         <!-- 标题，，， -->

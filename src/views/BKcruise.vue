@@ -2,7 +2,7 @@
   <div class="company bkcruise">
     <div class="company-banner">
       <HeaderMenu activeIndex="5"></HeaderMenu>
-      <img src="../assets/img/banner.jpg" alt=""/>
+      <img src="../assets/img/bannerBK.jpg" alt=""/>
       <div class="com-search container">
         <el-input
           placeholder="如：华东"

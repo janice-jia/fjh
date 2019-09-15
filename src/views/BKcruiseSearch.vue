@@ -2,7 +2,7 @@
   <div class="bkcruiseLevel">
     <div class="company-banner">
       <HeaderMenu activeIndex="5"></HeaderMenu>
-      <img src="../assets/img/banner.jpg" alt />
+      <img src="../assets/img/bannerBK.jpg" alt />
       <div class="com-search container">
         <el-input placeholder="如：亲子游" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt />

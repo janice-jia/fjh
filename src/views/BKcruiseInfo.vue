@@ -2,7 +2,7 @@
   <div class="bkcruiseinfo">
     <div class="bkcruiseinfo-banner">
       <HeaderMenu activeIndex="5"></HeaderMenu>
-      <img src="../assets/img/bkcruiseinfo.jpg" alt=""/>
+      <img src="../assets/img/bannerBK.jpg" alt=""/>
       
       <div class="com-page-info">
         <!-- 标题，，， -->

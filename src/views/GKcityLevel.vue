@@ -2,7 +2,7 @@
   <div class="companyLevel">
     <div class="company-banner">
       <HeaderMenu activeIndex="4"></HeaderMenu>
-      <img src="../assets/img/banner.jpg" alt />
+      <img src="../assets/img/bannerGK.jpg" alt />
       <div class="com-search container">
         <el-input placeholder="如：港口城市" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt />
@@ -199,7 +199,10 @@ export default {
         height: 360px;
         float: left;
         overflow: hidden;
-        background: #ededed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // background: #ededed;
         img{
           max-width: 100%;
         }

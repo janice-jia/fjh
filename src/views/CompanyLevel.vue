@@ -221,9 +221,12 @@ export default {
         height: 360px;
         float: left;
         overflow: hidden;
-        background: #ededed;
+        // background: #ededed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         img{
-          max-width: 100%;
+          max-width: none;
         }
       }
       & .companyLevel-item-tit {

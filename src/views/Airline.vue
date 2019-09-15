@@ -2,7 +2,7 @@
   <div class="airline">
     <div class="company-banner">
       <HeaderMenu activeIndex="3"></HeaderMenu>
-      <img src="../assets/img/banner.jpg" alt />
+      <img src="../assets/img/bannerHX.jpg" alt />
       <div class="com-search container">
         <el-input placeholder="如：邮轮名称，港口城市" v-model="searchVal"></el-input>
         <img class="com-search-btn" @click="getList('1')" src="../assets/img/header/search.png" alt />
@@ -464,8 +464,11 @@ export default {
       float: left;
       overflow: hidden;
       background: #ededed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       img{
-        max-width: 100%;
+        // max-width: 100%;
       }
     }
     & .airline-item-info {

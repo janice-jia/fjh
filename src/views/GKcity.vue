@@ -2,7 +2,7 @@
   <div class="company gkCity">
     <div class="company-banner">
       <HeaderMenu activeIndex="4"></HeaderMenu>
-      <img src="../assets/img/bannerCity.jpg" alt=""/>
+      <img src="../assets/img/bannerGK.jpg" alt=""/>
       <div class="com-search container">
         <el-input
           placeholder="如：北欧"
@@ -145,6 +145,9 @@ export default {
       background: #ededed;
       height: 100%;
       overflow: hidden;
+      display: flex;
+      align-content: center;
+      justify-content: center;
       img{
         max-width: 100%;
       }

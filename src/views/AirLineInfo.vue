@@ -443,10 +443,15 @@ export default {
       .coverimgBg{
         height: 110px;
         background: #e5e5e5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
       }
       img {
-        max-width: 100%;
-        max-height: 100%;
+        max-width: none;
+        // max-width: 100%;
+        // max-height: 100%;
       }
       .cntit {
         padding: 20px 0 0 20px;
@@ -622,8 +627,12 @@ export default {
       height: 100%;
       float: left;
       background: #e5e5e5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
       img{
-        max-width: 100%;
+        // max-width: 100%;
       }
     }
     .list-summary {

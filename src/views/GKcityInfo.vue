@@ -2,7 +2,7 @@
   <div class="cityInfo">
     <div class="cityInfo-banner">
       <HeaderMenu activeIndex="4"></HeaderMenu>
-      <img src="../assets/img/cityinfo.jpg" alt=""/>
+      <img src="../assets/img/bannerGK.jpg" alt=""/>
       
       <div class="com-page-info">
         <!-- 标题，，，评分 -->

@@ -8,7 +8,6 @@
           :label="item.name" 
           :name="item.id"
         >
-        {{item.id}}
           <HeadModulePP :contInfoPP="contInfoPP" :categoryid="item.id"></HeadModulePP>
         </el-tab-pane>
       </el-tabs>

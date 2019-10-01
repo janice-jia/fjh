@@ -485,6 +485,9 @@ export default {
         line-height: 28px;
         height: 170px;
         overflow: hidden;
+        *{
+          font-size: 20px;
+        }
       }
     }
   }

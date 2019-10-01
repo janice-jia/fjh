@@ -15,7 +15,8 @@
               {{contInfoCH.description}}
             </div>
             <div class="yl_chengshi_more">
-              <router-link :to="{name:'gkcityinfo', params: { id: contInfoCH.id }}">查看更多 ></router-link> 
+              <!-- <router-link :to="{name:'gkcityinfo', params: { id: contInfoCH.id }}">查看更多 ></router-link>  -->
+              <router-link :to="{name:'gkcitylevel', params: { areaid: contInfoCH.id }}">查看更多 ></router-link> 
             </div>
             </div>
           </el-col>

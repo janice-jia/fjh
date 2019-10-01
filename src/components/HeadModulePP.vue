@@ -22,7 +22,8 @@
             <el-col :span="9">
               <ul>
                 <li v-for="(vv, ii) in item.itinerarylist" :key="ii+1">
-                  <router-link :to="{path: 'companyInfo',  query: { id: vv.id, categoryid:categoryid  }}">
+                  <!-- <router-link :to="{path: 'companyInfo',  query: { id: vv.id, categoryid:categoryid  }}"> -->
+                  <router-link :to="{ name: 'airlineinfo', params: { id: vv.id }}">
                   <div class="pinPR">
                     <div class="pinPR-img">
                       <img :src="vv.coverimg" alt="">

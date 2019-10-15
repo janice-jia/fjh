@@ -25,7 +25,9 @@
       <div class="companyLevel-list">
         <div class="companyLevel-item" v-for="item in list" :key="item.id">
           <div class="companyLevel-item-img">
-            <img :src="item.coverimg" />
+            <router-link :to="{ path: 'companyInfo', query: { id: item.id,categoryid: shipcompanyid }}" target="_blank">
+              <img :src="item.coverimg" />
+            </router-link>
           </div>
           <div class="companyLevel-item-tit">
             <p class="info-title">

@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      activeName: '8',
+      activeName: '12',
       activeIndex: '1',
       activeIndex2: '1',
       contInfoYJ: {}

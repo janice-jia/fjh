@@ -125,5 +125,11 @@ export default new Router({
             name: 'airlineinfo',
             component: AirLineInfo
         }
-    ]
+    ],
+    scrollBehavior(to, from,savedPosition) {
+        return {
+            x: 0,
+            y: 0
+        }
+    }
 })

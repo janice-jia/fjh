@@ -106,7 +106,7 @@
                 <tr v-for="(item,index) in cabinsInfoList" :key="index">
                   <td>
                     <div class="image">
-                      <img :src="item.img" />
+                      <img :src="item.imgurl" />
                     </div>
                   </td>
                   <td class="red">{{item.cabinsname}}</td>
@@ -552,7 +552,7 @@ export default {
       padding-bottom: 50px;
       .el-tabs {
         .el-tabs__header {
-          padding-left: 125px;
+          padding-left: 60px;
         } 
         .el-tabs__item{
           margin-bottom: 10px;

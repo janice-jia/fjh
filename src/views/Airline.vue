@@ -527,6 +527,14 @@ export default {
 }
 
 @media screen and (max-width: 750px) {
-  
+  .filter-detail{
+    max-width: 100%;
+  }
+  .airline-item-img{
+    width: 40%!important;
+  }
+  .airline-item-info{
+    width: 60%!important;
+  }
 }
 </style>

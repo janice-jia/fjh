@@ -106,6 +106,8 @@ export default {
     .con{
       line-height: 25px;
       font-size: 14px;
+      height: 97px;
+      overflow: hidden;
       color: #666666;
     }
   }

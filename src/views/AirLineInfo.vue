@@ -476,6 +476,7 @@ export default {
 }
 
 .airLineInfo {
+  width: 1220px;
   .infoCon {
     margin-top: 100px;
     width: 1220px;
@@ -767,6 +768,20 @@ export default {
     ul li {
       list-style: disc;
     }
+  }
+}
+@media screen and (max-width: 750px) {
+  .com-page-info{
+    max-width: 100%;
+  }
+  .schedule-listimg{
+    width: 40%!important;
+  }
+  .list-summary{
+    width: 60%!important;
+  }
+  .fjh-tabs .el-tabs .el-tabs__item{
+    padding: 0 10px!important;
   }
 }
 </style>

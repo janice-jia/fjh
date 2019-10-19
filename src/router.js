@@ -115,8 +115,8 @@ export default new Router({
         },
         // 游轮航线
         {
-            path: '/airline:searchVal?',
-            name: 'airline',
+            path: '/YLairline:searchVal?',
+            name: 'YLairline',
             component: Airline
         },
          // 游轮航线详情

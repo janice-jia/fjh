@@ -477,6 +477,7 @@ export default {
 
 .airLineInfo {
   width: 1220px;
+  margin: 0 auto;
   .infoCon {
     margin-top: 100px;
     width: 1220px;

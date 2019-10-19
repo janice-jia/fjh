@@ -194,7 +194,7 @@ export default {
       searchVal.searchval = this.searchval
       searchVal = JSON.stringify(searchVal)
       // console.info('searchval====',searchval)
-      this.$router.push({path:'airline', query:{searchVal: searchVal}})
+      this.$router.push({path:'YLairline', query:{searchVal: searchVal}})
     },
     getCityList(){
       this.$http.get('/API/index.ashx?command=GetAreaCity').then(function (res) {

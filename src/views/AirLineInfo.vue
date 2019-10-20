@@ -641,6 +641,7 @@ export default {
       display: inline-block;
       height: 342px;
       overflow-y: auto;
+      float: left;
       table {
         margin-left: 10px;
         color: #333333;

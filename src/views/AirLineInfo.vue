@@ -625,7 +625,7 @@ export default {
   .schedule-list {
     height: 342px;
     .schedule-listimg{
-      width: 606px;
+      width: 605px;
       height: 100%;
       float: left;
       background: #e5e5e5;
@@ -641,11 +641,11 @@ export default {
       display: inline-block;
       height: 342px;
       overflow-y: auto;
-      float: left;
+      float: right;
+      width: 500px;
       table {
-        margin-left: 10px;
         color: #333333;
-        width: 524px;
+        width: 510px;
         th {
           font-size: 16px;
           text-align: left;

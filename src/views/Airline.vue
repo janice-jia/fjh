@@ -139,7 +139,7 @@
               <span>推荐班期：</span> 2019 12-10 周二
             </p> -->
             <p class="light">
-              <span>线路特色：</span>{{item.itineraryfeature}}
+              <span>途经国家：</span>{{item.viacountry}}
             </p>
             <p class="light">
               <span>出发港：</span>{{item.departureport}}

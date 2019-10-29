@@ -77,7 +77,7 @@ export default {
     max-width: 100%;
   }
   .com-page-info{
-    height: 120px;
+    min-height: 120px;
     padding: 20px 100px;
     width: 1200px;
     background: #ffffff;

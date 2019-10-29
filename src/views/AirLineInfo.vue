@@ -4,7 +4,7 @@
       <HeaderMenu activeIndex="3"></HeaderMenu>
       <img src="../assets/img/cominfo.jpg" alt />
 
-      <div class="com-page-info">
+      <div class="com-page-info" id="hauto">
         <!-- 标题，评分 -->
         <div class="info01">
           <el-row>
@@ -21,46 +21,46 @@
 
         <!-- 简介 -->
         <div class="info02">
-          <el-row type="flex" class="row-bg" justify="center">
-            <el-col :span="10">
+          <el-row id="flexLeft" type="flex" class="row-bg" justify="start">
+            <el-col :span="7">
               <div class="tag-item">出发城市：{{detail.departureport}}</div>
             </el-col>
-            <el-col :span="5">
-              <!-- <div class="tag-item">出发时间：2019-09-24 周二出发</div> -->
+            <el-col :span="7">
+              <div class="tag-item">到达城市：{{detail.arrivalport}}</div>
             </el-col>
-            <el-col :span="9">
-              <!-- <div class="tag-item">旅行：国旅环球</div> -->
+            <el-col :span="10">
+              <div class="tag-item">途经国家：{{detail.viacountry}}</div>
             </el-col>
           </el-row>
         </div>
       </div>
     </div>
 
-    <div class="container infoCon">
+    <!-- <div class="container infoCon">
       <div class="info-tag">
         <el-row type="flex" class="row-bg" justify="center">
           <el-col span="3" >
             <div class="info-tag-item"><a href="#cpts">产品特色</a></div>
           </el-col>
-          <el-col span="3" >
+          <el-col span="3" v-if="dayList.length > 0">
             <div class="info-tag-item"><a href="#xcjs">行程介绍</a></div>
           </el-col>
-          <!-- <el-col span="3" >
+          <el-col span="3" >
             <div class="info-tag-item"><a href="#fysm">费用说明</a></div>
           </el-col>
           <el-col span="3" >
             <div class="info-tag-item"><a href="#ydxz">预定须知</a></div>
-          </el-col> -->
+          </el-col>
         </el-row>
       </div>
-    </div>
+    </div> -->
     <!-- 产品特色 -->
     <div class="container features" id="cpts">
       <div class="divider feature-title">
         <el-divider>产品特色</el-divider>
       </div>
       <div class="feature-detail">
-        <p>{{detail.itineraryfeature}}</p>
+        <p v-html="detail.itineraryfeature"></p>
         <!-- <p>体验闽南特色，一元换购指定大交通（单趟）</p>
         <p>行程特色：</p>
         <p v-for="(item,index) in featureList" :key="index">* {{item}}</p>
@@ -80,7 +80,7 @@
       <!-- <div class="close">收起 ^</div> -->
     </div>
     <!-- 双子星号 -->
-    <div class="container star">
+    <!-- <div class="container star">
       <div class="divider star-title">
         <el-divider>{{shipDetail.shipname}}</el-divider>
       </div>
@@ -91,7 +91,6 @@
         </p>
         <div class="star-tag fjh-tabs">
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <!-- 仓房介绍 -->
             <el-tab-pane :label="'舱房介绍（' + cabinsInfoList.length + '）'" name="first">
               <table style="width: 100%" class="cangtable">
                 <tr>
@@ -117,20 +116,7 @@
                   <td class="red">详情 v</td>
                 </tr>
               </table>
-              <!-- <div class="star-item">
-                <el-row type="flex">
-                  <el-col class="star-item-info" v-for="(item,index) in cabinsInfoList" :key="index">
-                    <div class="star-item-infoimg">
-                      <img :src="item.imgurl" />
-                    </div>
-                    <p class="info-title">{{item.foodname}}</p>
-                    <p>楼层：{{item.floor}} | 容纳：{{item.guests}} | 消费：免费</p>
-                    <p>{{item.description}}</p>
-                  </el-col>
-                </el-row>
-              </div> -->
             </el-tab-pane>
-            <!-- 海上美食 -->
             <el-tab-pane :label="'海上美食（' + foodInfoList.length + '）'" name="second">
               <div class="star-item">
                 <el-row type="flex">
@@ -145,7 +131,6 @@
                 </el-row>
               </div>
             </el-tab-pane>
-            <!-- 船上娱乐 -->
             <el-tab-pane :label="'船上娱乐（' + amusementInfoList.length + '）'" name="third">
               <div class="star-item">
                 <el-row type="flex">
@@ -160,7 +145,6 @@
                 </el-row>
               </div>
             </el-tab-pane>
-            <!-- 邮轮购物 -->
             <el-tab-pane :label="'邮轮购物（' + shopInfoList.length + '）'" name="fourth">
               <div class="star-item">
                 <el-row type="flex">
@@ -176,20 +160,12 @@
               </div>
             </el-tab-pane>
           </el-tabs>
-
-          
-          <!-- <el-menu :default-active="activeIndex" active-text-color="#ee6b03" mode="horizontal">
-            <el-menu-item index="1">舱房介绍（4）</el-menu-item>
-            <el-menu-item index="2">海上美食（11）</el-menu-item>
-            <el-menu-item index="3">船上娱乐（22）</el-menu-item>
-            <el-menu-item index="4">邮轮服务（1）</el-menu-item>
-          </el-menu> -->
         </div>
         
       </div>
-    </div>
+    </div> -->
     <!-- 日程安排 -->
-    <div class="container schedule" id="xcjs">
+    <div class="container schedule" id="xcjs" v-if="dayList.length > 0">
       <div class="schedule-list">
         <div class="schedule-listimg">
           <img :src="detail.coverimg" />
@@ -430,6 +406,9 @@ export default {
   img {
     max-width: 100%;
   }
+  #hauto{
+    height: auto!important;
+  }
   .com-page-info {
     width: 1200px;
     padding-top: 10px;
@@ -468,7 +447,7 @@ export default {
       color: #999999;
       margin-top: 25px;
       .tag-item {
-        text-align: center;
+        text-align: left;
         border: none;
       }
     }

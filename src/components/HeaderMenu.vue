@@ -10,12 +10,12 @@
         <!-- pc菜单 -->
         <div class="pcMenu">
           <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="1"><router-link to="home" active-class="activeClass" target="_blank">首页</router-link></el-menu-item>
-          <el-menu-item index="2"><router-link to="company" active-class="activeClass" target="_blank">邮轮公司</router-link></el-menu-item>
-          <el-menu-item index="3"><router-link to="YLairline" active-class="activeClass" target="_blank">邮轮航线</router-link></el-menu-item>
-          <el-menu-item index="4"><router-link to="gkcity" active-class="activeClass" target="_blank">港口城市</router-link></el-menu-item>
-          <el-menu-item index="5"><router-link to="bkcruise" active-class="activeClass" target="_blank">邮轮百科</router-link></el-menu-item>
-          <el-menu-item index="6"><router-link to="travelog" active-class="activeClass" target="_blank">邮轮游记</router-link></el-menu-item>
+          <el-menu-item index="1"><router-link to="home" active-class="activeClass">首页</router-link></el-menu-item>
+          <el-menu-item index="2"><router-link to="company" active-class="activeClass">邮轮公司</router-link></el-menu-item>
+          <el-menu-item index="3"><router-link to="YLairline" active-class="activeClass">邮轮航线</router-link></el-menu-item>
+          <el-menu-item index="4"><router-link to="gkcity" active-class="activeClass">港口城市</router-link></el-menu-item>
+          <el-menu-item index="5"><router-link to="bkcruise" active-class="activeClass">邮轮百科</router-link></el-menu-item>
+          <el-menu-item index="6"><router-link to="travelog" active-class="activeClass">邮轮游记</router-link></el-menu-item>
           </el-menu>
         </div>
         <!-- app菜单 -->
@@ -27,12 +27,12 @@
             title="法嘉华"
             :visible.sync="drawer"
             :direction="direction">
-            <p class="appnav"><router-link to="home" target="_blank">首页</router-link></p>
-            <p class="appnav"><router-link to="company" target="_blank">邮轮公司</router-link></p>
-            <p class="appnav"><router-link to="YLairline" target="_blank">邮轮航线</router-link></p>
-            <p class="appnav"><router-link to="gkcity" target="_blank">港口城市</router-link></p>
-            <p class="appnav"><router-link to="bkcruise" target="_blank">邮轮百科</router-link></p>
-            <p class="appnav"><router-link to="travelog" target="_blank">邮轮游记</router-link></p>
+            <p class="appnav"><router-link to="home">首页</router-link></p>
+            <p class="appnav"><router-link to="company">邮轮公司</router-link></p>
+            <p class="appnav"><router-link to="YLairline">邮轮航线</router-link></p>
+            <p class="appnav"><router-link to="gkcity">港口城市</router-link></p>
+            <p class="appnav"><router-link to="bkcruise">邮轮百科</router-link></p>
+            <p class="appnav"><router-link to="travelog">邮轮游记</router-link></p>
             </el-drawer>
         </div>
         </el-col>

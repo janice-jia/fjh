@@ -40,13 +40,13 @@
               </el-col>
               <el-col :span="4">
                 <div class="company-tit-2" >
-                  <div> 旗下船队 <span>{{item.shipcount}}</span> 条</div>
+                  <div> 旗下船队 <span>{{item.shipcount}}</span> 艘</div>
                 </div>
               </el-col>
               <el-col :span="4">
-                <div class="company-tit-2"  align="bottom">
+                <!-- <div class="company-tit-2"  align="bottom">
                   航线数量 <span>{{item.itinerarycount}}</span> 条
-                </div>
+                </div> -->
               </el-col>
             </el-row>
           </div>

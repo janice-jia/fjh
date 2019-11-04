@@ -8,7 +8,7 @@
           :label="item.name" 
           :name="item.id"
         >
-          <HeadModulePP :contInfoPP="contInfoPP" :categoryid="item.id"></HeadModulePP>
+          <HeadModulePP :companyInfo="companyInfo" :contInfoPP="contInfoPP" :categoryid="item.id"></HeadModulePP>
         </el-tab-pane>
       </el-tabs>
 
@@ -34,21 +34,34 @@ export default {
       activeName: '1',
       activeIndex: '1',
       activeIndex2: '1',
-      contInfoPP: []
+      contInfoPP: [],
+      companyInfo: []
     }
   },
   mounted(){
     this.getConInfo(this.activeName)
   },
   methods: {
-    handleClick() {
-      this.getConInfo(this.activeName)
+    handleClick(tab, event) {
+      // console.info('this.navData===', this.navData)
+      
+      this.companyInfo = {}
+      this.contInfoPP = []
+      this.getConInfo(this.activeName, tab.index)
+      // console.info('this.companyInfo===', this.companyInfo)
     },
     // 根据分类id获取内容
-    getConInfo(companyid){
+    getConInfo(companyid, index){
       if(!companyid) return
+      if(!index) {
+        index = 0
+      }else{
+        index = parseInt(index)
+      }
+      var _this = this;
       this.$http.get('/API/index.ashx?command=GetShipListByCompanyId&companyid='+companyid).then(function (res) {
         this.contInfoPP = res.body.list
+        this.companyInfo = _this.navData[index]
       })
     }
   },

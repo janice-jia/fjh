@@ -1,34 +1,39 @@
 <template>
   <div class="HeadModulePP">
 
-    <el-carousel indicator-position="outside" :autoplay="false" trigger="click" arrow="nerver">
-      <el-carousel-item v-for="item in contInfoPP" :key="item.id">
+    <!-- <el-carousel indicator-position="outside" :autoplay="false" trigger="click" arrow="nerver">
+      <el-carousel-item v-for="item in contInfoPP" :key="item.id"> -->
         <div class="yl_pinpai container">
           <el-row>
             <el-col :span="15">
               <div class="pinPL">
                 <div class="pinPL-img">
-                  <img :src="item.imgurl" alt="">
+                  <!-- <img :src="item.imgurl" alt=""> -->
+                  <img :src="companyInfo.coverimg" alt="">
                 </div>
                 <div class="pinPL-con">
                   <p class="tit">
-                    {{item.shipname}}
-                    <router-link :to="{path: 'companyInfo',  query: { id: item.id, categoryid:categoryid }}">查看更多></router-link>
+                    <!-- {{item.shipname}} -->
+                    {{companyInfo.name}}
+                    <!-- <router-link :to="{path: 'companyInfo',  query: { id: item.id, categoryid:categoryid }}">查看更多></router-link> -->
+                    <router-link :to="{name: 'companylevel',  params: { shipcompanyid: companyInfo.id }}">查看更多></router-link>
                   </p>
-                  <p class="con">{{item.description}}</p>
+                  <!-- <p class="con">{{item.description}}</p> -->
+                  <p class="con">{{companyInfo.description}}</p>
                 </div>
               </div>
             </el-col>
             <el-col :span="9">
               <ul>
-                <li v-for="(vv, ii) in item.itinerarylist" :key="ii+1">
-                  <!-- <router-link :to="{path: 'companyInfo',  query: { id: vv.id, categoryid:categoryid  }}"> -->
-                  <router-link :to="{ name: 'airlineinfo', params: { id: vv.id }}">
+                <li v-for="(vv, ii) in contInfoPP" :key="ii+1" v-if="ii < 2">
+                  <router-link :to="{path: 'companyInfo',  query: { id: vv.id, categoryid:categoryid  }}">
+                  <!-- <router-link :to="{ name: 'airlineinfo', params: { id: vv.id }}"> -->
                   <div class="pinPR">
                     <div class="pinPR-img">
-                      <img :src="vv.coverimg" alt="">
+                      <!-- <img :src="vv.coverimg" alt=""> -->
+                      <img :src="vv.imgurl" alt="">
                     </div>
-                    <div class="pinPR-name">{{vv.title}}</div>
+                    <div class="pinPR-name">{{vv.shipname}}</div>
                   </div>
                   </router-link>
                 </li>
@@ -36,8 +41,8 @@
             </el-col>
           </el-row>
         </div> 
-      </el-carousel-item>
-    </el-carousel>
+      <!-- </el-carousel-item> -->
+    <!-- </el-carousel> -->
 
     
     
@@ -49,6 +54,7 @@ export default {
   name: 'HeadModulePP',
   props: {
     contInfoPP: Array,
+    companyInfo: Object,
     categoryid: String
   },
   data() {
@@ -64,7 +70,7 @@ export default {
     height: 600px;
   }
 }
-.pinPL,.pinPR{
+.pinPR{
   img{
     max-width: 100%;
     border-top-right-radius: 8px;
@@ -77,10 +83,16 @@ export default {
   .pinPL-img{
     height: 440px;
     max-height: 440px;
-    max-width: 100%;
+    // max-width: 100%;
     overflow: hidden;
     text-align: center;
     background: #ededed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+      max-width:auto!important;
+    }
   }
   .pinPL-con{
     height: 160px;
@@ -113,11 +125,12 @@ export default {
   }
 }
 .pinPR{
-  height: 180px;
+  height: 285px;
   margin-bottom: 30px;
   .pinPR-img{
-    height: 130px;
+    height: 235px;
     background: #ededed;
+    overflow:hidden;
   }
   .pinPR-name{
     height: 50px;

@@ -477,7 +477,7 @@ export default {
     bottom: -65px;
     margin-left: -600px;
     .info01 {
-      height: 120px;
+      min-height: 120px;
       border-bottom: 1px solid #e5e5e5;
       .left {
         padding: 10px 0 0 0;

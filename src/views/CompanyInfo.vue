@@ -15,7 +15,8 @@
               <div class="left">
                 <img src="../assets/img/msc.png" v-if="categoryid==1" alt />
                 <img src="../assets/img/costa.png" v-if="categoryid==2"  alt />
-                <img src="../assets/img/cominfologo.jpg" v-if="categoryid!=1&&categoryid!=2"   alt />
+                <img src="../assets/img/jlb.jpg" v-if="categoryid==7"  alt />
+                <img src="../assets/img/cominfologo.jpg" v-if="categoryid!=1&&categoryid!=2&&categoryid!=7"   alt />
               </div>
             </el-col>
             <el-col :span="8">
@@ -436,7 +437,7 @@ export default {
       if(!shipid) return
       this.$http.get("/API/ship.ashx?command=GetCabinsInfoList&shipid="+parseInt(shipid)).then(function(res) {
         this.cabinsInfoList = res.body;
-        this.cabinsInfoList = this.formatterTagType(this.cabinsInfoList, 'cabinsname')
+        this.cabinsInfoList = this.formatterTagType(this.cabinsInfoList, 'cabinstype')
       });
     },
     // 加班导航
@@ -615,7 +616,7 @@ export default {
         }
         .info-desc{
           margin: 10px 0;
-          height: 25px;
+          height: 75px;
           line-height:25px;
           overflow: hidden;
         }

@@ -31,7 +31,7 @@
           <div class="filter-detail">
             <!-- <p class="hot">热门港口</p> -->
             <!-- <p v-for="(item, index) in hotCity" :key="index">{{ item }}</p> -->
-            <p v-for="(item, index) in cityList" :key="index">
+            <p v-for="(item, index) in departureCity" :key="index">
               <span @click="showCFcityFn(index)" v-bind:class="{ hoverBorder: (index == showCfCityIndex)}">
                 {{ item.areaname }}
               </span>
@@ -42,12 +42,12 @@
         <el-collapse-transition>
           <div class="showCFcity" v-if="showCFcity && (showCfCityIndex || showCfCityIndex==0)">
             <span 
-              v-for="(item, index) in cityList[showCfCityIndex].child" 
+              v-for="(item, index) in departureCity[showCfCityIndex].child" 
               :key="index"
-              v-bind:class="{ hoverBg: (item.portname == searchParams.departureport)}"
-              @click="changeSearch('departureport', item.portname)"
+              v-bind:class="{ hoverBg: (item.departureport == searchParams.departureport)}"
+              @click="changeSearch('departureport', item.departureport)"
             >
-              {{ item.portname }}
+              {{ item.departureport }}
             </span>
           </div>
         </el-collapse-transition>
@@ -56,7 +56,7 @@
           <div class="filter-detail">
             <!-- <p class="hot">热门港口</p> -->
             <!-- <p v-for="(item, index) in hotCity" :key="index">{{ item }}</p> -->
-            <p v-for="(item, index) in cityList" :key="index">
+            <p v-for="(item, index) in arrivalCity" :key="index">
               <span @click="showMDcityFn(index)" v-bind:class="{ hoverBorder: (index == showMDCityIndex)}">
                 {{ item.areaname }}
               </span>
@@ -67,12 +67,12 @@
         <el-collapse-transition>
           <div class="showCFcity" v-if="showMDcity && (showMDCityIndex || showMDCityIndex==0)">
             <span 
-              v-for="(item, index) in cityList[showMDCityIndex].child" 
+              v-for="(item, index) in arrivalCity[showMDCityIndex].child" 
               :key="index"
-              v-bind:class="{ hoverBg: (item.portname == searchParams.arrivalport)}"
-              @click="changeSearch('arrivalport', item.portname)"
+              v-bind:class="{ hoverBg: (item.arrivalport == searchParams.arrivalport)}"
+              @click="changeSearch('arrivalport', item.arrivalport)"
             >
-              {{ item.portname }}
+              {{ item.arrivalport }}
             </span>
           </div>
         </el-collapse-transition>
@@ -225,6 +225,8 @@ export default {
       airlineCount: 474,
       tags: [],
       cityList: [],
+      departureCity: [],
+      arrivalCity: [],
       lineList: [],
       days: [
         "1~3天",
@@ -240,7 +242,9 @@ export default {
   },
   mounted() {
     this.getPPnav();
-    this.getCityList()
+    this.getCityList();
+    this.getDepartureCity(),
+    this.getArrivalCity()
     this.setSearch();
   },
   methods: {
@@ -285,6 +289,38 @@ export default {
       this.$http.get('/API/index.ashx?command=GetAreaCity').then(function (res) {
         // console.info('res.body===', res.body)
         this.cityList = res.body.list
+      })
+    },
+    getDepartureCity(){
+      this.$http.get('/API/index.ashx?command=GetDepartureCity').then(function (res) {
+        // console.info('res.body===', res.body)
+        this.departureCity = []
+        this.departureCity.push({
+          "id": 1,
+          "areaname": "热门港口",
+          "child": res.body.hotcity
+        })
+        this.departureCity.push({
+          "id": 2,
+          "areaname": "出发城市",
+          "child": res.body.allcity
+        })
+      })
+    },
+    getArrivalCity(){
+      this.$http.get('/API/index.ashx?command=GetArrivalCity').then(function (res) {
+        // console.info('res.body===', res.body)
+        this.arrivalCity = []
+        this.arrivalCity.push({
+          "id": 1,
+          "areaname": "热门城市",
+          "child": res.body.hotcity
+        })
+        this.arrivalCity.push({
+          "id": 2,
+          "areaname": "热门国家",
+          "child": res.body.hotcountry
+        })
       })
     },
     getList(pageval) {

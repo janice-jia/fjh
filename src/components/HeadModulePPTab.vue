@@ -67,7 +67,7 @@ export default {
         if(!_this.navData || _this.navData.length == 0){
           this.$http.get('/API/index.ashx?command=GetShipCompany').then(function (res) {
             res.body = this.formatterNavVal(res.body, 'shipcompany')
-            this.companyInfo = res.bodyres.body[index]
+            this.companyInfo = res.body[index]
           })
         }else{
           this.companyInfo = _this.navData[index]

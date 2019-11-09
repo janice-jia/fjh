@@ -14,12 +14,12 @@
                 width="450"
                 trigger="click"
                 v-model="isActiveCh">
-                <el-table :data="cityList">
+                <el-table :data="departureCity">
                   <el-table-column width="80" property="areaname" label="出发城市"></el-table-column>
                   <el-table-column width="350">
                     <template slot-scope="scope">
-                      <span @click="showSearchVal('isActiveCh', group.portname)" v-for="group in scope.row.child" :key="group.id">
-                        {{group.portname}}
+                      <span @click="showSearchVal('isActiveCh', group.departureport)" v-for="group in scope.row.child" :key="group.id">
+                        {{group.departureport}}
                       </span>
                     </template>
                   </el-table-column>
@@ -106,12 +106,12 @@
                 width="450"
                 trigger="click"
                 v-model="isActiveMD">
-                <el-table :data="cityList">
+                <el-table :data="arrivalCity">
                   <el-table-column width="80" property="areaname" label="目的地"></el-table-column>
                   <el-table-column width="350">
                     <template slot-scope="scope">
-                      <span @click="showSearchVal('isActiveMD', group.portname)" v-for="group in scope.row.child" :key="group.id">
-                        {{group.portname}}
+                      <span @click="showSearchVal('isActiveMD', group.arrivalport)" v-for="group in scope.row.child" :key="group.id">
+                        {{group.arrivalport}}
                       </span>
                     </template>
                   </el-table-column>
@@ -170,6 +170,8 @@ export default {
       city:[1,2,3],
       searchval: '',
       cityList: [],
+      departureCity: [],
+      arrivalCity: [],
       isActiveCh:false,
       isActiveHX:false,
       isActiveYL:false,
@@ -182,7 +184,9 @@ export default {
   },
   mounted(){
     this.getBannerList(),
-    this.getCityList()
+    this.getCityList(),
+    this.getDepartureCity(),
+    this.getArrivalCity()
   },
   methods: {
     handSearch() {
@@ -200,6 +204,38 @@ export default {
       this.$http.get('/API/index.ashx?command=GetAreaCity').then(function (res) {
         // console.info('res.body===', res.body)
         this.cityList = res.body.list
+      })
+    },
+    getDepartureCity(){
+      this.$http.get('/API/index.ashx?command=GetDepartureCity').then(function (res) {
+        // console.info('res.body===', res.body)
+        this.departureCity = []
+        this.departureCity.push({
+          "id": 1,
+          "areaname": "热门港口",
+          "child": res.body.hotcity
+        })
+        this.departureCity.push({
+          "id": 2,
+          "areaname": "出发城市",
+          "child": res.body.allcity
+        })
+      })
+    },
+    getArrivalCity(){
+      this.$http.get('/API/index.ashx?command=GetArrivalCity').then(function (res) {
+        // console.info('res.body===', res.body)
+        this.arrivalCity = []
+        this.arrivalCity.push({
+          "id": 1,
+          "areaname": "热门城市",
+          "child": res.body.hotcity
+        })
+        this.arrivalCity.push({
+          "id": 2,
+          "areaname": "热门国家",
+          "child": res.body.hotcountry
+        })
       })
     },
     getBannerList(){

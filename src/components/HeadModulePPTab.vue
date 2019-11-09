@@ -35,7 +35,7 @@ export default {
       activeIndex: '1',
       activeIndex2: '1',
       contInfoPP: [],
-      companyInfo: []
+      companyInfo: {}
     }
   },
   mounted(){
@@ -61,8 +61,26 @@ export default {
       var _this = this;
       this.$http.get('/API/index.ashx?command=GetShipListByCompanyId&companyid='+companyid).then(function (res) {
         this.contInfoPP = res.body.list
+        // console.info('_this.navData-----', _this.navData)
         this.companyInfo = _this.navData[index]
+
+        if(!_this.navData || _this.navData.length == 0){
+          this.$http.get('/API/index.ashx?command=GetShipCompany').then(function (res) {
+            res.body = this.formatterNavVal(res.body, 'shipcompany')
+            this.companyInfo = res.bodyres.body[index]
+          })
+        }else{
+          this.companyInfo = _this.navData[index]
+        }
       })
+    },
+    // 格式化数据
+    formatterNavVal(data, showName){
+      for(var i=0; i<data.length; i++){
+        if(data[i].id) data[i].id = data[i].id.toString();
+        data[i].name = data[i][showName]
+      }
+      return data;
     }
   },
   components: {

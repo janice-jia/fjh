@@ -34,7 +34,7 @@
 export default {
   name: 'HeadModuleYJ',
   props: {
-    contInfoYJ: Array
+    contInfoYJ: Object
   },
 }
 </script>

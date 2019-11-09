@@ -46,7 +46,7 @@
 export default {
   name: 'HeadModuleCH',
   props: {
-    contInfoCH: Array
+    contInfoCH: Object
   }
 }
 </script>

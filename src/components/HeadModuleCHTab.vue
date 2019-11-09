@@ -47,7 +47,7 @@ export default {
     getConInfo(areaid){
       if(!areaid) return
       this.$http.get('/API/index.ashx?command=GetAreaTopCity&areaid='+areaid).then(function (res) {
-        this.contInfoCH = res.body.list[0] ? res.body.list[0] : []
+        this.contInfoCH = res.body.list[0] ? res.body.list[0] : {}
       })
     }
   },

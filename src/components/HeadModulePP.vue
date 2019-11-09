@@ -83,7 +83,7 @@ export default {
   .pinPL-img{
     height: 440px;
     max-height: 440px;
-    // max-width: 100%;
+    max-width: 100%;
     overflow: hidden;
     text-align: center;
     background: #ededed;
@@ -91,7 +91,7 @@ export default {
     justify-content: center;
     align-items: center;
     img{
-      max-width:auto!important;
+      max-width:100%;
     }
   }
   .pinPL-con{

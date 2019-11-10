@@ -365,7 +365,7 @@ export default {
       }
     }
     .bk-xs-item{
-      height: 400px;
+      height: 280px;
       // overflow: hidden;
       .bk-xs-cont-tit{
         color: #ee6b03;
@@ -376,16 +376,16 @@ export default {
       }
       .bk-xs-cont-desc{
         margin-top: 10px;
-        height: 195px;
+        height: 128px;
         overflow: hidden;
         color:#666666;
-        font-size: 20px;
-        line-height: 28px;
+        font-size: 18px;
+        line-height: 25px;
       }
     }
     .conBg{
       background: #ffffff;
-      padding: 50px;
+      padding: 30px;
     }
   }
 

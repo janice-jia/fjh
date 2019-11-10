@@ -16,7 +16,7 @@
                 v-model="isActiveCh">
                 <el-table :data="departureCity">
                   <el-table-column width="80" property="areaname" label="出发城市"></el-table-column>
-                  <el-table-column width="350">
+                  <el-table-column width="350" class="fjh-table">
                     <template slot-scope="scope">
                       <span @click="showSearchVal('isActiveCh', group.departureport)" v-for="group in scope.row.child" :key="group.id">
                         {{group.departureport}}
@@ -253,6 +253,14 @@ export default {
 }
 </script>
 <style lang="scss">
+// 查询条件显示控制
+.el-table_1_column_1,.el-table_4_column_5{
+  vertical-align: top!important;
+}
+.el-table__header{
+  display: none;
+}
+// 查询条件显示控制
 .Banner{
   position: relative;
   height: 850px;

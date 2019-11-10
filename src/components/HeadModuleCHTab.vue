@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      activeName: '1',
+      activeName: '2',
       activeIndex: '1',
       activeIndex2: '1',
       contInfoCH: []
@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     handleClick(tab) {
+      // console.info('tab', tab)
       this.getConInfo(this.activeName)
     },
     // 根据分类id获取内容

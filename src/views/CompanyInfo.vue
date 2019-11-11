@@ -95,11 +95,11 @@
           <!-- <el-col :span="3">
             <div class="info-tag-item">常见问题</div>
           </el-col> -->
-          <el-col :span="3">
+          <!-- <el-col :span="3">
             <div class="info-tag-item">
               <a href="#jxyh">精选游记</a>
             </div>
-          </el-col>
+          </el-col> -->
           <!-- <el-col :span="3">
             <div class="info-tag-item">邮轮点评</div>
           </el-col> -->

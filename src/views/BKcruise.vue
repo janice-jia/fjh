@@ -528,7 +528,7 @@ export default {
     .bk-ylzl-item{
       height: 350px;
       .bk-ylzl-img{
-        height: 300px;
+        height: 265px;
       }
       .bk-ylzl-tit{
         height: 50px;

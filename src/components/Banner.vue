@@ -63,7 +63,7 @@
           </el-col>
 
           <el-col :span="5">
-            <!-- 热门邮轮 -->
+            <!-- 邮轮时长 -->
             <el-button class="searchBtn" v-bind:class="{ active: isActiveYL }" v-popover:popover3>{{isActiveYLName}}</el-button>
             <div class="showdropList">
               <el-popover
@@ -72,21 +72,16 @@
                 width="200"
                 trigger="click"
                 v-model="isActiveYL">
-                <el-table :data="lineList">
+                <el-table :data="timeList">
                   <el-table-column
-                    label="热门邮轮"
+                    label="邮轮时长"
                     width="180">
                       <template slot-scope="scope">
-                        <span style="width:90%; text-align:center;" @click="showSearchVal('isActiveYL', scope.row.shipcompany)" >
-                          {{scope.row.shipcompany}}
+                        <span style="width:90%; text-align:center;" @click="showSearchVal('isActiveYL', scope.row.name)" >
+                          {{scope.row.name}}
                         </span>
                       </template>
                   </el-table-column>
-                  <!-- <el-table-column width="120" v-for="group in lineList" :key="group.areaname" label="热门游轮">
-                    <span style="width:90%; text-align:center;" @click="showSearchVal('isActiveYL', group.shipcompany)" >
-                      {{group.shipcompany}}
-                    </span>
-                  </el-table-column> -->
                 </el-table>
               </el-popover>
             </div>
@@ -164,6 +159,19 @@ export default {
   },
   data() {
     return {
+      timeList:[{
+        id:1,
+        name:'+/-3天'
+      },{
+        id:2,
+        name:'+/-7天'
+      },{
+        id:3,
+        name:'+/-10天'
+      },{
+        id:4,
+        name:'15天以上'
+      }],
       bannerList:[],
       activeIndex: '1',
       activeIndex2: '1',
@@ -178,7 +186,7 @@ export default {
       isActiveMD:false,
       isActiveChName:'出发城市',
       isActiveHXName:'出发航线',
-      isActiveYLName:'热门游轮',
+      isActiveYLName:'邮轮时长',
       isActiveMDName:'目的地',
     };
   },
@@ -193,7 +201,7 @@ export default {
       var searchVal = {}
       searchVal.departureport = (this.isActiveChName == '出发城市' ? '' : this.isActiveChName)
       searchVal.area = (this.isActiveHXName == '出发航线' ? '' : this.isActiveHXName)
-      searchVal.shipcompany = (this.isActiveYLName == '热门游轮' ? '' : this.isActiveYLName)
+      searchVal.shipcompany = (this.isActiveYLName == '游轮时长' ? '' : this.isActiveYLName)
       searchVal.arrivalport = (this.isActiveMDName == '目的地' ? '' : this.isActiveMDName)
       searchVal.searchval = this.searchval
       searchVal = JSON.stringify(searchVal)

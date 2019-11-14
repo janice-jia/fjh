@@ -2,7 +2,7 @@
   <div class="company">
     <div class="company-banner">
       <HeaderMenu activeIndex="2"></HeaderMenu>
-      <img src="../assets/img/bannerGS.jpg" alt=""/>
+      <img src="../assets/img/company1.jpeg" alt=""/>
       <div class="com-search container">
         <el-input
           placeholder="请输入邮轮公司名称"

@@ -183,7 +183,7 @@
       <!-- 出行准备--内容-------------------------------start -->
       <div class="bk-chuxingzhunbei">
         <div class="bk-cx-banner">
-          <img src="../assets/img/bk-cx.jpg" alt="">
+          <img src="../assets/img/bkinfo.jpeg" alt="">
         </div>
         <el-row>
           <el-col :span="8" v-for="item in articleData.list4" :key="item.id">

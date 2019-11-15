@@ -201,7 +201,7 @@ export default {
       var searchVal = {}
       searchVal.departureport = (this.isActiveChName == '出发城市' ? '' : this.isActiveChName)
       searchVal.area = (this.isActiveHXName == '出发航线' ? '' : this.isActiveHXName)
-      searchVal.duration = (this.isActiveYLName == '游轮时长' ? '' : this.isActiveYLName)
+      searchVal.duration = (this.isActiveYLName == '邮轮时长' ? '' : this.isActiveYLName)
       searchVal.arrivalport = (this.isActiveMDName == '目的地' ? '' : this.isActiveMDName)
       searchVal.searchval = this.searchval
       searchVal = JSON.stringify(searchVal)

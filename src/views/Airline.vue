@@ -78,7 +78,7 @@
         </el-collapse-transition>
         <!-- <div class="airline-filter-city content"></div> -->
         <div class="airline-filter-line content">
-          <p class="filter-title">游轮时长：</p>
+          <p class="filter-title">邮轮时长：</p>
           <div class="filter-detail">
             <p class="hoverBg" v-for="(item, index) in timeList" :key="index">
               <span 
@@ -270,7 +270,7 @@ export default {
       if(this.searchParams.arrivalport)
         this.tags.push('目的地：'+this.searchParams.arrivalport)
       if(this.searchParams.duration)
-        this.tags.push('游轮时长：'+this.searchParams.duration)
+        this.tags.push('邮轮时长：'+this.searchParams.duration)
       if(this.searchParams.area)
         this.tags.push('出发航线：'+this.searchParams.area)
       this.getList();
@@ -292,7 +292,7 @@ export default {
         if(this.searchParams.arrivalport)
           this.tags.push('目的地：'+this.searchParams.arrivalport)
         if(this.searchParams.duration)
-          this.tags.push('游轮时长：'+this.searchParams.duration)
+          this.tags.push('邮轮时长：'+this.searchParams.duration)
         if(this.searchParams.area)
           this.tags.push('出发航线：'+this.searchParams.area)
         this.getList();
@@ -364,7 +364,7 @@ export default {
       // 目的地
       if(this.searchParams.arrivalport)
         paramsData.arrivalport = this.searchParams.arrivalport;
-      // 游轮时长
+      // 邮轮时长
       if(this.searchParams.duration)
         paramsData.duration = this.searchParams.duration;
       // 游轮品牌

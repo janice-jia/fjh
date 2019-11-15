@@ -4,7 +4,9 @@
       <HeaderMenu activeIndex="2"></HeaderMenu>
       <img src="../assets/img/company_msc.jpeg" v-if="shipcompanyid==1" alt />
       <img src="../assets/img/company_costa.jpeg" v-if="shipcompanyid==2" alt />
-      <img src="../assets/img/banner.jpg" v-if="shipcompanyid!=1&&shipcompanyid!=2" alt />
+      <img src="../assets/img/company_huangjia.jpeg" v-if="shipcompanyid==7" alt />
+      <!-- <img src="../assets/img/company_gongzhu.jpeg" v-if="shipcompanyid==8" alt /> -->
+      <img src="../assets/img/banner.jpg" v-if="shipcompanyid!=1&&shipcompanyid!=2&&shipcompanyid!=7" alt />
 
       <div class="com-search container">
         <el-input placeholder="请输入邮轮公司名称" v-model="searchVal"></el-input>

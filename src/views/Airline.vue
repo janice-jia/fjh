@@ -78,26 +78,26 @@
         </el-collapse-transition>
         <!-- <div class="airline-filter-city content"></div> -->
         <div class="airline-filter-line content">
-          <p class="filter-title">游轮航线：</p>
+          <p class="filter-title">游轮时长：</p>
           <div class="filter-detail">
-            <p class="hoverBg" v-for="(item, index) in cityList" :key="index">
+            <p class="hoverBg" v-for="(item, index) in timeList" :key="index">
               <span 
-                v-bind:class="{ hoverBg: (searchParams.area== item.areaname)}"
-                @click="changeSearch('area', item.areaname)"
+                v-bind:class="{ hoverBg: (searchParams.duration== item.name)}"
+                @click="changeSearch('duration', item.name)"
               >
-                {{ item.areaname }}航线
+                {{ item.name }}
               </span>
             </p>
           </div>
         </div>
         <div class="airline-filter-logo content">
-          <p class="filter-title">游轮品牌：</p>
+          <p class="filter-title">出发航线：</p>
           <div class="filter-detail">
-            <p v-for="(item, index) in lineList" :key="index">
+            <p v-for="(item, index) in cityList" :key="index">
               <span 
-                v-bind:class="{ hoverBg: (searchParams.shipcompany== item.shipcompany)}"
-                @click="changeSearch('shipcompany', item.shipcompany)"
-                >{{ item.shipcompany }}</span>
+                v-bind:class="{ hoverBg: (searchParams.area== item.areaname)}"
+                @click="changeSearch('area', item.areaname)"
+                >{{ item.areaname }}</span>
             </p>
           </div>
         </div>
@@ -237,6 +237,19 @@ export default {
         "17~33天",
         "33天以上"
       ],
+      timeList:[{
+        id:1,
+        name:'5天以内'
+      },{
+        id:2,
+        name:'6-10天'
+      },{
+        id:3,
+        name:'11-15天'
+      },{
+        id:4,
+        name:'15天以上'
+      }],
       country: ["亚洲", "欧洲", "北美洲", "南美洲", "大洋洲", "南极洲", "非洲"]
     };
   },
@@ -256,10 +269,10 @@ export default {
         this.tags.push('出发城市：'+this.searchParams.departureport)
       if(this.searchParams.arrivalport)
         this.tags.push('目的地：'+this.searchParams.arrivalport)
+      if(this.searchParams.duration)
+        this.tags.push('游轮时长：'+this.searchParams.duration)
       if(this.searchParams.area)
-        this.tags.push('游轮航线：'+this.searchParams.area)
-      if(this.searchParams.shipcompany)
-        this.tags.push('游轮品牌：'+this.searchParams.shipcompany)
+        this.tags.push('出发航线：'+this.searchParams.area)
       this.getList();
     },
     // 首页跳转过来，，，设置搜索参数
@@ -278,10 +291,10 @@ export default {
           this.tags.push('出发城市：'+this.searchParams.departureport)
         if(this.searchParams.arrivalport)
           this.tags.push('目的地：'+this.searchParams.arrivalport)
+        if(this.searchParams.duration)
+          this.tags.push('游轮时长：'+this.searchParams.duration)
         if(this.searchParams.area)
-          this.tags.push('游轮航线：'+this.searchParams.area)
-        if(this.searchParams.shipcompany)
-          this.tags.push('游轮品牌：'+this.searchParams.shipcompany)
+          this.tags.push('出发航线：'+this.searchParams.area)
         this.getList();
       }
     },
@@ -351,12 +364,12 @@ export default {
       // 目的地
       if(this.searchParams.arrivalport)
         paramsData.arrivalport = this.searchParams.arrivalport;
-      // 游轮航线
+      // 游轮时长
+      if(this.searchParams.duration)
+        paramsData.duration = this.searchParams.duration;
+      // 游轮品牌
       if(this.searchParams.area)
         paramsData.area = this.searchParams.area;
-      // 游轮品牌
-      if(this.searchParams.shipcompany)
-        paramsData.shipcompany = this.searchParams.shipcompany;
       return paramsData
     },
     // 清空全部
@@ -373,6 +386,7 @@ export default {
     // 标签关闭
     handleClose(tag) {
       this.tags.splice(this.tags.indexOf(tag), 1);
+      this.getList()
     },
     handleSizeChange(val) {
       // console.log(`每页 ${limit} 条`);

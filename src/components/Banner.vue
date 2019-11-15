@@ -161,13 +161,13 @@ export default {
     return {
       timeList:[{
         id:1,
-        name:'+/-3天'
+        name:'5天以内'
       },{
         id:2,
-        name:'+/-7天'
+        name:'6-10天'
       },{
         id:3,
-        name:'+/-10天'
+        name:'11-15天'
       },{
         id:4,
         name:'15天以上'
@@ -201,7 +201,7 @@ export default {
       var searchVal = {}
       searchVal.departureport = (this.isActiveChName == '出发城市' ? '' : this.isActiveChName)
       searchVal.area = (this.isActiveHXName == '出发航线' ? '' : this.isActiveHXName)
-      searchVal.shipcompany = (this.isActiveYLName == '游轮时长' ? '' : this.isActiveYLName)
+      searchVal.duration = (this.isActiveYLName == '游轮时长' ? '' : this.isActiveYLName)
       searchVal.arrivalport = (this.isActiveMDName == '目的地' ? '' : this.isActiveMDName)
       searchVal.searchval = this.searchval
       searchVal = JSON.stringify(searchVal)

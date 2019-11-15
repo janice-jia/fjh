@@ -385,6 +385,11 @@ export default {
     },
     // 标签关闭
     handleClose(tag) {
+      console.info('tag', tag)
+      if(tag.indexOf('出发城市') >-1) this.searchParams.departureport = ''
+      if(tag.indexOf('邮轮时长') >-1) this.searchParams.duration = ''
+      if(tag.indexOf('出发航线') >-1) this.searchParams.area = ''
+      if(tag.indexOf('目的地') >-1) this.searchParams.arrivalport = ''
       this.tags.splice(this.tags.indexOf(tag), 1);
       this.getList()
     },

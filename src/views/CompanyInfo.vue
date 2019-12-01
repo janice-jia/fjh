@@ -809,6 +809,12 @@ export default {
     }
   }
 }
+#jbdh{
+  .el-tabs__header {
+    width: 960px;
+    margin: 0 auto;
+  }
+}
 // 舱房table
 .cangtable {
   margin-top: 50px;
